@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>澳門・珠海・中山｜旅行手冊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: light dark;
+    --bg:#FBF7F0;
+    --card:#FFFCF6;
+    --border:#E6D7C2;
+    --text:#3D3025;
+    --text-dim:#776856;
+    --accent:#BD6A40;
+    --accent-soft:#F1DFC9;
+    --warm:#7C8A5E;
+    --warm-soft:#E9EEDD;
+    --active:#BD6A40;
+    --dot-idle:#C8C1B1;
+    --warning:#B14E36;
+    --warning-soft:#FCE9E0;
+    --radius:16px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#1C1A17;
+      --card:#25211C;
+      --border:#453B30;
+      --text:#F5EEE4;
+      --text-dim:#C9BCAA;
+      --accent:#C87545;
+      --accent-soft:#3A2E22;
+      --warm:#A8C08A;
+      --warm-soft:#2B3222;
+      --active:#C87545;
+      --dot-idle:#6E5F49;
+      --warning:#E99A75;
+      --warning-soft:#3A241E;
+    }
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0; width:100%; overflow-x:hidden;}
+  body{
+    background:var(--bg); color:var(--text);
+    font-family:'Noto Serif TC',serif;
+    padding-bottom:70px;
+  }
+  .mono{ font-family:'Noto Serif TC',serif; }
+  .serif{ font-family:'Noto Serif TC',serif; }
+
+  /* header */
+  header{
+    padding:32px 22px 18px;
+    text-align:center;
+  }
+  header .title{
+    font-family:'Noto Serif TC',serif; font-weight:700; font-size:27px; letter-spacing:1px;
+  }
+  header .dates{
+    margin-top:6px; font-size:12.5px; color:var(--text-dim); font-family:'Noto Serif TC',serif; letter-spacing:.5px;
+  }
+  header .trip-progress{
+    margin-top:4px; font-size:10.5px; color:var(--text-dim); letter-spacing:1.5px;
+    text-transform:uppercase; opacity:.7; font-weight:600;
+  }
+
+  .page{ display:none; padding:0 20px; }
+  .page.active{ display:block; }
+
+  .label{
+    font-size:11px; letter-spacing:2px; color:var(--text-dim); text-transform:uppercase;
+    margin:26px 0 12px; font-family:'Noto Serif TC',serif;
+  }
+  .label:first-child{ margin-top:4px; }
+
+  /* NOW card */
+  .now-wrap{ display:flex; align-items:center; gap:8px; margin-bottom:12px; }
+  .dot{ width:7px; height:7px; border-radius:50%; }
+  .dot.live{ background:var(--accent); box-shadow:0 0 0 4px var(--accent-soft); }
+  .dot.idle{ background:var(--dot-idle); }
+  .now-status{ font-size:14.5px; color:var(--text-dim); font-weight:500; }
+
+  .now-card{
+    background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+    padding:18px; display:flex; gap:14px; align-items:flex-start;
+    box-shadow:0 1px 3px rgba(42,40,35,.04);
+  }
+  .now-icon{
+    width:46px; height:46px; border-radius:12px; background:var(--accent-soft);
+    display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0;
+  }
+  .now-title{ font-family:'Noto Serif TC',serif; font-weight:700; font-size:19px; }
+  .now-time{ font-size:14px; color:var(--accent); margin-top:3px; font-family:'Noto Serif TC',serif; font-weight:600; }
+  .now-addr{ font-size:13.5px; color:var(--text-dim); margin-top:6px; line-height:1.6; }
+
+  .next-line{
+    margin-top:12px; padding-top:12px; border-top:1px solid var(--border);
+    display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text-dim);
+  }
+  .next-line .ic{ font-size:17px; }
+  .next-line b{ color:var(--text); font-weight:600; }
+  .now-remain{ font-size:13px; color:var(--text-dim); margin-top:10px; }
+  .now-remain b{ color:var(--accent); font-weight:600; }
+
+  .status-badge{
+    display:inline-block; font-size:10px; padding:2px 7px; border-radius:6px;
+    font-family:'Noto Serif TC',serif; flex-shrink:0; letter-spacing:.3px;
+  }
+  .status-badge.tentative{ color:var(--text-dim); background:transparent; border:1px solid var(--border); }
+  .status-badge.confirmed{ color:var(--warm); background:var(--warm-soft); font-weight:600; border:1px solid transparent; }
+
+  /* day quick nav on home */
+  .day-nav{ display:flex; flex-direction:column; gap:10px; }
+  .day-row{
+    display:flex; align-items:center; gap:12px; padding:13px 16px;
+    background:var(--card); border:1px solid var(--border); border-radius:var(--radius); cursor:pointer;
+  }
+  .day-row .d{
+    font-family:'Noto Serif TC',serif; font-weight:600; font-size:12px; color:var(--warm);
+    background:var(--warm-soft); padding:5px 9px; border-radius:8px; flex-shrink:0;
+  }
+  .day-row .r{ flex:1; }
+  .day-row .r .t{ font-size:15px; font-weight:600; }
+  .day-row .r .s{ font-size:12.5px; color:var(--text-dim); margin-top:2px; }
+  .day-row .arrow{ color:var(--text-dim); font-size:14px; }
+
+  /* confirmed section on home */
+  .confirmed-list{ display:flex; flex-direction:column; gap:10px; }
+  .c-row{
+    background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+    padding:14px 16px; cursor:pointer;
+  }
+  .c-head{ display:flex; align-items:center; gap:10px; }
+  .c-icon{ font-size:20px; flex-shrink:0; }
+  .c-main{ flex:1; min-width:0; }
+  .c-title{ font-size:14.5px; font-weight:600; }
+  .c-sub{ font-size:12.5px; color:var(--text-dim); margin-top:2px; }
+  .c-row.open .t-chev{ transform:rotate(90deg); }
+  .c-row.open .t-detail{ max-height:800px; margin-top:12px; }
+
+  /* itinerary tabs */
+  .tabs{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:20px 0 22px; }
+  .tab{
+    text-align:center; padding:10px 0; border-radius:12px;
+    border:1px solid var(--border); background:var(--card);
+    font-size:14.5px; font-weight:600; color:var(--text-dim); cursor:pointer;
+    min-width:0;
+  }
+  .tab.active{ background:var(--active); color:#FFF8F0; border-color:var(--active); }
+  .tab .dt{ display:block; font-size:10px; font-weight:500; margin-top:2px; opacity:.75; }
+
+  .empty-day{
+    text-align:center; color:var(--text-dim); font-size:14px; padding:60px 20px;
+    border:1px dashed var(--border); border-radius:var(--radius);
+  }
+
+  /* timeline */
+  .timeline{ position:relative; padding-left:2px; }
+  .t-row{
+    display:flex; gap:14px; padding:14px 0; border-bottom:1px solid var(--border);
+    cursor:pointer;
+  }
+  .t-row:last-child{ border-bottom:none; }
+  .t-time{ width:50px; flex-shrink:0; font-family:'Noto Serif TC',serif; font-size:14px; font-weight:600; color:var(--text-dim); padding-top:2px; }
+  .t-mid{
+    width:20px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; padding-top:4px;
+  }
+  .t-dot{ width:8px; height:8px; border-radius:50%; background:var(--border); border:2px solid var(--card); box-shadow:0 0 0 1px var(--border); }
+  .t-dot.current{ background:var(--accent); box-shadow:0 0 0 3px var(--accent-soft); }
+  .t-body{ flex:1; min-width:0; }
+  .t-head{ display:flex; align-items:flex-start; gap:8px; flex-wrap:wrap; min-width:0; }
+  .t-icon{ font-size:19px; flex-shrink:0; font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif; }
+  .t-title{ font-size:16px; font-weight:600; flex:1 1 180px; min-width:0; overflow-wrap:anywhere; word-break:break-word; }
+  .t-head .status-badge,.t-head .t-tag,.t-chev{ flex:0 0 auto; }
+  .t-tag{
+    font-size:9.5px; letter-spacing:.5px; color:#FFF8F0; background:var(--accent);
+    padding:2px 6px; border-radius:5px; font-family:'Noto Serif TC',serif;
+  }
+  .t-chev{ color:var(--text-dim); font-size:11px; transition:transform .18s; }
+  .t-row.open .t-chev{ transform:rotate(90deg); }
+
+  .t-detail{ max-height:0; overflow:hidden; transition:max-height .22s ease; }
+  .t-row.open .t-detail{ max-height:800px; margin-top:12px; }
+  .t-detail-inner{ width:100%; max-width:100%; overflow-wrap:anywhere; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px; }
+  .img-placeholder{
+    width:100%; height:120px; border-radius:10px; background:var(--accent-soft);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    color:var(--text-dim); font-size:12px; gap:4px; margin-bottom:12px; border:1px dashed var(--border);
+  }
+  .img-placeholder .ic{ font-size:22px; }
+  .d-img{
+    width:100%; height:130px; object-fit:cover; border-radius:10px; margin-bottom:12px; display:block;
+  }
+  .d-desc{ min-width:0; overflow-wrap:anywhere; word-break:break-word; font-size:14.5px; color:var(--text-dim); line-height:1.65; margin-bottom:10px; }
+  .d-line{ display:flex; gap:8px; font-size:14.5px; padding:6px 0; align-items:flex-start; }
+  .d-line .k{ width:20px; flex-shrink:0; }
+  .d-line .v{ flex:1; min-width:0; overflow-wrap:anywhere; word-break:break-word; }
+  .d-line a.link{ color:var(--text); text-decoration:underline dotted; }
+  .recs{ margin-top:4px; }
+  .recs .rec-title{ font-size:11.5px; color:var(--warm); font-weight:600; margin-bottom:4px; letter-spacing:.5px;}
+  .rec-item{ min-width:0; overflow-wrap:anywhere; word-break:break-word; font-size:12.5px; color:var(--text); padding:2px 0 2px 14px; position:relative; }
+  .rec-item::before{ content:"·"; position:absolute; left:2px; color:var(--warm); }
+  .btn-row{ display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
+  .btn{
+    flex:1 1 auto; min-width:110px; text-align:center; padding:10px; border-radius:10px; font-size:12.5px; font-weight:600;
+    border:1px solid var(--border); background:var(--bg); color:var(--text); cursor:pointer;
+  }
+  .btn.primary{ background:var(--active); color:#FFF8F0; border-color:var(--active); }
+
+  /* currency */
+  .exchange-card,
+  .exchange-result,
+  .exchange-rates{
+    background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  }
+  .exchange-card{ padding:16px; }
+  .exchange-notice{ font-size:12.5px; color:var(--text-dim); margin-bottom:14px; }
+  .exchange-inputs{ display:flex; gap:10px; }
+  .exchange-input,
+  .exchange-select{
+    height:46px; border:1px solid var(--border); border-radius:11px; background:var(--bg); color:var(--text);
+    font:600 16px 'Noto Serif TC',serif; padding:0 12px;
+  }
+  .exchange-input{ flex:1; min-width:0; }
+  .exchange-select{ width:92px; }
+  .exchange-results{ display:flex; flex-direction:column; gap:10px; }
+  .exchange-result{ padding:14px 16px; }
+  .exchange-result .currency-name{ font-size:12.5px; color:var(--text-dim); }
+  .exchange-result .currency-value{ font-size:22px; font-weight:700; margin-top:3px; color:var(--accent); }
+  .exchange-rates{ margin-top:12px; padding:13px 16px; font-size:12px; color:var(--text-dim); line-height:1.7; }
+
+  /* bottom nav */
+  .navbar{
+    position:fixed; left:0; right:0; bottom:0; height:60px;
+    background:var(--card); border-top:1px solid var(--border);
+    display:flex; z-index:50; padding-bottom:env(safe-area-inset-bottom);
+  }
+  .nav-btn{
+    flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:2px; color:var(--text-dim); font-size:10.5px; background:none; border:none; cursor:pointer;
+  }
+  .nav-btn .ic{ font-size:18px; }
+  .nav-btn.active{ color:var(--accent); font-weight:600; }
+
+  /* test time tool */
+  .test-fab{
+    position:fixed; right:14px; bottom:76px; z-index:60;
+    width:34px; height:34px; border-radius:50%; background:var(--card); border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center; font-size:14px; opacity:.55; cursor:pointer;
+  }
+  .test-sheet{
+    position:fixed; left:0; right:0; bottom:0; z-index:70; background:var(--card);
+    border-radius:18px 18px 0 0; padding:18px 20px calc(18px + env(safe-area-inset-bottom));
+    transform:translateY(110%); transition:transform .22s ease; box-shadow:0 -6px 24px rgba(0,0,0,.1);
+  }
+  .test-sheet.open{ transform:translateY(0); }
+  .test-title{ font-size:11.5px; letter-spacing:1.5px; color:var(--text-dim); text-transform:uppercase; margin-bottom:12px; font-family:'Noto Serif TC',serif;}
+  .test-row{ display:flex; gap:8px; margin-bottom:10px; }
+  .test-btn{
+    flex:1; padding:9px; border-radius:10px; border:1px solid var(--border); background:var(--bg);
+    font-size:13px; font-weight:600; cursor:pointer; text-align:center; color:var(--text);
+  }
+  .test-btn.active{ background:var(--active); color:#FFF8F0; border-color:var(--active); }
+  input[type="datetime-local"]{
+    width:100%; padding:10px; border-radius:10px; border:1px solid var(--border);
+    font-family:'Noto Serif TC',serif; font-size:13px; background:var(--bg); margin-bottom:10px; color:var(--text);
+  }
+  .presets{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:4px; }
+  .chip{ font-family:'Noto Serif TC',serif; font-size:11px; padding:6px 9px; background:var(--bg); border:1px solid var(--border); border-radius:8px; cursor:pointer; }
+  .test-close{ text-align:center; padding-top:10px; font-size:12px; color:var(--text-dim); cursor:pointer; }
+
+  .toast{
+    position:fixed; left:50%; transform:translateX(-50%); bottom:84px; z-index:80;
+    background:var(--active); color:#FFF8F0; padding:9px 16px; border-radius:20px; font-size:13px;
+    opacity:0; transition:opacity .2s; pointer-events:none;
+  }
+  .toast.show{ opacity:1; }
+
+  .last-updated{
+    text-align:center; font-size:10.5px; color:var(--text-dim); opacity:.55;
+    margin:28px 0 12px; font-family:'Noto Serif TC',serif;
+  }
+
+  .transport-budget{
+    margin-top:22px; background:var(--card); border:1px solid var(--border);
+    border-radius:var(--radius); padding:16px;
+  }
+  .transport-budget .tb-title{ font-size:13.5px; font-weight:700; color:var(--text); margin-bottom:10px; }
+  .transport-budget .tb-line{
+    display:flex; justify-content:space-between; gap:10px; font-size:13px; padding:5px 0; color:var(--text-dim);
+  }
+  .transport-budget .tb-line .v{ color:var(--text); font-weight:600; min-width:0; text-align:right; overflow-wrap:anywhere; }
+  .transport-budget .tb-total{
+    margin-top:10px; padding-top:10px; border-top:1px dashed var(--border); font-size:13.5px; color:var(--text);
+  }
+  .transport-budget .tb-total b{ color:var(--accent); }
+  .transport-budget .tb-note{ margin-top:8px; font-size:11px; color:var(--text-dim); opacity:.8; line-height:1.5; }
+  .transport-budget .tb-group{ font-size:12px; font-weight:600; color:var(--text-dim); margin:10px 0 4px; letter-spacing:.3px; }
+  .travel-warning{
+    margin-top:22px; background:var(--warning-soft); border:1px solid var(--warning);
+    border-radius:var(--radius); padding:16px;
+  }
+  .travel-warning .tw-title{ font-size:13.5px; font-weight:700; color:var(--warning); margin-bottom:8px; }
+  .travel-warning .tw-intro,.travel-warning .tw-detail{ font-size:12px; color:var(--text); line-height:1.6; }
+  .travel-warning .tw-list{ margin:7px 0; padding-left:20px; font-size:12px; color:var(--text); line-height:1.65; }
+  .flight-arrival-status{ margin-top:9px; font-size:12px; font-weight:600; line-height:1.5; }
+  .flight-arrival-status.safe{ color:var(--warm); }
+  .flight-arrival-status.late{ color:var(--warning); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="title serif">澳門・珠海・中山</div>
+  <div class="dates">2026.11.25 — 2026.11.30　SOLO TRIP</div>
+  <div class="trip-progress" id="trip-progress"></div>
+</header>
+
+<!-- ============ HOME ============ -->
+<div class="page active" id="page-home">
+  <div class="label">NOW｜現在</div>
+  <div class="now-wrap"><span class="dot" id="now-dot"></span><span class="now-status" id="now-status">—</span></div>
+  <div class="now-card" id="now-card"></div>
+
+  <div class="label">CONFIRMED｜已確認</div>
+  <div class="confirmed-list" id="confirmed-list"></div>
+
+  <div class="label">行程</div>
+  <div class="day-nav" id="day-nav"></div>
+
+  <div class="last-updated" id="last-updated-home"></div>
+</div>
+
+<!-- ============ ITINERARY ============ -->
+<div class="page" id="page-itinerary">
+  <div class="tabs" id="tabs"></div>
+  <div class="timeline" id="timeline"></div>
+  <div id="day-extra"></div>
+  <div class="last-updated" id="last-updated-itin"></div>
+</div>
+
+<!-- ============ CURRENCY ============ -->
+<div class="page" id="page-exchange">
+  <div class="label">EXCHANGE｜匯率換算</div>
+  <div class="exchange-card">
+    <div class="exchange-notice">目前使用手動設定匯率</div>
+    <div class="exchange-inputs">
+      <input class="exchange-input" id="currency-amount" type="number" min="0" step="any" value="100" inputmode="decimal" aria-label="金額">
+      <select class="exchange-select" id="currency-from" aria-label="原始幣別">
+        <option value="CNY">CNY</option>
+        <option value="TWD">TWD</option>
+        <option value="MOP">MOP</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="label">換算結果</div>
+  <div class="exchange-results" id="currency-results"></div>
+  <div class="exchange-rates" id="currency-rates"></div>
+</div>
+
+<div class="navbar">
+  <button class="nav-btn active" data-page="home"><span class="ic">🏠</span>首頁</button>
+  <button class="nav-btn" data-page="itinerary"><span class="ic">🗓️</span>行程</button>
+  <button class="nav-btn" data-page="exchange"><span class="ic">💱</span>匯率</button>
+</div>
+
+<div class="test-fab" id="test-fab">🧪</div>
+<div class="test-sheet" id="test-sheet">
+  <div class="test-title">測試時間</div>
+  <div class="test-row">
+    <div class="test-btn active" id="btn-real">使用目前時間</div>
+    <div class="test-btn" id="btn-sim">模擬時間</div>
+  </div>
+  <input type="datetime-local" id="sim-input">
+  <div class="presets" id="presets"></div>
+  <div class="test-close" id="test-close">關閉</div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   ================================
+   TRIP DATA｜旅行資料
+   未來主要只修改這裡
+   ================================
+
+   - 修改或新增行程，只需要編輯下面的 TRIP 物件
+   - 不需要更動任何 render function 或 HTML
+   - 每一天（day）固定格式：{ date, label, dateLabel, route, items }
+   - 每一個行程（item）固定支援以下欄位，沒有資料請填 null：
+       s            開始時間 "HH:mm"
+       e            結束時間 "HH:mm"
+       title        行程名稱
+       type         類型（餐廳／景點／交通／購物／住宿…）
+       icon         emoji icon
+       desc         簡短說明
+       address      地址
+       price        費用
+       transport    交通方式／班次
+       phone        電話
+       status       "confirmed" 或 "tentative"
+       imageUrl     圖片網址（null 時顯示 placeholder）
+       websiteUrl   官方網站
+       mapUrl       導航連結
+       bookingUrl   訂票／訂房連結
+       note         備註
+
+   // 新增行程範例（僅供參考，不會顯示在網站上）：
+   // {
+   //   s:"10:00", e:"11:30",
+   //   title:"景點名稱",
+   //   type:"景點",
+   //   icon:"📍",
+   //   desc:null,
+   //   address:null,
+   //   price:null,
+   //   transport:null,
+   //   phone:null,
+   //   status:"tentative",
+   //   imageUrl:null,
+   //   websiteUrl:null,
+   //   mapUrl:null,
+   //   bookingUrl:null,
+   //   note:null
+   // }
+   ========================================================= */
+const DEFAULT_TRIP = {
+  lastUpdated: "2026-08-21T06:00:00",
+
+  flights: [
+    { type:"outbound", airline:"STARLUX 星宇航空", flightNo:"JX201", date:"2026-11-25",
+      fromCity:"台北", fromAirport:"桃園國際機場", fromCode:"TPE",
+      toCity:"澳門", toAirport:"澳門國際機場", toCode:"MFM",
+      depart:"07:45", arrive:"09:45", duration:"2 小時", direct:true,
+      terminal:null, gate:null, seat:null, baggage:null,
+      bookingReference:null, bookingUrl:null, status:"confirmed", note:null },
+    { type:"return", airline:"STARLUX 星宇航空", flightNo:"JX206", date:"2026-11-30",
+      fromCity:"澳門", fromAirport:"澳門國際機場", fromCode:"MFM",
+      toCity:"台北", toAirport:"桃園國際機場", toCode:"TPE",
+      depart:"20:35", arrive:"22:25", duration:"1 小時 50 分", direct:true,
+      terminal:null, gate:null, seat:null, baggage:null,
+      bookingReference:null, bookingUrl:null, status:"confirmed", note:null }
+  ],
+
+  stays: [
+    { day:1, city:"中山", hotelName:"中山富華道石岐步行街亞朵酒店", checkIn:"2026-11-25", checkOut:"2026-11-26",
+      address:"中國廣東省中山市富華道7號", phone:"+86-760-88633838",
+      imageUrl:null, websiteUrl:null, bookingUrl:null, mapUrl:null,
+      nights:"1 晚", roomType:"高級大床房", bedType:"1 張大床", occupancy:"2 位成人",
+      area:"31–35 平方公尺", floor:"3–9 樓", features:"有窗、禁煙",
+      breakfast:"2026/11/26 每房 2 客早餐", price:"¥320",
+      note:"1 晚｜高級大床房｜含 11/26 兩客早餐", status:"confirmed" },
+    { day:2, city:"佛山", hotelName:"宜尚PLUS飯店（佛山禪城智慧新城地鐵站店）", checkIn:"2026-11-26", checkOut:"2026-11-29",
+      address:"中國廣東省佛山市禪城區華寶南路13號一座2樓201", phone:"+86-757-82133880",
+      imageUrl:null, websiteUrl:null, bookingUrl:null, mapUrl:null,
+      nights:"3 晚", roomType:"豪華城景大床房", roomNote:"超大休閒觀景陽台／茶具／落地窗",
+      bedType:"1 張特大雙人床", occupancy:"2 位成人", area:"80 平方公尺", view:"城市景觀",
+      floor:"7 樓", breakfast:"無餐食", price:"¥300",
+      note:"3 晚｜豪華城景大床房｜80㎡｜城市景觀｜7樓｜無早餐", status:"confirmed" },
+    { day:5, city:"珠海", hotelName:"珠海·海之珠｜RomanticPearl｜有溫度的酒店（拱北口岸珠海站店）", checkIn:"2026-11-29", checkOut:"2026-11-30",
+      checkInTime:"13:00 後", checkOutTime:"13:00 前", address:"中國廣東省珠海市香洲區粵華路138號拱北市場5-8商舖", phone:"+86-15323618111",
+      imageUrl:null, websiteUrl:null, bookingUrl:null, mapUrl:null,
+      nights:"1 晚", roomType:"零壓舒享大床房", bedType:"1 張約 1.81 米特大床", occupancy:"2 位成人",
+      area:"29–32 平方公尺", features:"有窗、部分禁煙", breakfast:"每間每晚含 2 份早餐", price:"¥196",
+      note:"1 晚｜零壓舒享大床房｜29–32㎡｜含 2 客早餐", status:"confirmed" }
+  ],
+
+  days: [
+    { date:"2026-11-25", label:"DAY 1", dateLabel:"11/25（三）", route:"台北 → 澳門 → 珠海 → 中山",
+      items: [
+        {s:"07:45",e:"09:45",title:"桃園 → 澳門",type:"交通",icon:"✈️",desc:"STARLUX JX201",address:"桃園國際機場 TPE",price:"—",transport:"航班 JX201",phone:null,status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"直飛，航程約 2 小時"},
+        {s:"10:00",e:"10:30",title:"抵達澳門",type:"交通",icon:"🛬",desc:"入境審查",address:"澳門國際機場",price:"—",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"10:30",e:"11:05",title:"澳門機場 → 關閘",type:"交通",icon:"🚌",desc:"搭乘 AP1 巴士",address:"澳門國際機場 → 關閘",price:"—",transport:"AP1",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"11:05",e:"11:35",title:"澳門出境 → 拱北口岸",type:"交通",icon:"🛂",desc:"辦理出入境手續",address:"關閘口岸／拱北口岸",price:"—",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"13:00",e:"13:30",title:"中山北站 → 中山富華道石岐步行街亞朵酒店",type:"交通",icon:"🚕",desc:"抵達中山後搭車前往酒店",address:null,price:null,transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"13:30",e:"13:40",title:"酒店寄存行李",type:"住宿",icon:"🧳",desc:"中山富華道石岐步行街亞朵酒店",address:"中國廣東省中山市富華道7號",price:null,transport:null,phone:"+86-760-88633838",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"酒店 16:00 後可入住，目前先寄存行李"},
+        {s:"13:40",e:"14:30",title:"午餐自理｜孫文西路周邊",type:"餐廳",icon:"🍜",desc:"當天依現場情況自行決定用餐地點",address:"中山市石岐區孫文西路文化旅遊步行街周邊",price:"待定",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"14:30",e:"15:10",title:"孫文西路步行街",type:"景點",icon:"📍",desc:"中山老街散步，嶺南建築風情。",address:"中山市石岐區孫文西路文化旅遊步行街",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"全天開放；商鋪約 09:00–22:00"},
+        {s:"15:10",e:"15:50",title:"香山商業文化博物館",type:"景點",icon:"📍",desc:"",address:"中山市石岐區孫文西路152號",price:"免費",transport:null,phone:"0760-88838248",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"09:00–17:30；周一閉館"},
+        {s:"15:50",e:"16:30",title:"中山公園",type:"景點",icon:"📍",desc:"",address:"中山市石岐區公園大道9號",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"16:30",e:"17:20",title:"岐江公園",type:"景點",icon:"🌇",desc:"工業風公園散步，安排傍晚江景與日落拍照",address:"中山市西區中山一路與大橋橫街交叉口東200米",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"24 小時開放"},
+        {s:"17:20",e:"17:45",title:"中懇人行天橋",type:"景點",icon:"📸",desc:"岐江橋旁熱門城市拍照機位",address:"中山市石岐區興中廣場旁岐江橋邊",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"市政人行橋，全天通行"},
+        {s:"17:45",e:"18:30",title:"興中廣場",type:"景點",icon:"🌃",desc:"岐江旁夜景、散步與自由活動",address:"中山市石岐區鳳鳴路3號",price:"街區免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"摩天輪需另外購票"},
+        {s:"18:30",e:"21:00",title:"岐江夜市",type:"景點",icon:"🌙",desc:"逛夜市、自由活動，晚餐現場自理",address:null,price:null,transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"21:00",e:"23:59",title:"回酒店休息",type:"住宿",icon:"🛏️",desc:"中山富華道石岐步行街亞朵酒店",address:"中國廣東省中山市富華道7號",price:"¥320",transport:null,phone:"+86-760-88633838",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"1 晚｜高級大床房｜含 11/26 兩客早餐"}
+      ],
+      transportBudget: {
+        items: [
+          {label:"澳門機場 → 關閘 AP1", cost:"約 MOP 6"},
+          {label:"關閘／拱北過關", cost:"免費"},
+          {label:"拱北口岸 → 中山北站", cost:"城際／高鐵票價待補"},
+          {label:"中山北站 → 中山亞朵酒店", cost:"約 ¥15–25"},
+          {label:"中山市區下午景點", cost:"以步行為主，約 ¥0"},
+          {label:"臨時短程叫車備用", cost:"約 ¥10–20"}
+        ],
+        total:"約 ¥25–45 ＋ MOP 6 ＋ 拱北→中山北站車票待補",
+        note:"未包含台北→澳門機票；拱北→中山北站票價待實際訂票後補入；實際費用依當天交通與叫車價格為準"
+      },
+      dayBudget: {
+        transport:"約 ¥25–45 ＋ MOP 6 ＋ 拱北→中山北站城際／高鐵票待補",
+        attractions: [
+          {name:"孫文西路步行街", cost:"免費"},
+          {name:"香山商業文化博物館", cost:"免費"},
+          {name:"中山公園", cost:"免費"},
+          {name:"岐江公園", cost:"免費"},
+          {name:"中懇人行天橋", cost:"免費"},
+          {name:"興中廣場", cost:"街區免費"},
+          {name:"岐江夜市", cost:"免費逛"}
+        ],
+        food:{label:"午餐＋岐江夜市晚餐／小吃", cost:"預留約 ¥80–150"},
+        other:{label:"飲料、臨時消費、備用", cost:"預留約 ¥30–50"},
+        total:"約 ¥135–245 ＋ MOP 6 ＋ 城際／高鐵票待補",
+        note:"不含台北→澳門機票、不含住宿、不含購物；城際／高鐵票確認後再補入。所有金額均為1人預算。"
+      }
+    },
+    { date:"2026-11-26", label:"DAY 2", dateLabel:"11/26（四）", route:"中山 → 廣州南 → 佛山",
+      items: [
+        {s:"07:00",e:"07:30",title:"中山富華道石岐步行街亞朵酒店 → 中山北站",type:"交通",icon:"🚕",desc:"退房後前往中山北站",address:null,price:null,transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"07:30",e:"08:15",title:"中山北站 → 廣州南站",type:"交通",icon:"🚄",desc:"高鐵／城際前往廣州南站",address:null,price:null,transport:"實際車次之後再補",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"08:15",e:"08:50",title:"廣州南站 → 佛山宜尚PLUS飯店",type:"交通",icon:"🚇",desc:"前往佛山住宿附近",address:null,price:null,transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"08:50",e:"09:05",title:"飯店寄放行李",type:"住宿",icon:"🧳",desc:"宜尚PLUS飯店（佛山禪城智慧新城地鐵站店）",address:"中國廣東省佛山市禪城區華寶南路13號一座2樓201",price:null,transport:null,phone:"+86-757-82133880",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"14:00 後可正式入住，目前先寄放行李"},
+        {s:"09:05",e:"09:40",title:"飯店 → 紫南文化旅遊區",type:"交通",icon:"🚕",desc:"建議直接叫車前往",address:null,price:null,transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"09:40",e:"11:20",title:"紫南文化旅遊區",type:"景點",icon:"🏞️",desc:"嶺南水鄉、紫南村街區、仁善三館、水鄉建築與拍照",address:"佛山市禪城區南庄鎮紫南村賢德路11號",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"08:00–18:00；遊船另收費"},
+        {s:"11:20",e:"12:00",title:"紫南文化旅遊區 → 梁園",type:"交通",icon:"🚕",desc:"直接叫車前往梁園",address:null,price:null,transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"12:00",e:"12:30",title:"午餐自理｜梁園周邊",type:"餐廳",icon:"🍜",desc:"當天依現場情況自行決定用餐地點",address:null,price:"待定",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"12:30",e:"13:30",title:"梁園",type:"景點",icon:"🏯",desc:"嶺南四大名園之一",address:"佛山市禪城區松風路先鋒古道93號",price:"約 ¥10",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"09:00–17:00；約 16:40 停止入園；周一閉園（節假日除外）"},
+        {s:"13:30",e:"13:45",title:"梁園 → 中山公園",type:"交通",icon:"🚶",desc:"步行前往",address:null,price:null,transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"13:45",e:"14:10",title:"中山公園",type:"景點",icon:"🌳",desc:"佛山老城湖景公園，短暫散步",address:"佛山市禪城區中山路12號",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"06:00–22:00"},
+        {s:"14:10",e:"14:25",title:"中山公園 → 佛山祖廟",type:"交通",icon:"🚕",desc:"前往佛山祖廟",address:null,price:null,transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"14:25",e:"15:50",title:"佛山祖廟",type:"景點",icon:"🏛️",desc:"佛山功夫文化核心，可看黃飛鴻紀念館、葉問堂、醒獅與古建築",address:"佛山市禪城區祖廟路21號",price:"約 ¥20",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"08:30–18:00；若醒獅表演時間不同，可依現場微調"},
+        {s:"15:50",e:"16:15",title:"嶺南天地",type:"景點",icon:"🏘️",desc:"祖廟旁老城街區、騎樓、老宅與文創店",address:"佛山市禪城區祖廟大街2號",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"16:15",e:"16:35",title:"嶺南天地 → 南風古灶",type:"交通",icon:"🚕",desc:"直接叫車前往，避免錯過關門時間",address:null,price:null,transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"16:35",e:"17:25",title:"南風古灶",type:"景點",icon:"🏺",desc:"五百年龍窯、石灣陶瓷與老窯建築",address:"佛山市禪城區高廟路6號",price:"約 ¥25",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"08:30–17:30；此景點關門時間重要，盡量 16:30 左右抵達"},
+        {s:"17:25",e:"18:10",title:"石灣公仔街",type:"景點",icon:"🧸",desc:"逛石灣公仔、陶藝小店、手工藝品與伴手禮",address:"南風古灶周邊",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"18:10",e:"18:25",title:"石灣公仔街 → 佛山創意產業園",type:"交通",icon:"🚕",desc:"直接叫車前往",address:null,price:null,transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"18:25",e:"21:15",title:"佛山創意產業園・功夫夜市",type:"景點",icon:"🌙",desc:"逛夜市、自由活動，晚餐現場自理",address:"佛山市禪城區季華四路33號",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"晚餐不指定餐廳，現場自理"},
+        {s:"21:15",e:"23:59",title:"回酒店休息",type:"住宿",icon:"🛏️",desc:"宜尚PLUS飯店（佛山禪城智慧新城地鐵站店）",address:"中國廣東省佛山市禪城區華寶南路13號一座2樓201",price:"¥300",transport:null,phone:"+86-757-82133880",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"3 晚｜豪華城景大床房｜80㎡｜城市景觀｜7樓｜無早餐"}
+      ],
+      transportBudget: {
+        items: [
+          {label:"中山亞朵酒店 → 中山北站", cost:"約 ¥15–25"},
+          {label:"中山北站 → 廣州南站", cost:"城際／高鐵票價待實際訂票確認（暫不計入總額）"},
+          {label:"廣州南站 → 佛山宜尚PLUS（以地鐵為主）", cost:"約 ¥5–10"},
+          {label:"宜尚PLUS → 紫南文化旅遊區", cost:"約 ¥30–45"},
+          {label:"紫南文化旅遊區 → 梁園", cost:"約 ¥35–50"},
+          {label:"梁園 → 中山公園", cost:"步行免費"},
+          {label:"中山公園 → 佛山祖廟", cost:"約 ¥10–15"},
+          {label:"祖廟 → 嶺南天地", cost:"步行免費"},
+          {label:"嶺南天地 → 南風古灶", cost:"約 ¥15–25"},
+          {label:"南風古灶 → 石灣公仔街", cost:"步行免費"},
+          {label:"石灣公仔街 → 佛山創意產業園", cost:"約 ¥10–15"},
+          {label:"佛山創意產業園 → 宜尚PLUS", cost:"約 ¥15–25"}
+        ],
+        total:"約 ¥135–210 ＋ 中山北→廣州南城際／高鐵票待補",
+        note:"城際／高鐵票價待實際訂票後補入；叫車價格依當天即時路況與平台為準"
+      },
+      dayBudget: {
+        transport:"約 ¥135–210 ＋ 中山北→廣州南城際／高鐵票待補",
+        attractions: [
+          {name:"紫南文化旅遊區", cost:"免費"},
+          {name:"梁園", cost:"約 ¥10"},
+          {name:"中山公園", cost:"免費"},
+          {name:"佛山祖廟", cost:"約 ¥20"},
+          {name:"嶺南天地", cost:"免費"},
+          {name:"南風古灶", cost:"約 ¥25"},
+          {name:"石灣公仔街", cost:"免費"},
+          {name:"佛山創意產業園", cost:"免費"},
+          {name:"固定景點門票預估", cost:"約 ¥55"},
+          {name:"紫南遊船", cost:"另計／現場決定"}
+        ],
+        food:{label:"梁園附近午餐＋功夫夜市晚餐／小吃", cost:"約 ¥100–180"},
+        other:{label:"飲料、伴手禮以外的臨時消費", cost:"約 ¥30–50"},
+        total:"約 ¥320–495 ＋ 中山北→廣州南城際／高鐵票待補",
+        note:"全部為1人預算。叫車費為獨自搭乘整台車的費用，不做兩人分攤。"
+      }
+    },
+    { date:"2026-11-27", label:"DAY 3", dateLabel:"11/27（五）", route:"佛山 → 順德 → 佛山",
+      theme:"順德一日遊｜建築藝術、嶺南園林與順德老街", hint:"行程較緊湊",
+      items: [
+        {s:"08:10",e:"09:00",title:"宜尚PLUS酒店 → 羅浮宮國際家居博覽中心",type:"交通",icon:"🚕",desc:"直接叫車前往順德樂從",address:null,price:"約 ¥28–42",transport:"叫車",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"約9–12公里／20–30分鐘；依當天即時路況為準"},
+        {s:"09:00",e:"10:15",title:"羅浮宮國際家居博覽中心",type:"景點",icon:"🏛️",desc:"大型高級家具展覽中心兼國家4A級景區，建築內有大量歐式裝潢與藝術裝置",address:"佛山市順德區樂從鎮英雄河西岸",price:"免費",transport:null,phone:"0757-28839999 / 0757-28835168",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"09:00–18:30｜停留約1小時15分鐘｜不是法國羅浮宮分館｜看點：C區5樓星座廣場、金色大廳、D區1樓椅子塔、A區白色旋轉樓梯｜省錢方案：智慧新城站→佛山地鐵2號線→魁奇路站C出口→255A/255B公交，約55–75分鐘／¥5–8（時間較長，本次不建議使用）"},
+        {s:"10:15",e:"10:50",title:"羅浮宮 → 和美術館",type:"交通",icon:"🚕",desc:"叫車前往和美術館",address:null,price:"約 ¥40–58",transport:"叫車",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"約15–18公里／28–40分鐘；依當天即時路況為準"},
+        {s:"10:50",e:"12:40",title:"和美術館",type:"景點",icon:"🎨",desc:"安藤忠雄設計的現代美術館，特色為清水混凝土、圓形結構、雙螺旋樓梯與自然光影",address:"佛山市順德區北滘新城怡興路6號／美和路6號",price:"依展覽而定；港澳台成人票約 ¥90 起，學生票約 ¥85",transport:null,phone:"0757-26670666",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"10:00–18:00；17:30停止入場；攜帶台灣學生證，出發前確認當期展覽及票價"},
+        {s:"12:40",e:"13:25",title:"午餐自理｜北滘新城周邊",type:"餐廳",icon:"🍜",desc:"和美術館或北滘新城附近自行決定用餐地點，以簡餐為主",address:null,price:"待定",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"控制約45分鐘，避免影響下午行程"},
+        {s:"13:25",e:"14:00",title:"北滘新城／和美術館 → 順峰山公園",type:"交通",icon:"🚕",desc:"叫車前往順峰山公園正門",address:null,price:"約 ¥50–70",transport:"叫車",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"約19–23公里／30–40分鐘；依當天即時路況為準"},
+        {s:"14:00",e:"15:05",title:"順峰山公園",type:"景點",icon:"🌳",desc:"順德大型城市公園，本次只遊覽正門、中華第一牌坊及青雲湖附近",address:"佛山市順德區大良街道南國東路40號",price:"免費",transport:null,phone:"0757-22638916",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"06:00–22:30｜本次不走完整約8公里環湖路線｜本次只遊覽正門牌坊及附近園區"},
+        {s:"15:05",e:"15:25",title:"順峰山公園 → 清暉園",type:"交通",icon:"🚕",desc:"叫車前往清暉園",address:null,price:"約 ¥18–28",transport:"叫車",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"約5–7公里／15–22分鐘；依當天即時路況為準"},
+        {s:"15:25",e:"16:40",title:"清暉園",type:"景點",icon:"🏯",desc:"廣東四大名園之一，主要欣賞嶺南園林、彩色玻璃、庭院、水景、木雕與傳統建築",address:"佛山市順德區大良街道清暉路23號",price:"成人約 ¥15",transport:null,phone:"0757-22226196",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"09:00–17:30；官方最晚入園約17:00，建議16:00前入園｜可提前購買15:00–17:30時段門票"},
+        {s:"16:40",e:"17:50",title:"華蓋路步行街＋華蓋山棧道",type:"景點",icon:"🏘️",desc:"順德老街散步、小吃街區與華蓋山綠地棧道",address:"佛山市順德區大良街道華蓋路步行街",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"清暉園出口步行約2–5分鐘；華蓋路與華蓋山棧道不是同一景點｜本次路線：清暉園出口→華蓋路步行街→華蓋山棧道入口→只走一小段後折返"},
+        {s:"17:50",e:"18:05",title:"華蓋路 → 金榜上街",type:"交通",icon:"🚶",desc:"可步行或短程叫車前往",address:null,price:"步行免費／叫車約 ¥8–15",transport:"步行或短程叫車",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"步行約1–1.5公里、15–22分鐘；叫車約5–10分鐘"},
+        {s:"18:05",e:"19:20",title:"金榜上街｜晚餐＋甜品自理",type:"景點",icon:"🥛",desc:"逛金榜上街，晚餐與甜品依現場情況自行決定",address:"佛山市順德區大良街道金榜上街",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"主要特色為順德乳製品、甜品及老街小吃｜推薦品項：雙皮奶、薑撞奶、水牛奶、牛乳片、炸牛奶｜可選參考店家（非固定行程）：金榜老街坊（金榜上街33號，13823467008）、霞姐牛奶牛乳（金榜上街21號，13690588312 / 13531396873）、金榜牛哞哞（金榜上街57號，13006744980 / 18998400132）｜金榜上街以乳製品與甜品為主，若需完整晚餐可在華蓋路或金榜周邊現場自行決定"},
+        {s:"19:20",e:"20:15",title:"金榜上街 → 千燈湖公園",type:"交通",icon:"🚕",desc:"直接叫車前往千燈湖夜景區",address:null,price:"約 ¥65–95",transport:"滴滴／高德打車",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"約45–55分鐘；費用與車程為旅行估算，依當天即時路況與叫車平台為準"},
+        {s:"20:15",e:"21:05",title:"千燈湖公園",type:"景點",icon:"🌉",desc:"佛山南海代表性城市湖景公園，晚上欣賞湖畔燈光、城市夜景與水面倒影",address:"佛山市南海區燈湖西路28號",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"全年全天開放｜本次為夜遊短停留，不走完整公園｜主要看點：千燈湖湖畔夜景、市民廣場、湖面燈光倒影、城市天際線、夜間散步拍照｜提醒：千燈湖範圍很大，本次只安排約50分鐘夜景散步，不走完整環湖路線"},
+        {s:"21:05",e:"21:15",title:"千燈湖公園 → 燈湖西街",type:"交通",icon:"🚶",desc:"沿千燈湖步行前往燈湖西街",address:null,price:"免費",transport:"步行",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"兩個景點位於同一千燈湖商圈，實際步行時間依當天出口與路線為準"},
+        {s:"21:15",e:"22:15",title:"燈湖西街夜市",type:"景點",icon:"🌙",desc:"千燈湖旁夜生活街區，逛夜市、市集、小吃與夜景，宵夜現場自理",address:"佛山市南海區燈湖西路與南六路交叉口東南120米",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"夜間街區約15:30–24:30較熱鬧；實際攤位與活動依當天為準｜特色：夜市與特色小吃、創意市集、街頭活動、千燈湖夜景、歐式街區建築、夜間拍照｜不新增固定餐廳，宵夜與小吃全部現場自理"},
+        {s:"22:15",e:"22:50",title:"燈湖西街 → 宜尚PLUS酒店",type:"交通",icon:"🚕",desc:"夜市結束後直接叫車返回佛山酒店",address:null,price:"約 ¥30–45",transport:"滴滴／高德打車",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"約25–35分鐘；費用與車程為旅行估算，依當天即時路況與叫車平台為準"},
+        {s:"22:50",e:"23:59",title:"回酒店休息",type:"住宿",icon:"🛏️",desc:"宜尚PLUS飯店（佛山禪城智慧新城地鐵站店）",address:"中國廣東省佛山市禪城區華寶南路13號一座2樓201",price:"¥300",transport:null,phone:"+86-757-82133880",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"3 晚｜豪華城景大床房｜80㎡｜城市景觀｜7樓｜無早餐"}
+      ],
+      transportBudget: {
+        items: [
+          {label:"酒店 → 羅浮宮", cost:"¥28–42"},
+          {label:"羅浮宮 → 和美術館", cost:"¥40–58"},
+          {label:"和美術館 → 順峰山", cost:"¥50–70"},
+          {label:"順峰山 → 清暉園", cost:"¥18–28"},
+          {label:"華蓋路 → 金榜上街", cost:"免費或 ¥8–15"},
+          {label:"金榜上街 → 千燈湖", cost:"¥65–95"},
+          {label:"千燈湖 → 燈湖西街", cost:"步行免費"},
+          {label:"燈湖西街 → 酒店", cost:"¥30–45"}
+        ],
+        total:"若華蓋路 → 金榜上街步行：約 ¥231–338／若該段也叫車：約 ¥239–353",
+        note:"所有叫車費用及車程均為旅行估算，實際依當天即時路況與滴滴／高德價格為準"
+      },
+      dayBudget: {
+        transport:"約 ¥231–353",
+        attractions: [
+          {name:"羅浮宮國際家居博覽中心", cost:"免費"},
+          {name:"和美術館", cost:"依展覽而定；預留約 ¥85–100"},
+          {name:"順峰山公園", cost:"免費"},
+          {name:"清暉園", cost:"約 ¥15"},
+          {name:"華蓋路步行街＋華蓋山棧道", cost:"免費"},
+          {name:"金榜上街", cost:"免費"},
+          {name:"千燈湖公園", cost:"免費"},
+          {name:"燈湖西街", cost:"免費"},
+          {name:"固定景點預算", cost:"約 ¥100–115"}
+        ],
+        food:{label:"北滘午餐＋金榜晚餐甜品＋燈湖西街小吃／宵夜", cost:"約 ¥120–200"},
+        other:{label:"飲料、臨時支出", cost:"約 ¥30–50"},
+        total:"約 ¥480–720",
+        note:"不含住宿、不含購物。全部為1人預算；叫車費為獨自乘車整台車費用，不做分攤。和美術館票價依當期展覽與實際購票資格調整。"
+      }
+    },
+    { date:"2026-11-28", label:"DAY 4", dateLabel:"11/28（六）", route:"佛山 → 廣州 → 佛山",
+      theme:"廣州一日遊｜西關老城、歷史建築與珠江夜景", hint:"全程以地鐵＋步行為主｜夜間珠江夜遊",
+      items: [
+        {s:"08:00",e:"09:25",title:"宜尚PLUS酒店 → 永慶坊",type:"交通",icon:"🚇",desc:null,address:null,price:"約 ¥8–12／人",transport:"智慧新城站 → 佛山地鐵2號線 → 魁奇路站 → 廣佛線 → 西塱站 → 廣州地鐵1號線 → 黃沙站 → 步行前往永慶坊",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"全程約70–85分鐘，實際依轉乘與候車時間為準。"},
+        {s:"09:25",e:"10:55",title:"永慶坊｜西關老廣州",type:"景點",icon:"🏘️",desc:"廣州西關歷史街區，以恩寧路、西關騎樓、西關老城生活與嶺南建築為主要特色。",address:"廣州市荔灣區恩寧路永慶坊",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"停留約1.5小時，可逛恩寧路、永慶坊及周邊西關街區。"},
+        {s:"10:55",e:"11:25",title:"永慶坊 → 中山紀念堂",type:"交通",icon:"🚇",desc:null,address:null,price:"約 ¥3–4／人",transport:"黃沙站 → 廣州地鐵1號線 → 公園前站 → 轉2號線 → 紀念堂站",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"11:25",e:"12:20",title:"中山紀念堂｜近代廣州",type:"景點",icon:"🏛️",desc:"廣州代表性的近代歷史建築之一，為紀念孫中山先生而興建。",address:"廣州市越秀區東風中路299號",price:"園區免費；主體建築依現場",transport:null,phone:"020-83552030",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"主體建築一般09:00–17:30；如遇演出、會議或活動，開放時間可能調整。"},
+        {s:"12:20",e:"13:00",title:"午餐自理｜中山紀念堂／一德路周邊",type:"餐廳",icon:"🍜",desc:"依當天現場情況選擇廣州小吃或簡餐。",address:null,price:"約 ¥25–50／人",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"13:00",e:"13:25",title:"中山紀念堂 → 石室聖心大教堂",type:"交通",icon:"🚇",desc:null,address:null,price:"約 ¥2–3／人",transport:"紀念堂站 → 2號線 → 海珠廣場站 → 轉6號線 → 一德路站 → 步行",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"13:25",e:"14:20",title:"石室聖心大教堂｜哥德式建築",type:"景點",icon:"⛪",desc:"廣州代表性的哥德復興式教堂，以全石結構、雙尖塔與彩色玻璃為特色。",address:"廣州市越秀區一德路舊部前56號",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"2026/11/28為星期六，本次安排13:25–14:20參觀。宗教活動可能臨時影響開放，出發前再次確認。"},
+        {s:"14:20",e:"14:40",title:"石室聖心大教堂 → 北京路",type:"交通",icon:"🚇",desc:null,address:null,price:"約 ¥2–3／人",transport:"一德路站 → 廣州地鐵6號線 → 北京路站",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"14:40",e:"17:15",title:"北京路＋大佛寺｜老城商圈",type:"景點",icon:"🏮",desc:"廣州代表性老城商圈，結合北京路步行街、歷史街區、大佛寺、商場與小吃。",address:"廣州市越秀區北京路步行街／惠福東路惠新中街21號",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"停留約2.5小時。大佛寺安排接近傍晚拍照。不要新增固定餐廳。"},
+        {s:"17:15",e:"17:50",title:"北京路 → 珠江新城",type:"交通",icon:"🚇",desc:null,address:null,price:"約 ¥3–4／人",transport:"北京路站 → 6號線 → 區莊站 → 轉5號線 → 珠江新城站",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"17:50",e:"19:00",title:"珠江新城＋花城廣場｜現代廣州",type:"景點",icon:"🌆",desc:"廣州現代城市核心區，欣賞花城廣場、廣州大劇院、廣東省博物館外觀、東西塔、海心沙與廣州塔天際線。",address:"廣州市天河區花城廣場",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"本次以戶外散步與夜景為主，不安排廣東省博物館入館。"},
+        {s:"19:00",e:"19:20",title:"花城廣場 → 廣州塔",type:"交通",icon:"🚇",desc:null,address:null,price:"約 ¥2／人",transport:"步行至附近APM線車站 → APM線 → 廣州塔站",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"19:20",e:"20:00",title:"廣州塔｜城市地標",type:"景點",icon:"🗼",desc:"廣州代表性城市地標，本次以塔下外觀與珠江夜景拍照為主。",address:"廣州市海珠區閱江西路222號",price:"塔下外觀免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"本次不安排登塔，不要加入廣州塔登塔門票。"},
+        {s:"20:00",e:"21:30",title:"珠江夜遊｜廣州塔碼頭",type:"景點",icon:"🚢",desc:"從廣州塔周邊登船，以珠江夜景作為廣州一日遊最後一站。",address:"廣州塔碼頭",price:"預留約 ¥80–150／人",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"尚未訂票。實際2026/11/28班次之後再確認。"},
+        {s:"21:30",e:"23:00",title:"廣州塔 → 宜尚PLUS酒店",type:"交通",icon:"🚇",desc:null,address:null,price:"約 ¥8–12／人",transport:"廣州塔站 → 3號線 → 客村站 → 轉8號線 → 沙園站 → 轉廣佛線 → 魁奇路站 → 轉佛山地鐵2號線 → 智慧新城站 → 步行回酒店",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"約75–90分鐘。珠江夜遊正式訂票前，需再次確認當天廣州→佛山地鐵末班車。"},
+        {s:"23:00",e:"23:59",title:"回酒店休息",type:"住宿",icon:"🛏️",desc:"宜尚PLUS飯店（佛山禪城智慧新城地鐵站店）",address:"中國廣東省佛山市禪城區華寶南路13號一座2樓201",price:null,transport:null,phone:"+86-757-82133880",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"3 晚｜豪華城景大床房｜80㎡｜城市景觀｜7樓｜無早餐"}
+      ],
+      transportBudget: {
+        items: [
+          {label:"宜尚PLUS → 永慶坊", cost:"地鐵約 ¥8–12"},
+          {label:"永慶坊 → 中山紀念堂", cost:"地鐵約 ¥3–4"},
+          {label:"中山紀念堂 → 石室聖心大教堂", cost:"地鐵約 ¥2–3"},
+          {label:"石室聖心大教堂 → 北京路", cost:"地鐵約 ¥2–3"},
+          {label:"北京路 → 珠江新城", cost:"地鐵約 ¥3–4"},
+          {label:"花城廣場 → 廣州塔", cost:"APM 約 ¥2"},
+          {label:"廣州塔 → 宜尚PLUS", cost:"地鐵約 ¥8–12"}
+        ],
+        total:"純地鐵交通預估約 ¥28–40",
+        note:"本日以地鐵＋步行為主，不預設叫車；實際票價依當日廣州／佛山地鐵計費為準。珠江夜遊、餐飲及其他消費不包含在交通預算內。"
+      },
+      dayBudget: {
+        transport:"約 ¥28–40",
+        attractions: [
+          {name:"永慶坊", cost:"免費"},
+          {name:"中山紀念堂", cost:"園區免費，主體建築依現場"},
+          {name:"石室聖心大教堂", cost:"免費"},
+          {name:"北京路", cost:"免費"},
+          {name:"大佛寺", cost:"免費"},
+          {name:"花城廣場", cost:"免費"},
+          {name:"廣州塔塔下", cost:"免費"},
+          {name:"珠江夜遊", cost:"預留 ¥80–150"}
+        ],
+        food:{label:"午餐＋晚餐／小吃", cost:"約 ¥80–150"},
+        other:{label:"備用", cost:"約 ¥30–50"},
+        total:"約 ¥220–390",
+        note:"不含購物、不含廣州塔登塔。珠江夜遊尚未訂票，因此總額為旅行規劃估算。"
+      }
+    },
+    { date:"2026-11-29", label:"DAY 5", dateLabel:"11/29（日）", route:"尚未安排",
+      items: [
+        {s:"11:30",e:"12:00",title:"佛山宜尚PLUS退房",type:"住宿",icon:"🧳",desc:"宜尚PLUS飯店（佛山禪城智慧新城地鐵站店）退房",address:"中國廣東省佛山市禪城區華寶南路13號一座2樓201",price:null,transport:null,phone:"+86-757-82133880",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"12:00 前退房"},
+        {s:"20:00",e:"23:59",title:"回酒店休息",type:"住宿",icon:"🛏️",desc:"珠海·海之珠｜RomanticPearl｜有溫度的酒店（拱北口岸珠海站店）",address:null,price:null,transport:null,phone:null,status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"1 晚｜零壓舒享大床房｜29–32㎡｜含 2 客早餐"}
+      ]
+    },
+    { date:"2026-11-30", label:"DAY 6", dateLabel:"11/30（一）", route:"珠海 → 澳門 → 台北",
+      theme:"澳門美食與伴手禮快閃", hint:"跨境回程日｜大三巴、金光大道、官也街與永利皇宮｜行程緊湊",
+      airportArrivalTime:"18:05",
+      arrivalNotice:{
+        title:"台灣入境｜肉類製品注意",
+        intro:"不要購買或攜帶以下產品回台：",
+        items:["豬肉乾","牛肉乾","肉鬆蛋捲","含肉鳳凰捲","含肥肉或肉塊的杏仁餅","雞仔餅","含肉肉切酥","其他含豬肉、牛肉或禽肉製品"],
+        details:["部分雞仔餅、杏仁餅、鳳凰捲或肉切酥可能含豬肉、肥膘或肉鬆。","購買前確認包裝成分。無法確認時不要購買；若抵台時仍無法判斷，主動向檢疫人員詢問。"]
+      },
+      transportBudget:{
+        items:[
+          {label:"珠海酒店 → 拱北口岸",cost:"約 ¥10–15"},
+          {label:"關閘 → 澳門機場",cost:"AP1 約 MOP 6"},
+          {label:"澳門機場 → 百樂門",cost:"約 MOP 100–135"},
+          {label:"百樂門 → 大三巴",cost:"約 MOP 50–75"},
+          {label:"大三巴 → 福隆新街",cost:"步行免費"},
+          {label:"福隆新街 → 倫敦人",cost:"約 MOP 85–120"},
+          {label:"倫敦人 → 巴黎人 → 威尼斯人",cost:"步行免費"},
+          {label:"威尼斯人 → 官也街",cost:"步行免費"},
+          {label:"官也街 → 永利皇宮",cost:"約 MOP 35–55"},
+          {label:"永利皇宮 → 澳門機場",cost:"輕軌約 MOP 6"}
+        ],
+        total:"約 ¥10–15 ＋ MOP 282–397",
+        note:"全部為1人實際支出；未含機場行李寄存。"
+      },
+      dayBudget:{
+        transport:"約 ¥10–15 ＋ MOP 282–397",
+        attractions:[
+          {name:"大三巴牌坊",cost:"免費"},
+          {name:"澳門倫敦人",cost:"免費"},
+          {name:"澳門巴黎人",cost:"免費"},
+          {name:"澳門威尼斯人",cost:"免費"},
+          {name:"官也街",cost:"免費"},
+          {name:"永利皇宮觀光纜車",cost:"免費"},
+          {name:"澳門機場行李寄存",cost:"約 MOP 80／件"}
+        ],
+        food:{label:"早午餐＋午餐＋蛋撻＋官也街美食",cost:"約 MOP 180–300"},
+        other:{label:"伴手禮＋其他",cost:"約 MOP 200–500"},
+        total:"約 ¥10–15 ＋ MOP 742–1277",
+        note:"不含澳門→台灣機票、不含珠海住宿。全部為1人預算。"
+      },
+      items: [
+        {s:"07:10",e:"07:50",title:"起床、整理行李、退房",type:"住宿",icon:"🧳",desc:"珠海·海之珠｜RomanticPearl｜有溫度的酒店（拱北口岸珠海站店）",address:null,price:null,transport:null,phone:null,status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"07:50",e:"08:05",title:"珠海海之珠酒店 → 拱北口岸",type:"交通",icon:"🚕",desc:"叫車前往拱北口岸",address:"拱北口岸",price:"約 ¥10–15",transport:"叫車",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"08:05",e:"08:45",title:"中國出境 → 澳門入境",type:"交通",icon:"🛂",desc:"辦理中國出境與澳門入境手續",address:"拱北口岸／關閘",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"提醒攜帶台胞證、台灣護照"},
+        {s:"08:45",e:"09:30",title:"澳門關閘 → 澳門國際機場",type:"交通",icon:"🚌",desc:"優先搭乘 AP1 巴士；如趕時間可改搭的士",address:"澳門關閘 → 澳門國際機場",price:"AP1 約 MOP 6／的士約 MOP 105–140",transport:"AP1 巴士（省錢推薦）／的士（趕時間推薦）",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"AP1：省錢推薦｜的士：趕時間推薦"},
+        {s:"09:30",e:"09:45",title:"澳門機場寄放行李",type:"交通",icon:"🧳",desc:"於澳門國際機場寄放行李",address:"澳門氹仔偉龍馬路澳門國際機場",price:"約 MOP 80／件",transport:null,phone:"+853 2886 1111",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"09:45",e:"10:10",title:"澳門機場 → 百樂門粉麵店",type:"交通",icon:"🚕",desc:"叫車前往百樂門粉麵店",address:"百樂門粉麵店",price:"約 MOP 100–135",transport:"叫車",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"10:10",e:"10:50",title:"百樂門粉麵店｜早午餐",type:"餐廳",icon:"🍜",desc:"SOLO TRIP：建議 1 份主食＋少量小吃或飲料。",address:"澳門祐漢新村第一街16號",price:"約 MOP 45–80",transport:null,phone:"+853 2837 1138",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null,recs:["咖喱薯仔雞翼","菜撈麵","香腸雞蛋麵"]},
+        {s:"10:50",e:"11:10",title:"百樂門 → 大三巴",type:"交通",icon:"🚕",desc:"叫車前往大三巴",address:"大三巴牌坊",price:"約 MOP 50–75",transport:"叫車",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"11:10",e:"11:35",title:"大三巴牌坊｜快速拍照",type:"景點",icon:"⛪",desc:"快速拍照；本次不進博物館。",address:"澳門耶穌會紀念廣場",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"11:35",e:"12:00",title:"大三巴街｜試吃伴手禮",type:"購物",icon:"🥮",desc:"先試吃，主要購物留到官也街。",address:null,price:"試吃為主",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null,recs:["杏仁餅","花生糖","芝麻糖","蛋捲","薑糖","牛軋糖","鉅記","咀香園","英記"]},
+        {s:"12:00",e:"12:20",title:"大三巴街 → 福隆新街",type:"交通",icon:"🚶",desc:"步行前往福隆新街",address:"大三巴街 → 福隆新街",price:"免費",transport:"步行",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"12:20",e:"13:10",title:"福隆新街｜午餐二選一",type:"餐廳",icon:"🍲",desc:"午餐二選一：預設添發碗仔翅；備選祥記麵家，擇一即可。",address:"福隆新街",price:"約 MOP 50–100",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null,recs:["添發碗仔翅","祥記麵家（備選）"]},
+        {s:"13:10",e:"13:40",title:"福隆新街 → 澳門倫敦人",type:"交通",icon:"🚕",desc:"前往金光大道",address:"澳門倫敦人",price:"的士約 MOP 85–120／21A／26A 巴士約 MOP 6",transport:"的士（優先）／21A／26A 巴士（省錢備選）",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"13:40",e:"14:10",title:"澳門倫敦人｜快速拍照",type:"景點",icon:"🇬🇧",desc:"快速拍照。",address:"澳門倫敦人",price:"免費",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null,recs:["大笨鐘","國會大廈外觀","倫敦街景","室內金色大廳"]},
+        {s:"14:10",e:"14:35",title:"澳門巴黎人｜快速拍照",type:"景點",icon:"🗼",desc:"由倫敦人步行前往；本次不登塔。",address:"澳門巴黎人",price:"免費",transport:"步行",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null,recs:["巴黎鐵塔正面","巴黎風格大廳","商場街景"]},
+        {s:"14:35",e:"15:15",title:"澳門威尼斯人＋安德魯蛋撻",type:"景點",icon:"🛶",desc:"商場免費，蛋撻另計。SOLO TRIP：建議先買 1 顆蛋撻現場吃；本次不搭貢多拉。",address:"澳門氹仔望德聖母灣大馬路",price:"蛋撻預留約 MOP 12–25",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null,recs:["人造天空","大運河","貢多拉區","安德魯蛋撻"]},
+        {s:"15:15",e:"15:35",title:"威尼斯人 → 官也街",type:"交通",icon:"🚶",desc:"優先步行前往；如需要可改搭的士。",address:"官也街",price:"步行免費／的士約 MOP 25–40",transport:"步行（優先）／的士（備選）",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"15:35",e:"16:50",title:"官也街｜美食＋伴手禮",type:"購物",icon:"🛍️",desc:"SOLO TRIP：不需要每家都吃，現場挑 2–3 樣即可。",address:"澳門氹仔官也街",price:"美食預留約 MOP 70–120｜伴手禮另計",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null,recs:["榮記牛雜","世記咖啡","莫義記","晃記餅家","鉅記","咀香園"]},
+        {s:"16:50",e:"17:05",title:"官也街 → 永利皇宮",type:"交通",icon:"🚕",desc:"前往永利皇宮。",address:"永利皇宮",price:"的士約 MOP 35–55",transport:"的士（優先）／輕軌（備選）",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"17:05",e:"17:50",title:"永利皇宮＋觀光纜車",type:"景點",icon:"🎡",desc:"纜車免費。排隊超過 30 分鐘就放棄纜車。",address:"澳門路氹體育館大馬路",price:"纜車免費",transport:null,phone:"+853 8889 8889",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"17:50",e:"18:05",title:"永利皇宮 → 澳門國際機場",type:"交通",icon:"🚇",desc:"路氹東站 → 機場站",address:"澳門國際機場",price:"約 MOP 6",transport:"輕軌",phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"18:05",e:"18:30",title:"領行李＋辦理航班報到",type:"交通",icon:"🛫",desc:"領取寄放行李後辦理回程航班報到。",address:"澳門國際機場",price:"—",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"18:30",e:"20:35",title:"澳門機場候機",type:"交通",icon:"🛫",desc:"等候回程班機 STARLUX JX206",address:"澳門國際機場 MFM",price:"—",transport:null,phone:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"預留報到、安檢、出境與候機時間"},
+        {s:"20:35",e:"22:25",title:"澳門 → 桃園",type:"交通",icon:"✈️",desc:"STARLUX JX206",address:"澳門國際機場 MFM",price:"—",transport:"航班 JX206",phone:null,status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"直飛，航程約 1 小時 50 分"}
+      ]
+    }
+  ]
+};
+
+/* TRIP 目前指向的資料來源：預設為內建資料（DEFAULT_TRIP）
+   若 Supabase 讀取成功，會在 initTrip() 中被換成雲端資料 */
+let TRIP = DEFAULT_TRIP;
+
+/* time utils */
+/* 只接受合法的 "YYYY-MM-DD" + "HH:mm"，其他情況回傳 null（不會產生 Invalid Date） */
+function toDate(dateStr,timeStr){
+  if(!dateStr || !timeStr) return null;
+  const dm = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr);
+  const tm = /^(\d{2}):(\d{2})$/.exec(timeStr);
+  if(!dm || !tm) return null;
+  const d = new Date(Number(dm[1]), Number(dm[2])-1, Number(dm[3]), Number(tm[1]), Number(tm[2]), 0, 0);
+  return isNaN(d.getTime()) ? null : d;
+}
+let FLAT=[];
+function buildFlat(){
+  FLAT=[];
+  TRIP.days.forEach((day,dayIdx)=>{
+    if(!day.date || !Array.isArray(day.items) || day.items.length===0) return; // 待安排／空白的一天，NOW 不處理
+    day.items.forEach((it,itemIdx)=>{
+      let start=toDate(day.date,it.s), end=toDate(day.date,it.e);
+      if(!start || !end) return; // 缺少有效 start/end，略過，不加入 NOW 判斷
+      if(end<=start) end=new Date(end.getTime()+24*60*60*1000);
+      FLAT.push({...it,dayIdx,itemIdx,dayLabel:day.label,start,end});
+    });
+  });
+  FLAT.sort((a,b)=>a.start-b.start);
+}
+buildFlat();
+
+/* =========================================================
+   ================================
+   SUPABASE 讀取架構｜V4-A2
+   只使用 anon key 讀取（select），不做寫入、不做登入。
+   成功 → 用雲端資料覆蓋 TRIP；失敗／未設定 → 維持 DEFAULT_TRIP。
+   ================================
+   ========================================================= */
+const SUPABASE_URL = "YOUR_SUPABASE_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+
+function supabaseConfigured(){
+  return !!SUPABASE_URL && !!SUPABASE_ANON_KEY &&
+    SUPABASE_URL.indexOf("YOUR_SUPABASE_URL")===-1 &&
+    SUPABASE_ANON_KEY.indexOf("YOUR_SUPABASE_ANON_KEY")===-1;
+}
+
+async function sbGet(path){
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    headers:{
+      "apikey": SUPABASE_ANON_KEY,
+      "Authorization": "Bearer " + SUPABASE_ANON_KEY
+    }
+  });
+  if(!res.ok) throw new Error(`Supabase 讀取失敗：${path}（${res.status}）`);
+  return res.json();
+}
+
+/* "HH:mm:ss" 或 "HH:mm" → "HH:mm"；空值回傳 null */
+function sbTime(t){ return t ? String(t).slice(0,5) : null; }
+
+/* 將 Supabase 回傳的 rows 轉換成目前網站使用的 TRIP 結構
+   （TRIP.days / TRIP.stays / TRIP.flights），
+   欄位命名對應現有 render function 所預期的 camelCase 欄位。 */
+function mapSupabaseToTrip(trip, dayRows, itemRows, stayRows, flightRows){
+  const dayIndexById = {};
+  dayRows.forEach(d=> dayIndexById[d.id] = d.day_index);
+
+  const days = dayRows
+    .slice()
+    .sort((a,b)=>a.day_index-b.day_index)
+    .map(d=>{
+      const fallbackDay = DEFAULT_TRIP.days.find(x=>x.date===d.date);
+      const items = itemRows
+        .filter(it=>it.day_id===d.id)
+        .slice()
+        .sort((a,b)=>(a.sort_order??0)-(b.sort_order??0))
+        .map(it=>({
+          s: sbTime(it.start_time),
+          e: sbTime(it.end_time),
+          title: it.title,
+          type: it.type,
+          icon: it.icon,
+          desc: it.description,
+          address: it.address,
+          price: it.price,
+          transport: it.transport,
+          phone: it.phone,
+          status: it.status,
+          imageUrl: it.image_url,
+          websiteUrl: it.website_url,
+          mapUrl: it.map_url,
+          bookingUrl: it.booking_url,
+          note: it.note,
+          image: !!it.image_url
+        }));
+      return {
+        date: d.date,
+        label: d.label,
+        dateLabel: d.date_label,
+        route: d.route,
+        theme: fallbackDay?.theme ?? null,
+        hint: fallbackDay?.hint ?? null,
+        transportBudget: fallbackDay?.transportBudget ?? null,
+        dayBudget: fallbackDay?.dayBudget ?? null,
+        arrivalNotice: fallbackDay?.arrivalNotice ?? null,
+        airportArrivalTime: fallbackDay?.airportArrivalTime ?? null,
+        items
+      };
+    });
+
+  const stays = stayRows.map(s=>({
+    day: s.day_id ? (dayIndexById[s.day_id] ?? null) : null,
+    city: s.city,
+    hotelName: s.hotel_name,
+    checkIn: s.check_in,
+    checkOut: s.check_out,
+    address: s.address,
+    phone: s.phone,
+    imageUrl: s.image_url,
+    websiteUrl: s.website_url,
+    bookingUrl: s.booking_url,
+    mapUrl: s.map_url,
+    note: s.note,
+    status: s.status
+  }));
+
+  const flights = flightRows.map(f=>({
+    type: f.type,
+    airline: f.airline,
+    flightNo: f.flight_no,
+    date: f.date,
+    fromCity: f.from_city,
+    fromAirport: f.from_airport,
+    fromCode: f.from_code,
+    toCity: f.to_city,
+    toAirport: f.to_airport,
+    toCode: f.to_code,
+    depart: sbTime(f.depart_time),
+    arrive: sbTime(f.arrive_time),
+    duration: f.duration,
+    direct: f.direct,
+    terminal: f.terminal,
+    gate: f.gate,
+    seat: f.seat,
+    baggage: f.baggage,
+    bookingReference: f.booking_reference,
+    bookingUrl: f.booking_url,
+    status: f.status,
+    note: f.note
+  }));
+
+  // lastUpdated 直接採用 Supabase trips 資料表的 updated_at 欄位（timestamptz）。
+  // 未來任何資料異動（景點/時間/地址/備註/住宿/交通/照片新增或刪除）
+  // 只要在後端寫入時同步更新 trips.updated_at，這裡就會自動反映最新時間，
+  // 不需要另外修改這段前端邏輯。
+  return { lastUpdated: trip.updated_at, flights, stays, days };
+}
+
+/* 嘗試從 Supabase 讀取整趟旅行資料；任何一步失敗都會 throw，
+   由呼叫端 catch 並 fallback 回 DEFAULT_TRIP */
+async function loadFromSupabase(){
+  if(!supabaseConfigured()) return null; // 尚未設定，直接跳過、不發送請求
+
+  const trips = await sbGet(`trips?select=*&is_public=eq.true&order=created_at.desc&limit=1`);
+  const trip = trips && trips[0];
+  if(!trip) throw new Error("找不到公開的旅行資料");
+
+  const dayRows = await sbGet(`days?select=*&trip_id=eq.${trip.id}&order=day_index.asc`);
+  if(!dayRows || dayRows.length===0) throw new Error("找不到 days 資料");
+
+  const dayIds = dayRows.map(d=>d.id);
+  const itemRows = dayIds.length
+    ? await sbGet(`itinerary_items?select=*&day_id=in.(${dayIds.join(",")})&order=sort_order.asc`)
+    : [];
+
+  const stayRows = await sbGet(`stays?select=*&trip_id=eq.${trip.id}&order=check_in.asc`);
+  const flightRows = await sbGet(`flights?select=*&trip_id=eq.${trip.id}`);
+
+  return mapSupabaseToTrip(trip, dayRows, itemRows, stayRows, flightRows);
+}
+
+const state={ page:"home", day:1, openId:null, openConfirmed:null, simTime:null };
+function getNow(){ return state.simTime ? new Date(state.simTime) : new Date(); }
+function computeStatus(now){
+  let current=null,next=null;
+  for(const it of FLAT){ if(now>=it.start && now<it.end) current=it; }
+  for(const it of FLAT){ if(it.start>now){ next=it; break; } }
+  return {current,next};
+}
+function esc(s){ return (s||"").replace(/'/g,"\\'"); }
+function copyText(t){ navigator.clipboard?.writeText(t).then(()=>showToast("已複製地址 📋")).catch(()=>showToast("複製失敗")); }
+function callPhone(n){ window.location.href="tel:"+n.replace(/[^0-9+]/g,""); }
+function openMap(addr){ window.open("https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(addr),"_blank"); }
+function showToast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),1600); }
+
+/* ---- 匯率：手動設定，均以 1 單位幣別可兌換的 CNY 表示 ---- */
+const MANUAL_CURRENCY_RATES = { CNY:1, TWD:1/4.5, MOP:1/1.1 };
+const CURRENCY_NAMES = { CNY:"人民幣 CNY", TWD:"新台幣 TWD", MOP:"澳門幣 MOP" };
+function convertCurrency(amount,fromCurrency,toCurrency){
+  const value=Number(amount);
+  if(!Number.isFinite(value) || value<0 || !MANUAL_CURRENCY_RATES[fromCurrency] || !MANUAL_CURRENCY_RATES[toCurrency]) return null;
+  return value*MANUAL_CURRENCY_RATES[fromCurrency]/MANUAL_CURRENCY_RATES[toCurrency];
+}
+function formatCurrency(currency,value){
+  if(value==null) return "—";
+  return `${currency} ${value.toLocaleString("zh-TW",{maximumFractionDigits:2})}`;
+}
+function renderExchange(){
+  const amountInput=document.getElementById("currency-amount");
+  const fromSelect=document.getElementById("currency-from");
+  const results=document.getElementById("currency-results");
+  const rates=document.getElementById("currency-rates");
+  if(!amountInput || !fromSelect || !results || !rates) return;
+  const rawAmount=amountInput.value.trim();
+  const amount=Number(rawAmount);
+  const valid=rawAmount!=="" && Number.isFinite(amount) && amount>=0;
+  const from=fromSelect.value;
+  const targets=Object.keys(MANUAL_CURRENCY_RATES).filter(currency=>currency!==from);
+  results.innerHTML=valid
+    ? targets.map(currency=>`<div class="exchange-result"><div class="currency-name">${CURRENCY_NAMES[currency]}</div><div class="currency-value">${formatCurrency(currency,convertCurrency(amount,from,currency))}</div></div>`).join("")
+    : '<div class="exchange-result"><div class="currency-name">請輸入有效金額</div></div>';
+  rates.textContent="目前使用手動設定匯率｜1 CNY = 4.50 TWD｜1 CNY = 1.10 MOP";
+}
+
+/* 剩餘時間文字：不顯示小數或秒數 */
+function formatRemaining(ms){
+  let totalMin = Math.max(1, Math.round(ms/60000));
+  const h = Math.floor(totalMin/60), m = totalMin%60;
+  if(h<=0) return `${m} 分鐘`;
+  if(m===0) return `${h} 小時`;
+  return `${h} 小時 ${m} 分鐘`;
+}
+/* 下一個行程的時間顯示：跨日時附上日期 */
+function formatNextWhen(item, now){
+  const sameDay = item.start.getFullYear()===now.getFullYear() && item.start.getMonth()===now.getMonth() && item.start.getDate()===now.getDate();
+  return sameDay ? item.s : `${item.start.getMonth()+1}/${item.start.getDate()}（${item.s}）`;
+}
+/* 找出 now 所在日曆日期對應的 TRIP.days 項目（依 date 欄位比對年月日） */
+function findDayForDate(now){
+  return TRIP.days.find(d=>{
+    if(!d.date) return false;
+    const [y,m,dd]=d.date.split("-").map(Number);
+    return now.getFullYear()===y && (now.getMonth()+1)===m && now.getDate()===dd;
+  });
+}
+/* 找出 now 屬於旅行第幾天（1-based），不屬於旅行期間則回傳 null */
+function getTripDayIndex(now){
+  for(let i=0;i<TRIP.days.length;i++){
+    const d=TRIP.days[i];
+    if(!d.date) continue;
+    const [y,m,dd]=d.date.split("-").map(Number);
+    if(now.getFullYear()===y && (now.getMonth()+1)===m && now.getDate()===dd) return i+1;
+  }
+  return null;
+}
+
+/* ---- render trip progress (header) ---- */
+function renderTripProgress(){
+  const el=document.getElementById("trip-progress");
+  if(!el) return;
+  const now=getNow();
+  const before = FLAT[0] && now < FLAT[0].start;
+  const after = FLAT.length && now >= FLAT[FLAT.length-1].end;
+  if(before || after){
+    el.textContent = "6 DAYS · 5 NIGHTS";
+  } else {
+    const dayIdx = getTripDayIndex(now);
+    el.textContent = dayIdx ? `DAY ${dayIdx} OF 6` : "6 DAYS · 5 NIGHTS";
+  }
+}
+
+/* ---- render NOW ---- */
+function renderNow(){
+  const now=getNow();
+  const {current,next}=computeStatus(now);
+  const dotEl=document.getElementById("now-dot");
+  const statusEl=document.getElementById("now-status");
+  const card=document.getElementById("now-card");
+
+  if(current){
+    dotEl.className="dot live";
+    statusEl.textContent="現在正在進行";
+    const remain = formatRemaining(current.end - now);
+    const tag = current.status==="confirmed" ? `<span class="status-badge confirmed">✓ 已確認</span>` : `<span class="status-badge tentative">暫定</span>`;
+    card.innerHTML=`
+      <div class="now-icon">${current.icon}</div>
+      <div style="flex:1; min-width:0">
+        <div class="now-title serif">${current.title}</div>
+        <div class="now-time mono">${current.s} – ${current.e}</div>
+        <div style="margin-top:6px">${tag}</div>
+        <div class="now-addr">📍 ${current.address||"—"}</div>
+        <div class="now-remain">距離本行程結束還有 <b>${remain}</b></div>
+        ${next?`<div class="next-line"><span class="ic">${next.icon}</span><span>下一站：<b>${next.title}</b>　${next.s}</span></div>`:""}
+      </div>`;
+  } else {
+    dotEl.className="dot idle";
+    const before = FLAT[0] && now < FLAT[0].start;
+    const after = FLAT.length && now >= FLAT[FLAT.length-1].end;
+    const todayDay = findDayForDate(now);
+    const noScheduleToday = !before && !after && todayDay && (!todayDay.items || todayDay.items.length===0);
+
+    if(after){
+      statusEl.textContent = "行程已結束";
+      card.innerHTML = `<div style="padding:6px 2px; color:var(--text-dim); font-size:13.5px;">這趟旅程已經結束，一路順風 ✈️</div>`;
+    } else if(noScheduleToday){
+      statusEl.textContent = "今日尚未安排";
+      const remain = next ? formatRemaining(next.start - now) : null;
+      const whenStr = next ? formatNextWhen(next, now) : null;
+      card.innerHTML=`
+        <div class="now-icon">☕</div>
+        <div style="flex:1; min-width:0">
+          <div class="now-title serif">今日尚未安排詳細行程</div>
+          ${next?`
+            <div class="now-addr" style="margin-top:8px">下一個行程：</div>
+            <div class="now-title serif" style="font-size:16px; margin-top:2px;">${next.icon} ${next.title}</div>
+            <div class="now-addr" style="margin-top:6px">開始：<span class="mono">${whenStr}</span></div>
+            <div class="now-remain">距離下一個行程還有 <b>${remain}</b></div>
+          `:""}
+        </div>`;
+    } else if(next){
+      statusEl.textContent = before ? "尚未出發" : "自由／緩衝時間";
+      const remain = formatRemaining(next.start - now);
+      const whenStr = formatNextWhen(next, now);
+      card.innerHTML=`
+        <div class="now-icon">☕</div>
+        <div style="flex:1; min-width:0">
+          <div class="now-title serif">自由／緩衝時間</div>
+          <div class="now-addr" style="margin-top:8px">下一個行程：</div>
+          <div class="now-title serif" style="font-size:16px; margin-top:2px;">${next.icon} ${next.title}</div>
+          <div class="now-addr" style="margin-top:6px">開始：<span class="mono">${whenStr}</span></div>
+          <div class="now-remain">距離下一個行程還有 <b>${remain}</b></div>
+        </div>`;
+    } else {
+      statusEl.textContent = "尚未安排";
+      card.innerHTML = `<div style="padding:6px 2px; color:var(--text-dim); font-size:13.5px;">目前沒有安排的行程。</div>`;
+    }
+  }
+}
+
+/* ---- render home day nav ---- */
+function renderDayNav(){
+  const el=document.getElementById("day-nav");
+  el.innerHTML = TRIP.days.map((d,i)=>`
+    <div class="day-row" onclick="goDay(${i+1})">
+      <div class="d mono">${d.label}</div>
+      <div class="r">
+        <div class="t">${d.dateLabel}</div>
+        <div class="s">${d.route}</div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+  `).join("");
+}
+function goDay(n){ state.day=n; switchPage("itinerary"); }
+
+/* ---- render home confirmed section ---- */
+function fmtDateShort(dateStr){
+  if(!dateStr) return "—";
+  const [y,m,d]=dateStr.split("-");
+  return `${parseInt(m)}/${parseInt(d)}`;
+}
+function renderConfirmed(){
+  const el=document.getElementById("confirmed-list");
+  if(!el) return;
+  const outbound = TRIP.flights.find(f=>f.type==="outbound");
+  const ret = TRIP.flights.find(f=>f.type==="return");
+  const staysSorted = [...TRIP.stays].sort((a,b)=>a.day-b.day);
+  const rows = [];
+  if(outbound) rows.push({kind:"flight", id:"f-out", data:outbound, label:"去程航班"});
+  staysSorted.forEach(s=> rows.push({kind:"stay", id:"s-"+s.day, data:s}));
+  if(ret) rows.push({kind:"flight", id:"f-ret", data:ret, label:"回程航班"});
+
+  el.innerHTML = rows.map(r=>{
+    const isOpen = state.openConfirmed===r.id;
+    if(r.kind==="flight"){
+      const f=r.data;
+      const airlineShort = f.airline ? f.airline.split(" ")[0] : "";
+      const durationLine = [f.direct?"直飛":(f.direct===false?"轉機":null), f.duration].filter(Boolean).join(" · ");
+      const extraLines = [];
+      if(f.terminal) extraLines.push(`<div class="d-line"><span class="k">🚪</span><span class="v">航廈 ${f.terminal}</span></div>`);
+      if(f.gate) extraLines.push(`<div class="d-line"><span class="k">🚏</span><span class="v">登機門 ${f.gate}</span></div>`);
+      if(f.seat) extraLines.push(`<div class="d-line"><span class="k">💺</span><span class="v">座位 ${f.seat}</span></div>`);
+      if(f.baggage) extraLines.push(`<div class="d-line"><span class="k">🧳</span><span class="v">行李 ${f.baggage}</span></div>`);
+      if(f.note) extraLines.push(`<div class="d-line"><span class="k">📝</span><span class="v">${f.note}</span></div>`);
+      const btns=[];
+      if(f.bookingUrl) btns.push(`<div class="btn" onclick="event.stopPropagation(); window.open('${esc(f.bookingUrl)}','_blank')">訂票資訊</div>`);
+      return `
+      <div class="c-row ${isOpen?'open':''}" onclick="toggleConfirmed('${r.id}')">
+        <div class="c-head">
+          <span class="c-icon">✈️</span>
+          <div class="c-main">
+            <div class="c-title">${r.label}</div>
+            <div class="c-sub mono">${airlineShort}${airlineShort?" ":""}${f.flightNo}</div>
+            <div class="c-sub mono">${fmtDateShort(f.date)} · ${f.depart} ${f.fromCode} → ${f.arrive} ${f.toCode}</div>
+          </div>
+          <span class="status-badge confirmed">✓ 已確認</span>
+          <span class="t-chev">▶</span>
+        </div>
+        <div class="t-detail">
+          <div class="t-detail-inner" onclick="event.stopPropagation()">
+            <div class="d-line"><span class="k">🏢</span><span class="v">${f.airline||"—"}</span></div>
+            <div class="d-line"><span class="k">🛫</span><span class="v">${f.depart}　${f.fromCode}　${f.fromAirport||""}</span></div>
+            <div class="d-line"><span class="k">↓</span><span class="v"></span></div>
+            <div class="d-line"><span class="k">🛬</span><span class="v">${f.arrive}　${f.toCode}　${f.toAirport||""}</span></div>
+            ${durationLine?`<div class="d-line"><span class="k">🕐</span><span class="v">${durationLine}</span></div>`:""}
+            ${extraLines.join("")}
+            ${btns.length?`<div class="btn-row">${btns.join("")}</div>`:""}
+          </div>
+        </div>
+      </div>`;
+    } else {
+      const h=r.data;
+      const stayPrice = h.price == null ? null : h.price;
+      const stayDateRange = h.checkIn && h.checkOut
+        ? `${fmtDateShort(h.checkIn)} → ${fmtDateShort(h.checkOut)}`
+        : null;
+      const staySummary = [
+        stayDateRange,
+        h.nights,
+        stayPrice
+      ].filter(Boolean).join(" · ");
+      const stayDetails = [];
+      const stayDates = [
+        h.checkIn ? `入住 ${fmtDateShort(h.checkIn)}${h.checkInTime ? ` ${h.checkInTime}` : ""}` : null,
+        h.checkOut ? `退房 ${fmtDateShort(h.checkOut)}${h.checkOutTime ? ` ${h.checkOutTime}` : ""}` : null
+      ].filter(Boolean).join(" · ");
+      if(h.address) stayDetails.push(["📍",h.address]);
+      if(h.phone) stayDetails.push(["☎️",h.phone]);
+      if(stayPrice) stayDetails.push(["💰",stayPrice]);
+      if(stayDates) stayDetails.push(["🗓️",stayDates]);
+      if(h.nights) stayDetails.push(["🌙",h.nights]);
+      if(h.roomType) stayDetails.push(["🛏️",h.roomType]);
+      if(h.bedType) stayDetails.push(["🛌",h.bedType]);
+      if(h.occupancy) stayDetails.push(["👥",h.occupancy]);
+      if(h.area) stayDetails.push(["📐",h.area]);
+      if(h.view) stayDetails.push(["🏙️",h.view]);
+      if(h.floor) stayDetails.push(["🏢",h.floor]);
+      if(h.features) stayDetails.push(["🪟",h.features]);
+      if(h.breakfast) stayDetails.push(["🍳",h.breakfast]);
+      if(h.note) stayDetails.push(["📝",h.note]);
+      const btns=[];
+      if(h.mapUrl) btns.push(`<div class="btn" onclick="event.stopPropagation(); window.open('${esc(h.mapUrl)}','_blank')">導航</div>`);
+      else if(h.address) btns.push(`<div class="btn" onclick="event.stopPropagation(); openMap('${esc(h.address)}')">導航</div>`);
+      if(h.websiteUrl) btns.push(`<div class="btn" onclick="event.stopPropagation(); window.open('${esc(h.websiteUrl)}','_blank')">飯店網站</div>`);
+      if(h.bookingUrl) btns.push(`<div class="btn" onclick="event.stopPropagation(); window.open('${esc(h.bookingUrl)}','_blank')">訂房資訊</div>`);
+      if(h.phone) btns.push(`<div class="btn primary" onclick="event.stopPropagation(); callPhone('${h.phone}')">撥打電話</div>`);
+      const imgHtml = h.imageUrl
+        ? `<img class="d-img" src="${esc(h.imageUrl)}" alt="${esc(h.hotelName)}">`
+        : `<div class="img-placeholder"><span class="ic">🖼️</span><span>圖片區域</span></div>`;
+      return `
+      <div class="c-row ${isOpen?'open':''}" onclick="toggleConfirmed('${r.id}')">
+        <div class="c-head">
+          <span class="c-icon">🏨</span>
+          <div class="c-main">
+            <div class="c-title">${stayDayRangeLabel(h)}${h.city?('　· '+h.city):''}</div>
+            <div class="c-sub">${h.hotelName}</div>
+            <div class="c-sub mono">${staySummary}</div>
+          </div>
+          <span class="status-badge confirmed">✓ 已確認</span>
+          <span class="t-chev">▶</span>
+        </div>
+        <div class="t-detail">
+          <div class="t-detail-inner" onclick="event.stopPropagation()">
+            ${imgHtml}
+            ${stayDetails.map(([icon,value])=>`<div class="d-line"><span class="k">${icon}</span><span class="v">${value}</span></div>`).join("")}
+            ${btns.length?`<div class="btn-row">${btns.join("")}</div>`:""}
+          </div>
+        </div>
+      </div>`;
+    }
+  }).join("");
+}
+function toggleConfirmed(id){ state.openConfirmed = state.openConfirmed===id ? null : id; renderConfirmed(); }
+
+/* ---- 依 stay 的 checkIn/checkOut 換算住宿標題顯示用的 DAY 範圍 ---- */
+function stayDayRangeLabel(h){
+  const days = TRIP.days;
+  const startIdx = days.findIndex(d=>d.date===h.checkIn);
+  let endIdx = -1;
+  if(h.checkOut){
+    const co = new Date(h.checkOut+"T00:00:00");
+    if(!isNaN(co.getTime())){
+      co.setDate(co.getDate()-1); // 退房日的前一晚才是最後一個住宿夜晚
+      const pad=n=>String(n).padStart(2,"0");
+      const endDateStr = `${co.getFullYear()}-${pad(co.getMonth()+1)}-${pad(co.getDate())}`;
+      endIdx = days.findIndex(d=>d.date===endDateStr);
+    }
+  }
+  const startDay = startIdx>=0 ? startIdx+1 : h.day;
+  const endDay = endIdx>=0 ? endIdx+1 : startDay;
+  return startDay===endDay ? `DAY ${startDay} 住宿` : `DAY ${startDay}–${endDay} 住宿`;
+}
+
+/* ---- 將 Timeline 的住宿項目對應至同一筆住宿資料，避免重複維護飯店資訊 ---- */
+function stayForTimelineItem(day,it){
+  if(it.type!=="住宿") return null;
+  const itemText=`${it.title||""} ${it.desc||""}`;
+  const namedStay=TRIP.stays.find(h=>h.hotelName && itemText.includes(h.hotelName));
+  if(namedStay) return namedStay;
+  return TRIP.stays.find(h=>h.checkIn && h.checkOut && day.date>=h.checkIn && day.date<h.checkOut) || null;
+}
+function stayDetailLines(h,itemNote=null){
+  const price=h.price==null ? "價格待補" : h.price;
+  const dates=[
+    h.checkIn ? `入住 ${fmtDateShort(h.checkIn)}${h.checkInTime ? ` ${h.checkInTime}` : ""}` : null,
+    h.checkOut ? `退房 ${fmtDateShort(h.checkOut)}${h.checkOutTime ? ` ${h.checkOutTime}` : ""}` : null
+  ].filter(Boolean).join(" · ");
+  const lines=[];
+  if(dates) lines.push(["🗓️",dates]);
+  if(h.nights) lines.push(["🌙",h.nights]);
+  lines.push(["💰",price]);
+  if(h.roomType) lines.push(["🛏️",h.roomNote ? `${h.roomType}｜${h.roomNote}` : h.roomType]);
+  if(h.bedType) lines.push(["🛌",h.bedType]);
+  if(h.occupancy) lines.push(["👥",h.occupancy]);
+  if(h.area) lines.push(["📐",h.area]);
+  if(h.view) lines.push(["🏙️",h.view]);
+  if(h.floor) lines.push(["🏢",h.floor]);
+  if(h.features) lines.push(["🪟",h.features]);
+  if(h.breakfast) lines.push(["🍳",h.breakfast]);
+  if(h.address) lines.push(["📍",h.address]);
+  if(h.phone) lines.push(["☎️",h.phone]);
+  if(h.note) lines.push(["📝",h.note]);
+  if(itemNote && itemNote!==h.note) lines.push(["📝",itemNote]);
+  return lines.map(([icon,value])=>`<div class="d-line"><span class="k">${icon}</span><span class="v">${value}</span></div>`).join("");
+}
+
+/* ---- last updated ---- */
+function formatLastUpdated(iso){
+  if(!iso) return "";
+  const d=new Date(iso);
+  const pad=n=>String(n).padStart(2,"0");
+  return `最後更新：${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+function renderLastUpdated(){
+  const txt = formatLastUpdated(TRIP.lastUpdated);
+  const a=document.getElementById("last-updated-home");
+  const b=document.getElementById("last-updated-itin");
+  if(a) a.textContent = txt;
+  if(b) b.textContent = txt;
+}
+
+/* ---- render itinerary ---- */
+function renderTabs(){
+  const el=document.getElementById("tabs");
+  el.innerHTML = TRIP.days.map((d,i)=>`
+    <div class="tab ${state.day===i+1?'active':''}" onclick="setDay(${i+1})">${d.label}<span class="dt">${d.dateLabel}</span></div>
+  `).join("");
+}
+function setDay(n){ state.day=n; state.openId=null; renderTabs(); renderTimeline(); }
+
+function renderTimeline(){
+  const day=TRIP.days[state.day-1];
+  const now=getNow();
+  const {current}=computeStatus(now);
+  const el=document.getElementById("timeline");
+
+  if(!day.items || day.items.length===0){
+    el.innerHTML = `<div class="empty-day">這一天還沒有安排</div>`;
+    renderDayExtra(day);
+    return;
+  }
+
+  el.innerHTML = day.items.map((it,idx)=>{
+    const id=`${state.day}-${idx}`;
+    const isCurrent = current && current.dayIdx===state.day-1 && current.itemIdx===idx;
+    const isOpen = state.openId===id;
+    const stay=stayForTimelineItem(day,it);
+    const detailData=stay||it;
+    const itemNoteHtml=["孫文西路步行街","香山商業文化博物館","岐江公園","中懇人行天橋","興中廣場"].includes(it.title) && it.note
+      ? `<div class="d-line"><span class="k">📝</span><span class="v">${it.note}</span></div>`
+      : "";
+    const recsHtml = it.recs ? `<div class="recs"><div class="rec-title">推薦</div>${it.recs.map(r=>`<div class="rec-item">${r}</div>`).join("")}</div>` : "";
+    const imgHtml = it.image
+      ? (it.imageUrl
+          ? `<img class="d-img" src="${esc(it.imageUrl)}" alt="${esc(it.title)}">`
+          : `<div class="img-placeholder"><span class="ic">🖼️</span><span>圖片區域</span></div>`)
+      : "";
+    const btns = [];
+    if(detailData.mapUrl) btns.push(`<div class="btn" onclick="event.stopPropagation(); window.open('${esc(detailData.mapUrl)}','_blank')">導航</div>`);
+    else if(detailData.address) btns.push(`<div class="btn" onclick="event.stopPropagation(); openMap('${esc(detailData.address)}')">地圖</div>`);
+    if(detailData.websiteUrl) btns.push(`<div class="btn" onclick="event.stopPropagation(); window.open('${esc(detailData.websiteUrl)}','_blank')">官方網站</div>`);
+    if(detailData.bookingUrl) btns.push(`<div class="btn" onclick="event.stopPropagation(); window.open('${esc(detailData.bookingUrl)}','_blank')">訂房資訊</div>`);
+    if(detailData.phone) btns.push(`<div class="btn primary" onclick="event.stopPropagation(); callPhone('${detailData.phone}')">撥打電話</div>`);
+    else if(detailData.address) btns.push(`<div class="btn" onclick="event.stopPropagation(); copyText('${esc(detailData.address)}')">複製地址</div>`);
+    return `
+      <div class="t-row ${isOpen?'open':''}" onclick="toggleItem('${id}')">
+        <div class="t-time mono">${it.s}</div>
+        <div class="t-mid"><div class="t-dot ${isCurrent?'current':''}"></div></div>
+        <div class="t-body">
+          <div class="t-head">
+            <span class="t-icon">${it.icon}</span>
+            <span class="t-title">${it.title}</span>
+            ${it.status==="confirmed"?'<span class="status-badge confirmed">✓ 已確認</span>':'<span class="status-badge tentative">暫定</span>'}
+            ${isCurrent?'<span class="t-tag">NOW</span>':''}
+            <span class="t-chev">▶</span>
+          </div>
+          <div class="t-detail">
+            <div class="t-detail-inner" onclick="event.stopPropagation()">
+              ${imgHtml}
+              <div class="d-desc">${stay?stay.hotelName:it.desc}</div>
+              ${stay?stayDetailLines(stay,it.title==="酒店寄存行李" ? it.note : null):`<div class="d-line"><span class="k">📍</span><span class="v">${it.address||"—"}</span></div>
+              <div class="d-line"><span class="k">💰</span><span class="v">${it.price||"—"}</span></div>
+              ${it.phone?`<div class="d-line"><span class="k">☎</span><span class="v">${it.phone}</span></div>`:""}${itemNoteHtml}`}
+              ${it.transport?`<div class="d-line"><span class="k">🚦</span><span class="v">${it.transport}</span></div>`:""}
+              ${recsHtml}
+              ${btns.length?`<div class="btn-row">${btns.join("")}</div>`:""}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+  renderDayExtra(day);
+}
+function timeToMinutes(time){
+  const match=/^(\d{2}):(\d{2})$/.exec(time||"");
+  if(!match) return null;
+  const hours=Number(match[1]), minutes=Number(match[2]);
+  return hours<24 && minutes<60 ? hours*60+minutes : null;
+}
+function minutesToTime(totalMinutes){
+  const normalized=((totalMinutes%1440)+1440)%1440;
+  const hours=Math.floor(normalized/60), minutes=normalized%60;
+  return `${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}`;
+}
+function renderFlightArrivalCheck(day){
+  const planned=day.airportArrivalTime;
+  const flight=TRIP.flights.find(f=>f.date===day.date && f.type==="return" && f.status==="confirmed");
+  const plannedMinutes=timeToMinutes(planned);
+  const departureMinutes=timeToMinutes(flight?.depart);
+  if(plannedMinutes==null || departureMinutes==null) return "";
+  const latestMinutes=departureMinutes-120;
+  const latest=minutesToTime(latestMinutes);
+  const late=plannedMinutes>latestMinutes;
+  const status=late
+    ? "⚠️ 預計抵達機場時間晚於建議時間，請縮短前方行程。"
+    : "✓ 預計機場抵達時間仍在建議範圍內";
+  return `
+    <div class="transport-budget">
+      <div class="tb-title">✈️ 機場抵達時間</div>
+      <div class="tb-line"><span>預計抵達澳門機場</span><span class="v">${planned}</span></div>
+      <div class="tb-line"><span>建議最晚抵達</span><span class="v">${latest}</span></div>
+      <div class="flight-arrival-status ${late?"late":"safe"}">${status}</div>
+    </div>`;
+}
+/* 選填的「今日交通預算」區塊：只有該天資料裡有 transportBudget 才會顯示 */
+function renderDayExtra(day){
+  const el=document.getElementById("day-extra");
+  if(!el) return;
+  const tb = day && day.transportBudget;
+  const db = day && day.dayBudget;
+  const arrivalNotice = day && day.arrivalNotice;
+  let html = "";
+  if(tb){
+    html += `
+    <div class="transport-budget">
+      <div class="tb-title">💰 今日交通預算</div>
+      ${(tb.items||[]).map(i=>`<div class="tb-line"><span>${i.label}</span><span class="v">${i.cost}</span></div>`).join("")}
+      ${tb.total?`<div class="tb-total">交通預估：<b>${tb.total}</b></div>`:""}
+      ${tb.note?`<div class="tb-note">＊${tb.note}</div>`:""}
+    </div>`;
+  }
+  if(db){
+    html += `
+    <div class="transport-budget">
+      <div class="tb-title">💰 今日預算</div>
+      <div class="tb-line"><span>交通</span><span class="v">${db.transport}</span></div>
+      ${db.attractions&&db.attractions.length?`<div class="tb-group">景點</div>${db.attractions.map(a=>`<div class="tb-line"><span>${a.name}</span><span class="v">${a.cost}</span></div>`).join("")}`:""}
+      ${db.food?`<div class="tb-group">餐飲</div><div class="tb-line"><span>${db.food.label}</span><span class="v">${db.food.cost}</span></div>`:""}
+      ${db.other?`<div class="tb-group">其他</div><div class="tb-line"><span>${db.other.label}</span><span class="v">${db.other.cost}</span></div>`:""}
+      ${db.total?`<div class="tb-total">今日總預算：<b>${db.total}</b></div>`:""}
+      ${db.note?`<div class="tb-note">＊${db.note}</div>`:""}
+    </div>`;
+  }
+  if(day && day.airportArrivalTime) html += renderFlightArrivalCheck(day);
+  if(arrivalNotice){
+    html += `
+    <div class="travel-warning">
+      <div class="tw-title">⚠️ ${arrivalNotice.title}</div>
+      <div class="tw-intro">${arrivalNotice.intro}</div>
+      <ul class="tw-list">${(arrivalNotice.items||[]).map(item=>`<li>${item}</li>`).join("")}</ul>
+      ${(arrivalNotice.details||[]).map(detail=>`<div class="tw-detail">${detail}</div>`).join("")}
+    </div>`;
+  }
+  el.innerHTML = html;
+}
+function toggleItem(id){ state.openId = state.openId===id ? null : id; renderTimeline(); }
+
+/* ---- page switching ---- */
+function switchPage(page){
+  state.page=page;
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("page-"+page).classList.add("active");
+  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active", b.dataset.page===page));
+  if(page==="itinerary"){ renderTabs(); renderTimeline(); }
+  if(page==="exchange"){ renderExchange(); }
+}
+document.querySelectorAll(".nav-btn").forEach(btn=>btn.addEventListener("click",()=>switchPage(btn.dataset.page)));
+document.getElementById("currency-amount").addEventListener("input",renderExchange);
+document.getElementById("currency-from").addEventListener("change",renderExchange);
+renderExchange();
+
+/* ---- test time tool ---- */
+const testFab=document.getElementById("test-fab");
+const testSheet=document.getElementById("test-sheet");
+const simInput=document.getElementById("sim-input");
+const btnReal=document.getElementById("btn-real");
+const btnSim=document.getElementById("btn-sim");
+testFab.addEventListener("click",()=>testSheet.classList.add("open"));
+document.getElementById("test-close").addEventListener("click",()=>testSheet.classList.remove("open"));
+btnReal.addEventListener("click",()=>{ state.simTime=null; btnReal.classList.add("active"); btnSim.classList.remove("active"); refreshAll(); showToast("已切換為裝置目前時間"); });
+btnSim.addEventListener("click",()=>{ btnSim.classList.add("active"); btnReal.classList.remove("active"); if(!simInput.value) simInput.value="2026-11-25T19:00"; state.simTime=simInput.value; refreshAll(); });
+simInput.addEventListener("change",()=>{ if(simInput.value){ state.simTime=simInput.value; btnSim.classList.add("active"); btnReal.classList.remove("active"); refreshAll(); } });
+const PRESETS=[
+  {label:"11/25 19:00",val:"2026-11-25T19:00"},
+  {label:"11/26 10:00",val:"2026-11-26T10:00"},
+  {label:"11/26 10:30",val:"2026-11-26T10:30"},
+  {label:"11/27 09:00",val:"2026-11-27T09:00"},
+  {label:"11/28 12:00",val:"2026-11-28T12:00"},
+  {label:"11/29 12:00",val:"2026-11-29T12:00"},
+  {label:"11/30 21:00",val:"2026-11-30T21:00"},
+];
+document.getElementById("presets").innerHTML = PRESETS.map(p=>`<div class="chip" onclick="setPreset('${p.val}')">${p.label}</div>`).join("");
+function setPreset(val){ simInput.value=val; state.simTime=val; btnSim.classList.add("active"); btnReal.classList.remove("active"); refreshAll(); }
+
+/* ---- refresh loop ---- */
+function refreshAll(){
+  renderNow();
+  renderTripProgress();
+  if(state.page==="itinerary") renderTimeline();
+}
+/* ---- 啟動流程：Supabase 成功 → 用雲端資料；失敗／未設定 → fallback 回內建 TRIP ---- */
+async function initTrip(){
+  try{
+    const remote = await loadFromSupabase();
+    if(remote && Array.isArray(remote.days) && remote.days.length){
+      TRIP = remote;
+    }
+    // remote 為 null（未設定 Supabase）時，TRIP 維持預設的 DEFAULT_TRIP，不做任何事
+  } catch(err){
+    console.warn("Supabase 讀取失敗，改用內建行程資料：", err);
+    TRIP = DEFAULT_TRIP; // 明確 fallback，確保 NOW／Day1~6／Timeline／航班／住宿都正常
+  }
+  buildFlat();
+  renderDayNav();
+  renderConfirmed();
+  renderLastUpdated();
+  if(state.page==="itinerary"){ renderTabs(); renderTimeline(); }
+  refreshAll();
+  setInterval(()=>{ if(!state.simTime) refreshAll(); },20000);
+}
+initTrip();
+</script>
+</body>
+</html>

@@ -1,6 +1,3 @@
-Warning: truncated output (original token count: 41896)
-Total output lines: 2883
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -65,7 +62,2775 @@ Total output lines: 2883
   html,body{margin:0; padding:0; width:100%; overflow-x:hidden;}
   body{
     background:var(--bg); color:var(--text);
-    fon…40896 tokens truncated…TRIP = remote;
+    font-family:'Noto Serif TC',serif;
+    padding-bottom:70px;
+  }
+  .mono{ font-family:'Noto Serif TC',serif; }
+  .serif{ font-family:'Noto Serif TC',serif; }
+
+  /* header */
+  header{
+    padding:32px 22px 18px;
+    text-align:center;
+  }
+  header .title{
+    font-family:'Noto Serif TC',serif; font-weight:700; font-size:27px; letter-spacing:1px;
+  }
+  header .dates{
+    margin-top:6px; font-size:12.5px; color:var(--text-dim); font-family:'Noto Serif TC',serif; letter-spacing:.5px;
+  }
+  header .trip-progress{
+    margin-top:4px; font-size:10.5px; color:var(--text-dim); letter-spacing:1.5px;
+    text-transform:uppercase; opacity:.7; font-weight:600;
+  }
+
+  .page{ display:none; padding:0 20px; }
+  .page.active{ display:block; }
+
+  .label{
+    font-size:11px; letter-spacing:2px; color:var(--text-dim); text-transform:uppercase;
+    margin:26px 0 12px; font-family:'Noto Serif TC',serif;
+  }
+  .label:first-child{ margin-top:4px; }
+
+  /* NOW card */
+  .now-wrap{ display:flex; align-items:center; gap:8px; margin-bottom:12px; }
+  .dot{ width:7px; height:7px; border-radius:50%; }
+  .dot.live{ background:var(--accent); box-shadow:0 0 0 4px var(--accent-soft); }
+  .dot.idle{ background:var(--dot-idle); }
+  .now-status{ font-size:14.5px; color:var(--text-dim); font-weight:500; }
+
+  .now-card{
+    background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+    padding:18px; display:flex; gap:14px; align-items:flex-start;
+    box-shadow:0 1px 3px rgba(42,40,35,.04);
+  }
+  .now-icon{
+    width:46px; height:46px; border-radius:12px; background:var(--accent-soft);
+    display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0;
+  }
+  .now-title{ font-family:'Noto Serif TC',serif; font-weight:700; font-size:19px; }
+  .now-time{ font-size:14px; color:var(--accent); margin-top:3px; font-family:'Noto Serif TC',serif; font-weight:600; }
+  .now-addr{ font-size:13.5px; color:var(--text-dim); margin-top:6px; line-height:1.6; }
+
+  .next-line{
+    margin-top:12px; padding-top:12px; border-top:1px solid var(--border);
+    display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text-dim);
+  }
+  .next-line .ic{ font-size:17px; }
+  .next-line b{ color:var(--text); font-weight:600; }
+  .now-remain{ font-size:13px; color:var(--text-dim); margin-top:10px; }
+  .now-remain b{ color:var(--accent); font-weight:600; }
+
+  /* day quick nav on home */
+  .day-nav{ display:flex; flex-direction:column; gap:10px; }
+  .day-row{
+    display:flex; align-items:center; gap:12px; padding:13px 16px;
+    background:var(--card); border:1px solid var(--border); border-radius:var(--radius); cursor:pointer;
+  }
+  .day-row .d{
+    font-family:'Noto Serif TC',serif; font-weight:600; font-size:12px; color:var(--warm);
+    background:var(--warm-soft); padding:5px 9px; border-radius:8px; flex-shrink:0;
+  }
+  .day-row .r{ flex:1; }
+  .day-row .r .t{ font-size:15px; font-weight:600; }
+  .day-row .r .s{ font-size:12.5px; color:var(--text-dim); margin-top:2px; }
+  .day-row .arrow{ color:var(--text-dim); font-size:14px; }
+
+  /* itinerary tabs */
+  .tabs{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:20px 0 22px; }
+  .tab{
+    text-align:center; padding:10px 0; border-radius:12px;
+    border:1px solid var(--border); background:var(--card);
+    font-size:14.5px; font-weight:600; color:var(--text-dim); cursor:pointer;
+    min-width:0;
+  }
+  .tab.active{ background:var(--active); color:#FFF8F0; border-color:var(--active); }
+  .tab .dt{ display:block; font-size:10px; font-weight:500; margin-top:2px; opacity:.75; }
+
+  .empty-day{
+    text-align:center; color:var(--text-dim); font-size:14px; padding:60px 20px;
+    border:1px dashed var(--border); border-radius:var(--radius);
+  }
+
+  /* timeline */
+  .timeline{ position:relative; padding-left:2px; }
+  .t-row{
+    display:flex; gap:14px; padding:14px 0; border-bottom:1px solid var(--border);
+    cursor:pointer;
+  }
+  .t-row:last-child{ border-bottom:none; }
+  .t-time{ width:50px; flex-shrink:0; font-family:'Noto Serif TC',serif; font-size:14px; font-weight:600; color:var(--text-dim); padding-top:2px; }
+  .t-mid{
+    width:20px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; padding-top:4px;
+  }
+  .t-dot{ width:8px; height:8px; border-radius:50%; background:var(--border); border:2px solid var(--card); box-shadow:0 0 0 1px var(--border); }
+  .t-dot.current{ background:var(--accent); box-shadow:0 0 0 3px var(--accent-soft); }
+  .t-body{ flex:1; min-width:0; }
+  .t-head{ display:flex; align-items:flex-start; gap:8px; flex-wrap:wrap; min-width:0; }
+  .t-icon{ font-size:19px; flex-shrink:0; font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif; }
+  .t-title{ font-size:16px; font-weight:600; flex:1 1 180px; min-width:0; overflow-wrap:anywhere; word-break:break-word; }
+  .t-head .t-tag,.t-chev{ flex:0 0 auto; }
+  .t-tag{
+    font-size:9.5px; letter-spacing:.5px; color:#FFF8F0; background:var(--accent);
+    padding:2px 6px; border-radius:5px; font-family:'Noto Serif TC',serif;
+  }
+  .t-chev{ color:var(--text-dim); font-size:11px; transition:transform .18s; }
+  .t-row.open .t-chev{ transform:rotate(90deg); }
+
+  .t-detail{ max-height:0; overflow:hidden; transition:max-height .22s ease; }
+  .t-row.open .t-detail{ max-height:800px; margin-top:12px; }
+  .t-detail-inner{ width:100%; max-width:100%; overflow-wrap:anywhere; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px; }
+  .img-placeholder{
+    width:100%; height:120px; border-radius:10px; background:var(--accent-soft);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    color:var(--text-dim); font-size:12px; gap:4px; margin-bottom:12px; border:1px dashed var(--border);
+  }
+  .img-placeholder .ic{ font-size:22px; }
+  .d-img{
+    width:100%; height:130px; object-fit:cover; border-radius:10px; margin-bottom:12px; display:block;
+  }
+  .d-desc{ min-width:0; overflow-wrap:anywhere; word-break:break-word; font-size:14.5px; color:var(--text-dim); line-height:1.65; margin-bottom:10px; }
+  .d-line{ display:flex; gap:8px; font-size:14.5px; padding:6px 0; align-items:flex-start; }
+  .d-line .k{ width:20px; flex-shrink:0; }
+  .d-line .v{ flex:1; min-width:0; overflow-wrap:anywhere; word-break:break-word; }
+  .d-line a.link{ color:var(--text); text-decoration:underline dotted; }
+  .recs{ margin-top:4px; }
+  .recs .rec-title{ font-size:11.5px; color:var(--warm); font-weight:600; margin-bottom:4px; letter-spacing:.5px;}
+  .rec-item{ min-width:0; overflow-wrap:anywhere; word-break:break-word; font-size:12.5px; color:var(--text); padding:2px 0 2px 14px; position:relative; }
+  .rec-item::before{ content:"·"; position:absolute; left:2px; color:var(--warm); }
+  .btn-row{ display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
+  .btn{
+    flex:1 1 auto; min-width:110px; text-align:center; padding:10px; border-radius:10px; font-size:12.5px; font-weight:600;
+    border:1px solid var(--border); background:var(--bg); color:var(--text); cursor:pointer;
+  }
+  .btn.primary{ background:var(--active); color:#FFF8F0; border-color:var(--active); }
+
+  /* currency */
+  .exchange-card,
+  .exchange-result,
+  .exchange-rates{
+    background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  }
+  .exchange-card{ padding:16px; }
+  .exchange-notice{ font-size:12.5px; color:var(--text-dim); margin-bottom:14px; }
+  .exchange-inputs{ display:flex; gap:10px; }
+  .exchange-input,
+  .exchange-select{
+    height:46px; border:1px solid var(--border); border-radius:11px; background:var(--bg); color:var(--text);
+    font:600 16px 'Noto Serif TC',serif; padding:0 12px;
+  }
+  .exchange-input{ flex:1; min-width:0; }
+  .exchange-select{ width:92px; }
+  .exchange-results{ display:flex; flex-direction:column; gap:10px; }
+  .exchange-result{ padding:14px 16px; }
+  .exchange-result .currency-name{ font-size:12.5px; color:var(--text-dim); }
+  .exchange-result .currency-value{ font-size:22px; font-weight:700; margin-top:3px; color:var(--accent); }
+  .exchange-rates{ margin-top:12px; padding:13px 16px; font-size:12px; color:var(--text-dim); line-height:1.7; }
+
+  /* bottom nav */
+  .navbar{
+    position:fixed; left:0; right:0; bottom:0; height:60px;
+    background:var(--card); border-top:1px solid var(--border);
+    display:flex; z-index:50; padding-bottom:env(safe-area-inset-bottom);
+  }
+  .nav-btn{
+    flex:1 1 0; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:2px; color:var(--text-dim); font-size:10px; white-space:nowrap; background:none; border:none; cursor:pointer;
+  }
+  .nav-btn .ic{ font-size:16px; line-height:1; }
+  .nav-btn.active{ color:var(--accent); font-weight:600; }
+
+  /* test time tool */
+  .test-fab{
+    position:fixed; right:14px; bottom:76px; z-index:60;
+    width:34px; height:34px; border-radius:50%; background:var(--card); border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center; font-size:14px; opacity:.55; cursor:pointer;
+  }
+  .test-sheet{
+    position:fixed; left:0; right:0; bottom:0; z-index:70; background:var(--card);
+    border-radius:18px 18px 0 0; padding:18px 20px calc(18px + env(safe-area-inset-bottom));
+    transform:translateY(110%); transition:transform .22s ease; box-shadow:0 -6px 24px rgba(0,0,0,.1);
+  }
+  .test-sheet.open{ transform:translateY(0); }
+  .test-title{ font-size:11.5px; letter-spacing:1.5px; color:var(--text-dim); text-transform:uppercase; margin-bottom:12px; font-family:'Noto Serif TC',serif;}
+  .test-row{ display:flex; gap:8px; margin-bottom:10px; }
+  .test-btn{
+    flex:1; padding:9px; border-radius:10px; border:1px solid var(--border); background:var(--bg);
+    font-size:13px; font-weight:600; cursor:pointer; text-align:center; color:var(--text);
+  }
+  .test-btn.active{ background:var(--active); color:#FFF8F0; border-color:var(--active); }
+  input[type="datetime-local"]{
+    width:100%; padding:10px; border-radius:10px; border:1px solid var(--border);
+    font-family:'Noto Serif TC',serif; font-size:13px; background:var(--bg); margin-bottom:10px; color:var(--text);
+  }
+  .presets{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:4px; }
+  .chip{ font-family:'Noto Serif TC',serif; font-size:11px; padding:6px 9px; background:var(--bg); border:1px solid var(--border); border-radius:8px; cursor:pointer; }
+  .test-close{ text-align:center; padding-top:10px; font-size:12px; color:var(--text-dim); cursor:pointer; }
+
+  .toast{
+    position:fixed; left:50%; transform:translateX(-50%); bottom:84px; z-index:80;
+    background:var(--active); color:#FFF8F0; padding:9px 16px; border-radius:20px; font-size:13px;
+    opacity:0; transition:opacity .2s; pointer-events:none;
+  }
+  .toast.show{ opacity:1; }
+
+  .last-updated{
+    text-align:center; font-size:10.5px; color:var(--text-dim); opacity:.55;
+    margin:28px 0 12px; font-family:'Noto Serif TC',serif;
+  }
+
+  .transport-budget{
+    margin-top:22px; background:var(--card); border:1px solid var(--border);
+    border-radius:var(--radius); padding:16px;
+  }
+  .transport-budget .tb-title{ font-size:13.5px; font-weight:700; color:var(--text); margin-bottom:10px; }
+  .transport-budget .tb-line{
+    display:flex; justify-content:space-between; gap:10px; font-size:13px; padding:5px 0; color:var(--text-dim);
+  }
+  .transport-budget .tb-line .v{ color:var(--text); font-weight:600; min-width:0; text-align:right; overflow-wrap:anywhere; }
+  .transport-budget .tb-total{
+    margin-top:10px; padding-top:10px; border-top:1px dashed var(--border); font-size:13.5px; color:var(--text);
+  }
+  .transport-budget .tb-total b{ color:var(--accent); }
+  .transport-budget .tb-note{ margin-top:8px; font-size:11px; color:var(--text-dim); opacity:.8; line-height:1.5; }
+  .transport-budget .tb-group{ font-size:12px; font-weight:600; color:var(--text-dim); margin:10px 0 4px; letter-spacing:.3px; }
+  .travel-warning{
+    margin-top:22px; background:var(--warning-soft); border:1px solid var(--warning);
+    border-radius:var(--radius); padding:16px;
+  }
+  .travel-warning .tw-title{ font-size:13.5px; font-weight:700; color:var(--warning); margin-bottom:8px; }
+  .travel-warning .tw-intro,.travel-warning .tw-detail{ font-size:12px; color:var(--text); line-height:1.6; }
+  .travel-warning .tw-list{ margin:7px 0; padding-left:20px; font-size:12px; color:var(--text); line-height:1.65; }
+  .flight-arrival-status{ margin-top:9px; font-size:12px; font-weight:600; line-height:1.5; }
+  .flight-arrival-status.safe{ color:var(--warm); }
+  .flight-arrival-status.late{ color:var(--warning); }
+
+  /* pre-departure page */
+  .prep-page{ padding-bottom:30px; }
+  .prep-intro{ margin:4px 0 18px; font-size:13px; color:var(--text-dim); line-height:1.7; }
+  .prep-tabs{ display:grid; grid-template-columns:1fr 1fr; gap:6px; padding:5px; border:1px solid var(--border); background:var(--card); border-radius:13px; }
+  .prep-tab{ min-height:40px; border:0; border-radius:9px; background:transparent; color:var(--text-dim); font:600 13px 'Noto Serif TC',serif; cursor:pointer; }
+  .prep-tab.active{ background:var(--warm-soft); color:var(--warm); }
+  .prep-content{ margin-top:16px; }
+  .prep-card{ background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:16px; margin-bottom:12px; box-shadow:0 1px 3px rgba(42,40,35,.035); }
+  .prep-card-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin-bottom:12px; }
+  .prep-card-title{ font-size:16px; font-weight:700; color:var(--text); }
+  .prep-card-sub{ margin-top:3px; font-size:12px; color:var(--text-dim); line-height:1.55; }
+  .prep-ref{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:11px 12px; border:1px dashed var(--border); border-radius:11px; background:var(--bg); }
+  .prep-ref-code{ min-width:0; color:var(--accent); font:700 20px 'Noto Serif TC',serif; letter-spacing:1.5px; overflow-wrap:anywhere; }
+  .prep-ref-actions{ display:flex; gap:6px; flex-shrink:0; }
+  .prep-mini-btn{ min-height:32px; padding:0 9px; border:1px solid var(--border); border-radius:8px; background:var(--card); color:var(--text); font:600 11.5px 'Noto Serif TC',serif; cursor:pointer; }
+  .prep-flight{ display:grid; grid-template-columns:42px minmax(0,1fr) auto; gap:8px; align-items:center; padding:12px 0; border-bottom:1px solid var(--border); }
+  .prep-flight:last-child{ border-bottom:0; padding-bottom:0; }
+  .prep-flight-date{ color:var(--warm); font:700 12px 'Noto Serif TC',serif; }
+  .prep-flight-route{ min-width:0; font-size:13px; font-weight:700; overflow-wrap:anywhere; }
+  .prep-flight-detail{ margin-top:2px; color:var(--text-dim); font-size:11.5px; line-height:1.5; }
+  .prep-flight-state{ color:var(--warm); font-size:11px; font-weight:700; white-space:nowrap; }
+  .prep-baggage{ display:flex; align-items:center; gap:15px; }
+  .prep-bag-svg{ width:53px; height:64px; color:var(--warm); flex-shrink:0; }
+  .prep-baggage-list{ flex:1; min-width:0; }
+  .prep-baggage-line{ padding:7px 0; border-bottom:1px solid var(--border); font-size:12.5px; line-height:1.55; }
+  .prep-baggage-line:last-child{ border-bottom:0; }
+  .prep-baggage-line b{ color:var(--text); }
+  .prep-checks{ display:flex; flex-direction:column; gap:3px; }
+  .prep-check{ display:flex; align-items:flex-start; gap:10px; min-width:0; padding:10px 0; border-bottom:1px solid var(--border); cursor:pointer; font-size:13.5px; line-height:1.5; }
+  .prep-check:last-child{ border-bottom:0; padding-bottom:0; }
+  .prep-check input{ appearance:none; width:20px; height:20px; margin:0; flex:0 0 20px; border:1.5px solid var(--border); border-radius:6px; background:var(--bg); display:grid; place-content:center; cursor:pointer; }
+  .prep-check input::before{ content:""; width:9px; height:5px; border-left:2px solid #FFF8F0; border-bottom:2px solid #FFF8F0; transform:rotate(-45deg) scale(0); transition:transform .12s ease; margin-top:-2px; }
+  .prep-check input:checked{ background:var(--active); border-color:var(--active); }
+  .prep-check input:checked::before{ transform:rotate(-45deg) scale(1); }
+  .prep-packing-grid{ max-width:1040px; margin:12px auto 0; columns:1; column-gap:12px; }
+  .prep-packing-grid .prep-card{ display:inline-block; width:100%; margin:0 0 12px; padding:14px 15px; vertical-align:top; break-inside:avoid; page-break-inside:avoid; box-shadow:none; }
+  .prep-category-head{ display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+  .prep-category-title{ flex:1; min-width:0; font-size:14px; font-weight:700; color:var(--text); }
+  .prep-category-count{ flex-shrink:0; padding:2px 7px; border-radius:999px; background:var(--warm-soft); color:var(--warm); font-size:10.5px; font-weight:700; }
+  .prep-packing-check{ min-height:44px; align-items:center; gap:9px; padding:7px 0; font-size:13px; }
+  .prep-packing-check input{ width:18px; height:18px; flex-basis:18px; border-radius:5px; }
+  .prep-packing-check input::before{ width:8px; height:4px; }
+  .prep-packing-check span{ flex:1; min-width:0; overflow-wrap:anywhere; }
+  .prep-packing-check input:checked + span{ opacity:.65; text-decoration:line-through; text-decoration-thickness:1px; }
+  .prep-packing-progress{ max-width:1040px; margin:12px auto 0; color:var(--text-dim); font-size:12px; line-height:1.45; }
+  .prep-packing-progress-head{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; }
+  .prep-packing-progress-name{ color:var(--text); font-weight:700; }
+  .prep-packing-progress-count{ white-space:nowrap; }
+  .prep-packing-progress b{ color:var(--accent); }
+  .prep-packing-track{ height:4px; margin-top:7px; overflow:hidden; border-radius:999px; background:var(--accent-soft); }
+  .prep-packing-fill{ display:block; width:0; height:100%; border-radius:inherit; background:var(--accent); transition:width .18s ease; }
+  .prep-packing-complete{ display:block; margin-top:6px; color:var(--warm); font-weight:700; }
+  .prep-check input:focus-visible,.prep-mini-btn:focus-visible,.prep-tab:focus-visible,.prep-start:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  .prep-note{ margin:10px 0 0; color:var(--text-dim); font-size:12px; line-height:1.65; }
+  .prep-start{ width:100%; min-height:48px; border:0; border-radius:12px; background:var(--active); color:#FFF8F0; font:700 14px 'Noto Serif TC',serif; letter-spacing:.5px; cursor:pointer; box-shadow:0 4px 12px rgba(189,106,64,.2); }
+
+  /* transit maps */
+  .transit-page{ padding-bottom:30px; }
+  .transit-intro{ margin:4px 0 18px; font-size:13px; color:var(--text-dim); line-height:1.7; }
+  .transit-card{ background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:16px; margin-bottom:12px; box-shadow:0 1px 3px rgba(42,40,35,.035); }
+  .transit-card-title{ font-size:16px; font-weight:700; color:var(--text); }
+  .transit-card-sub{ margin-top:3px; color:var(--text-dim); font-size:12px; line-height:1.55; }
+  .transit-map-frame{ margin-top:13px; padding:7px; border:1px solid var(--border); border-radius:12px; background:var(--bg); overflow:hidden; }
+  .transit-map-image{ display:block; width:100%; height:auto; max-width:100%; border-radius:8px; }
+  .transit-map-action{ width:100%; min-height:42px; margin-top:12px; border:1px solid var(--border); border-radius:10px; background:var(--bg); color:var(--text); font:600 13px 'Noto Serif TC',serif; cursor:pointer; }
+  .transit-note-list{ margin:3px 0 0; padding:0; list-style:none; }
+  .transit-note-list li{ position:relative; padding:10px 0 10px 15px; border-bottom:1px solid var(--border); color:var(--text); font-size:13px; line-height:1.6; }
+  .transit-note-list li:last-child{ border-bottom:0; padding-bottom:0; }
+  .transit-note-list li::before{ content:""; position:absolute; left:1px; top:20px; width:5px; height:5px; border-radius:50%; background:var(--warm); }
+  .transit-lightbox{ position:fixed; inset:0; z-index:90; display:none; flex-direction:column; padding:max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom)); background:rgba(28,26,23,.88); }
+  .transit-lightbox.open{ display:flex; }
+  .transit-lightbox-head{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:12px; color:#FFF8F0; }
+  .transit-lightbox-title{ flex:1 1 130px; min-width:0; font-size:14px; font-weight:700; overflow-wrap:anywhere; }
+  .transit-lightbox-controls{ display:flex; align-items:center; gap:5px; flex:0 0 auto; }
+  .transit-zoom-btn{ width:36px; height:36px; border:1px solid rgba(255,248,240,.6); border-radius:9px; background:rgba(255,255,255,.08); color:#FFF8F0; font:700 20px/1 'Noto Serif TC',serif; cursor:pointer; }
+  .transit-zoom-btn.reset{ width:50px; font-size:11px; }
+  .transit-lightbox-close{ flex-shrink:0; min-height:36px; padding:0 12px; border:1px solid rgba(255,248,240,.6); border-radius:9px; background:transparent; color:#FFF8F0; font:600 12px 'Noto Serif TC',serif; cursor:pointer; }
+  .transit-map-viewport{ flex:1; min-height:0; display:flex; align-items:center; justify-content:center; overflow:hidden; border:1px solid rgba(255,248,240,.25); border-radius:12px; touch-action:none; outline:none; }
+  .transit-map-viewport:focus-visible,.transit-zoom-btn:focus-visible,.transit-lightbox-close:focus-visible{ outline:2px solid #FFF8F0; outline-offset:2px; }
+  .transit-lightbox-image{ width:100%; height:100%; min-height:0; object-fit:contain; transform-origin:center; cursor:grab; user-select:none; -webkit-user-drag:none; }
+  .transit-map-viewport.dragging .transit-lightbox-image{ cursor:grabbing; }
+  @media (max-width:390px){
+    .prep-ref{ align-items:flex-start; flex-direction:column; }
+    .prep-ref-actions{ width:100%; }
+    .prep-mini-btn{ flex:1; }
+    .prep-flight{ grid-template-columns:38px minmax(0,1fr); }
+    .prep-flight-state{ grid-column:2; }
+    .transit-card{ padding:14px; }
+  }
+  @media (min-width:680px){ .prep-packing-grid{ columns:2; } }
+  @media (min-width:1000px){ .prep-packing-grid{ columns:3; } }
+
+  /* =========================================================
+     V2 VISUAL FOUNDATIONS｜Editorial Travel × Soft Glass
+     All rules below are presentation-only; markup and behavior stay intact.
+     ========================================================= */
+  html{ background:var(--bg); }
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(75rem 38rem at 10% -12%, rgba(235,216,194,.72), transparent 58%),
+      radial-gradient(52rem 30rem at 106% 18%, rgba(224,232,210,.58), transparent 60%),
+      var(--bg);
+    line-height:1.5;
+    padding-bottom:calc(80px + env(safe-area-inset-bottom));
+  }
+  button,input,select{ font-family:inherit; }
+  button{ -webkit-font-smoothing:antialiased; }
+  header{
+    max-width:920px;
+    margin:0 auto;
+    padding:var(--space-xl) var(--space-lg) var(--space-lg);
+  }
+  header .title{
+    font-size:clamp(28px,4vw,38px);
+    font-weight:700;
+    letter-spacing:.085em;
+    line-height:1.24;
+  }
+  header .dates{
+    margin-top:var(--space-sm);
+    font-size:11px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+  }
+  header .trip-progress,
+  .label,
+  .test-title{
+    font-family:'Noto Serif TC',serif;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.18em;
+  }
+  header .trip-progress{ margin-top:var(--space-xs); }
+  .page{
+    width:min(100%,920px);
+    margin:0 auto;
+    padding:0 var(--space-lg) var(--space-xl);
+  }
+  .label{ margin:var(--space-lg) 0 var(--space-sm); }
+  .label:first-child{ margin-top:var(--space-xs); }
+
+  .now-card,
+  .day-row,
+  .exchange-card,
+  .exchange-result,
+  .exchange-rates,
+  .transport-budget,
+  .prep-card,
+  .transit-card,
+  .t-detail-inner{
+    background:var(--surface-glass);
+    border:1px solid var(--border);
+    box-shadow:var(--shadow-sm);
+    -webkit-backdrop-filter:blur(20px) saturate(112%);
+    backdrop-filter:blur(20px) saturate(112%);
+  }
+  .now-card,
+  .day-row,
+  .exchange-card,
+  .exchange-result,
+  .exchange-rates,
+  .transport-budget,
+  .prep-card,
+  .transit-card{ border-radius:var(--radius-md); }
+  .t-detail-inner{ border-radius:var(--radius-sm); }
+  .now-card{ padding:var(--space-md); gap:var(--space-md); }
+  .now-icon{
+    width:50px;
+    height:50px;
+    border-radius:var(--radius-sm);
+    background:rgba(234,216,197,.72);
+    border:1px solid rgba(169,95,61,.12);
+  }
+  .now-title{ font-size:20px; letter-spacing:.015em; }
+  .now-time{ margin-top:4px; }
+  .now-addr{ margin-top:var(--space-xs); }
+  .now-wrap{ gap:var(--space-sm); margin-bottom:var(--space-sm); }
+  .dot.live{ box-shadow:0 0 0 5px var(--accent-soft); }
+  .day-nav{ gap:var(--space-sm); }
+  .day-row{ gap:var(--space-sm); padding:15px 17px; }
+  .day-row .d{
+    padding:5px 10px;
+    border-radius:999px;
+    letter-spacing:.06em;
+  }
+  .day-row .r .t{ font-size:15.5px; }
+  .day-row .r .s{ margin-top:3px; line-height:1.5; }
+
+  .tabs{ gap:var(--space-xs); margin:var(--space-sm) 0 var(--space-lg); }
+  .tab{
+    min-height:52px;
+    padding:9px 4px;
+    border-radius:var(--radius-sm);
+    border-color:var(--border);
+    background:var(--surface);
+    -webkit-backdrop-filter:blur(16px);
+    backdrop-filter:blur(16px);
+  }
+  .tab.active{
+    background:var(--accent);
+    border-color:transparent;
+    box-shadow:0 8px 18px rgba(169,95,61,.18);
+  }
+  .timeline{ padding-left:0; }
+  .t-row{ gap:var(--space-sm); padding:16px 2px; }
+  .t-time{ width:54px; font-size:13px; }
+  .t-mid{ width:18px; }
+  .t-dot{ background:var(--surface); border-color:var(--surface); }
+  .t-head{ gap:var(--space-xs); }
+  .t-title{ font-size:16px; letter-spacing:.01em; }
+  .t-tag{ border-radius:999px; padding:3px 7px; letter-spacing:.07em; }
+  .t-detail-inner{ padding:var(--space-md); }
+  .img-placeholder,
+  .d-img{ border-radius:var(--radius-sm); }
+  .btn-row{ gap:var(--space-sm); margin-top:var(--space-md); }
+  .btn,
+  .transit-map-action,
+  .prep-mini-btn,
+  .test-btn,
+  .chip{
+    border-color:var(--border);
+    background:var(--surface);
+    color:var(--text);
+    border-radius:var(--radius-sm);
+  }
+  .btn{ min-height:42px; padding:10px 12px; }
+  .btn.primary,
+  .prep-start,
+  .test-btn.active{ background:var(--accent); border-color:var(--accent); }
+
+  .exchange-card{ padding:var(--space-md); }
+  .exchange-results{ gap:var(--space-sm); }
+  .exchange-result{ padding:15px var(--space-md); }
+  .exchange-rates{ padding:14px var(--space-md); }
+  .exchange-inputs{ gap:var(--space-sm); }
+  .exchange-input,
+  .exchange-select,
+  input[type="datetime-local"]{
+    border-color:var(--border);
+    border-radius:var(--radius-sm);
+    background:rgba(255,255,255,.34);
+    -webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(12px);
+  }
+  .exchange-input:focus,
+  .exchange-select:focus,
+  input[type="datetime-local"]:focus{ outline:2px solid rgba(169,95,61,.38); outline-offset:2px; }
+
+  .transport-budget,
+  .travel-warning{ margin-top:var(--space-lg); padding:var(--space-md); }
+  .travel-warning{
+    border-color:rgba(167,77,57,.32);
+    border-radius:var(--radius-md);
+    box-shadow:var(--shadow-sm);
+    -webkit-backdrop-filter:blur(18px);
+    backdrop-filter:blur(18px);
+  }
+  .prep-page,.transit-page{ padding-bottom:var(--space-xl); }
+  .prep-intro,.transit-intro{ margin:var(--space-xs) 0 var(--space-md); }
+  .prep-tabs{
+    padding:5px;
+    border-color:var(--border);
+    border-radius:var(--radius-md);
+    background:var(--surface);
+    -webkit-backdrop-filter:blur(16px);
+    backdrop-filter:blur(16px);
+  }
+  .prep-tab{ min-height:44px; border-radius:var(--radius-sm); }
+  .prep-content{ margin-top:var(--space-md); }
+  .prep-card{ padding:var(--space-md); margin-bottom:var(--space-sm); }
+  .prep-ref,
+  .transit-map-frame{
+    border-color:var(--border);
+    border-radius:var(--radius-sm);
+    background:rgba(255,255,255,.26);
+  }
+  .prep-mini-btn{ min-height:34px; }
+  .prep-check input{ background:rgba(255,255,255,.28); border-color:var(--border); }
+  .prep-packing-grid{ margin-top:var(--space-sm); column-gap:var(--space-sm); }
+  .prep-packing-grid .prep-card{ margin-bottom:var(--space-sm); }
+  .prep-start{ border-radius:var(--radius-sm); box-shadow:0 10px 22px rgba(169,95,61,.17); }
+  .transit-card{ padding:var(--space-md); margin-bottom:var(--space-sm); }
+  .transit-map-frame{ margin-top:var(--space-sm); padding:8px; }
+  .transit-map-action{ margin-top:var(--space-sm); border-radius:var(--radius-sm); }
+  .transit-lightbox{ background:rgba(29,25,22,.87); -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px); }
+  .transit-map-viewport{ border-radius:var(--radius-md); }
+
+  .navbar{
+    height:68px;
+    background:rgba(255,252,247,.73);
+    border-top-color:var(--border);
+    box-shadow:0 -8px 28px rgba(72,48,31,.05);
+    -webkit-backdrop-filter:blur(22px) saturate(118%);
+    backdrop-filter:blur(22px) saturate(118%);
+  }
+  .nav-btn{ gap:4px; font-size:10px; }
+  .nav-btn .ic{ font-size:17px; }
+  .test-fab{
+    right:var(--space-md);
+    bottom:92px;
+    width:38px;
+    height:38px;
+    background:var(--surface-glass);
+    border-color:var(--border);
+    box-shadow:var(--shadow-sm);
+    -webkit-backdrop-filter:blur(18px);
+    backdrop-filter:blur(18px);
+  }
+  .test-sheet{
+    background:var(--surface-glass);
+    border:1px solid var(--border);
+    border-bottom:0;
+    border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+    box-shadow:var(--shadow-md);
+    -webkit-backdrop-filter:blur(24px) saturate(118%);
+    backdrop-filter:blur(24px) saturate(118%);
+  }
+  .toast{ border-radius:999px; box-shadow:var(--shadow-md); }
+  .last-updated{ margin:var(--space-xl) 0 var(--space-sm); }
+
+  @media (prefers-color-scheme: dark){
+    body{
+      background:
+        radial-gradient(62rem 34rem at 8% -14%, rgba(93,66,47,.42), transparent 56%),
+        radial-gradient(52rem 30rem at 104% 20%, rgba(71,82,57,.28), transparent 58%),
+        var(--bg);
+    }
+    .now-icon{ background:rgba(73,55,43,.86); border-color:rgba(210,138,93,.16); }
+    .exchange-input,
+    .exchange-select,
+    input[type="datetime-local"],
+    .prep-ref,
+    .transit-map-frame{ background:rgba(20,16,14,.19); }
+    .navbar{ background:rgba(37,31,26,.78); }
+  }
+  @media (hover:hover) and (pointer:fine){
+    .now-card,
+    .day-row,
+    .exchange-card,
+    .exchange-result,
+    .exchange-rates,
+    .transport-budget,
+    .prep-card,
+    .transit-card{
+      transition:transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+    }
+    .now-card:hover,
+    .day-row:hover,
+    .exchange-card:hover,
+    .exchange-result:hover,
+    .exchange-rates:hover,
+    .transport-budget:hover,
+    .prep-card:hover,
+    .transit-card:hover{
+      transform:translateY(-2px);
+      box-shadow:var(--shadow-md);
+      border-color:rgba(169,95,61,.24);
+    }
+    .tab,.btn,.prep-tab,.prep-mini-btn,.transit-map-action,.nav-btn,.test-btn,.chip,.test-fab{
+      transition:transform 250ms ease, background-color 250ms ease, border-color 250ms ease, color 250ms ease;
+    }
+    .tab:not(.active):hover,.btn:not(.primary):hover,.prep-mini-btn:hover,.transit-map-action:hover,.test-btn:not(.active):hover,.chip:hover{ background:var(--accent-soft); }
+    .prep-tab:not(.active):hover{ background:rgba(114,128,97,.1); }
+    .test-fab:hover{ transform:translateY(-2px); opacity:.9; }
+  }
+  @media (max-width:560px){
+    header{ padding:34px var(--space-md) var(--space-md); }
+    .page{ padding:0 var(--space-md) var(--space-xl); }
+    .tabs{ margin-bottom:var(--space-md); }
+    .navbar{ height:66px; }
+    .nav-btn{ font-size:9px; }
+    .nav-btn .ic{ font-size:16px; }
+  }
+
+  /* V3｜Hero, trip status, and floating navigation dock */
+  body{ padding-bottom:calc(116px + env(safe-area-inset-bottom)); }
+  .hero{
+    position:relative;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:var(--space-lg) var(--space-xl);
+    min-height:292px;
+    padding:clamp(48px,8vw,84px) var(--space-lg) var(--space-xl);
+    overflow:hidden;
+    isolation:isolate;
+    text-align:left;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    right:clamp(20px,8vw,80px);
+    bottom:40px;
+    width:44px;
+    height:1px;
+    background:var(--accent);
+    opacity:.58;
+  }
+  .hero-ghost{
+    position:absolute;
+    inset:18px -3% auto auto;
+    z-index:-1;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    color:var(--text);
+    font-family:Arial,sans-serif;
+    font-size:clamp(44px,10vw,100px);
+    font-weight:700;
+    line-height:.82;
+    letter-spacing:-.08em;
+    opacity:.045;
+    pointer-events:none;
+    user-select:none;
+  }
+  .hero-kicker{
+    grid-column:1 / -1;
+    color:var(--accent);
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.22em;
+    line-height:1;
+  }
+  .hero-copy{ align-self:end; min-width:0; }
+  .hero .title{
+    max-width:760px;
+    font-size:clamp(31px,5.4vw,52px);
+    font-weight:700;
+    letter-spacing:.075em;
+    line-height:1.27;
+  }
+  .hero-meta{
+    display:flex;
+    align-items:flex-end;
+    gap:var(--space-md);
+    margin-top:var(--space-md);
+    color:var(--text-dim);
+  }
+  .hero .dates{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    margin:0;
+    color:var(--text);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.14em;
+    line-height:1.42;
+  }
+  .hero-type{
+    padding:3px 8px;
+    border:1px solid var(--border);
+    border-radius:999px;
+    color:var(--text-dim);
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.16em;
+    line-height:1.25;
+    white-space:nowrap;
+  }
+  .trip-progress{
+    grid-column:2;
+    align-self:end;
+    width:min(190px,30vw);
+    display:grid;
+    gap:4px;
+    padding-bottom:3px;
+    color:var(--text-dim);
+    text-align:right;
+  }
+  .trip-progress-label{
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.18em;
+    line-height:1.3;
+  }
+  .trip-progress-value{
+    color:var(--text);
+    font-family:'Noto Serif TC',serif;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.06em;
+    line-height:1.4;
+  }
+  .trip-progress-line{
+    display:block;
+    width:100%;
+    height:1px;
+    margin-top:5px;
+    overflow:hidden;
+    background:var(--border);
+  }
+  .trip-progress-line i{
+    display:block;
+    width:0;
+    height:100%;
+    background:var(--accent);
+  }
+
+  .navbar{
+    left:max(16px, env(safe-area-inset-left));
+    right:max(16px, env(safe-area-inset-right));
+    bottom:max(12px, env(safe-area-inset-bottom));
+    width:auto;
+    max-width:640px;
+    height:68px;
+    margin-inline:auto;
+    padding:6px;
+    border:1px solid var(--border);
+    border-radius:24px;
+    background:rgba(255,255,255,.62);
+    box-shadow:0 14px 34px rgba(72,48,31,.12);
+    -webkit-backdrop-filter:blur(22px) saturate(120%);
+    backdrop-filter:blur(22px) saturate(120%);
+  }
+  .nav-btn{
+    position:relative;
+    min-height:54px;
+    gap:3px;
+    border-radius:17px;
+    color:var(--text-dim);
+    font-size:9px;
+    font-weight:600;
+    letter-spacing:.015em;
+    transition:transform 180ms ease, color 180ms ease, background-color 180ms ease;
+  }
+  .nav-btn .ic{ font-size:17px; }
+  .nav-btn.active{
+    background:rgba(169,95,61,.12);
+    color:var(--accent);
+    font-weight:700;
+  }
+  .nav-btn.active::after{
+    content:"";
+    position:absolute;
+    bottom:5px;
+    left:50%;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background:currentColor;
+    transform:translateX(-50%);
+  }
+  .nav-btn:active{ transform:scale(.97); }
+  @media (prefers-color-scheme: dark){
+    .navbar{
+      background:rgba(48,40,33,.72);
+      box-shadow:0 14px 34px rgba(0,0,0,.3);
+    }
+    .nav-btn.active{ background:rgba(210,138,93,.16); }
+  }
+  @media (max-width:560px){
+    .hero{
+      grid-template-columns:minmax(0,1fr);
+      gap:var(--space-lg);
+      min-height:318px;
+      padding:48px var(--space-md) 44px;
+    }
+    .hero-kicker{ grid-column:1; }
+    .hero .title{ font-size:clamp(29px,9.6vw,42px); }
+    .hero-ghost{ inset:25px -7% auto auto; font-size:60px; }
+    .trip-progress{
+      grid-column:1;
+      width:min(100%,220px);
+      text-align:left;
+    }
+    .hero::after{ right:var(--space-md); bottom:46px; }
+    .navbar{ height:66px; border-radius:22px; }
+    .nav-btn{ min-height:52px; font-size:8.5px; }
+    .nav-btn .ic{ font-size:16px; }
+  }
+
+  /* V4｜Home, exchange, and pre-departure refinements */
+  .section-label{ display:flex; align-items:baseline; gap:9px; }
+  .section-label span{ color:var(--text-dim); }
+  .section-label em{
+    color:var(--text);
+    font-size:13px;
+    font-style:normal;
+    font-weight:700;
+    letter-spacing:.04em;
+  }
+  .now-wrap{ align-items:center; margin-bottom:10px; }
+  .now-status{
+    display:flex;
+    align-items:baseline;
+    gap:7px;
+    color:var(--text-dim);
+    font-family:Arial,sans-serif;
+  }
+  .now-status span{ font-size:9px; font-weight:700; letter-spacing:.18em; }
+  .now-status b{ color:var(--text); font-family:'Noto Serif TC',serif; font-size:12px; font-weight:700; }
+  .now-card{
+    display:grid;
+    grid-template-columns:42px minmax(0,1fr);
+    align-items:start;
+    gap:14px;
+    min-height:148px;
+    padding:20px;
+  }
+  .now-icon{
+    width:42px;
+    height:42px;
+    border-radius:14px;
+    font-size:18px;
+    opacity:.8;
+  }
+  .now-content{ min-width:0; }
+  .now-title{ font-size:clamp(20px,4.3vw,25px); line-height:1.35; }
+  .now-time{ margin-top:5px; font-size:13px; letter-spacing:.06em; }
+  .now-addr{ margin-top:8px; font-size:12.5px; line-height:1.65; }
+  .next-line{ margin-top:13px; padding-top:12px; font-size:12.5px; line-height:1.55; }
+  .next-line .ic{ font-size:14px; opacity:.72; }
+  .now-remain{ margin-top:9px; font-size:12px; }
+
+  .day-nav{ gap:0; border-top:1px solid var(--border); }
+  .day-row{
+    min-height:82px;
+    gap:14px;
+    padding:17px 2px;
+    border:0;
+    border-bottom:1px solid var(--border);
+    border-radius:0;
+    background:transparent;
+    box-shadow:none;
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
+  }
+  .day-row .d{
+    width:84px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    padding:0;
+    border-radius:0;
+    background:transparent;
+    color:var(--text);
+    font-family:Arial,sans-serif;
+    line-height:1.1;
+  }
+  .day-row .d span{ font-size:10px; font-weight:700; letter-spacing:.14em; }
+  .day-row .d small{ color:var(--accent); font-size:9px; font-weight:700; letter-spacing:.12em; }
+  .day-row .r .s{ margin:0; color:var(--text); font-size:14.5px; font-weight:600; line-height:1.55; }
+  .day-row .arrow{ padding-right:2px; color:var(--accent); font-size:21px; font-weight:300; }
+  @media (hover:hover) and (pointer:fine){
+    .day-row:hover{ transform:none; border-color:var(--border); background:rgba(255,255,255,.18); box-shadow:none; }
+  }
+
+  #page-exchange .section-label{ margin-bottom:var(--space-md); }
+  .exchange-card{
+    position:relative;
+    overflow:hidden;
+    padding:23px 20px 19px;
+    border-radius:var(--radius-lg);
+  }
+  .exchange-card::before{
+    content:"AMOUNT";
+    display:block;
+    margin-bottom:10px;
+    color:var(--text-dim);
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.2em;
+  }
+  .exchange-notice{ position:absolute; top:23px; right:20px; margin:0; font-size:10px; opacity:.72; }
+  .exchange-inputs{ align-items:end; gap:8px; }
+  .exchange-input{
+    height:60px;
+    padding:0;
+    border:0;
+    border-radius:0;
+    background:transparent;
+    color:var(--text);
+    font-size:clamp(36px,10vw,54px);
+    font-weight:700;
+    letter-spacing:-.035em;
+    line-height:1;
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
+  }
+  .exchange-select{
+    width:82px;
+    height:38px;
+    margin-bottom:5px;
+    padding:0 10px;
+    border-radius:12px;
+    background:rgba(255,255,255,.38);
+    font-size:13px;
+    letter-spacing:.08em;
+  }
+  .exchange-input:focus{ outline:none; }
+  .exchange-results{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-sm); }
+  .exchange-result{ min-height:124px; padding:18px; border-radius:var(--radius-md); }
+  .exchange-result .currency-name{
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.13em;
+    line-height:1.45;
+  }
+  .exchange-result .currency-value{
+    margin-top:12px;
+    font-size:clamp(21px,5vw,29px);
+    letter-spacing:-.03em;
+    line-height:1.1;
+  }
+  .exchange-result .currency-value::before{ content:"≈ "; font-size:.7em; font-weight:600; vertical-align:middle; }
+  .exchange-rates{ padding:13px 16px; border-radius:var(--radius-sm); font-size:10px; line-height:1.7; }
+
+  .prep-page > .label{ display:flex; align-items:baseline; gap:9px; }
+  .prep-tabs{
+    gap:4px;
+    padding:4px;
+    border-radius:16px;
+    background:rgba(255,255,255,.38);
+    box-shadow:var(--shadow-sm);
+  }
+  .prep-tab{
+    min-height:44px;
+    border-radius:12px;
+    font-size:12px;
+    letter-spacing:.05em;
+  }
+  .prep-tab.active{ background:var(--surface-glass); box-shadow:0 4px 12px rgba(72,48,31,.07); }
+  .prep-card{ padding:19px; border-radius:var(--radius-md); }
+  .prep-card-title{ font-size:17px; }
+  .prep-ref{
+    align-items:center;
+    padding:14px;
+    border-style:solid;
+    background:rgba(255,255,255,.24);
+  }
+  .prep-ref-label{
+    margin-bottom:4px;
+    color:var(--text-dim);
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.18em;
+  }
+  .prep-ref-code{ font-size:22px; letter-spacing:.12em; line-height:1.1; }
+  .prep-mini-btn{
+    min-height:34px;
+    padding:0 10px;
+    border-radius:10px;
+    font-size:11px;
+  }
+  .prep-flight{
+    grid-template-columns:54px minmax(0,1fr) 18px minmax(0,1fr) auto;
+    gap:9px;
+    align-items:center;
+    padding:16px 0;
+  }
+  .prep-flight-date{
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+    color:var(--text-dim);
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.07em;
+  }
+  .prep-flight-date small{ color:var(--accent); font-size:9px; letter-spacing:.12em; }
+  .prep-flight-place{ min-width:0; display:flex; flex-direction:column; gap:3px; }
+  .prep-flight-place b{ color:var(--text); font-family:Arial,sans-serif; font-size:17px; letter-spacing:.07em; line-height:1.05; }
+  .prep-flight-place span{ color:var(--text-dim); font-family:'Noto Serif TC',serif; font-size:12px; font-weight:700; }
+  .prep-flight-arrow{ color:var(--accent); font-size:17px; text-align:center; }
+  .prep-flight-meta{ min-width:56px; display:flex; flex-direction:column; gap:3px; text-align:right; }
+  .prep-flight-meta b{ color:var(--text); font-family:Arial,sans-serif; font-size:11px; letter-spacing:.08em; }
+  .prep-flight-meta span{ color:var(--text-dim); font-family:Arial,sans-serif; font-size:9px; font-weight:700; letter-spacing:.08em; }
+  .prep-check{ gap:11px; padding:11px 0; font-size:13px; }
+  .prep-check input{ width:18px; height:18px; flex-basis:18px; border-radius:50%; border-width:1px; }
+  .prep-check input::before{ width:8px; height:4px; }
+  .prep-check input:checked + span{ opacity:.52; text-decoration:line-through; text-decoration-thickness:1px; }
+  .prep-packing-progress{ margin:var(--space-md) auto var(--space-sm); }
+  .prep-packing-track{ height:2px; margin-top:8px; }
+  .prep-packing-progress-count{ font-family:Arial,sans-serif; font-size:10px; letter-spacing:.06em; }
+  .travel-warning{
+    border-color:rgba(167,77,57,.2);
+    background:rgba(243,218,203,.5);
+    box-shadow:none;
+  }
+  @media (prefers-color-scheme: dark){
+    .exchange-select,.prep-ref,.prep-tabs{ background:rgba(20,16,14,.22); }
+    .travel-warning{ background:rgba(85,49,38,.44); border-color:rgba(229,154,121,.18); }
+  }
+  @media (max-width:560px){
+    .now-card{ padding:18px; }
+    .day-row .d{ width:78px; }
+    .exchange-card{ padding:21px 17px 17px; }
+    .exchange-notice{ top:21px; right:17px; max-width:110px; text-align:right; line-height:1.35; }
+    .exchange-result{ min-height:112px; padding:15px; }
+    .prep-card{ padding:16px; }
+    .prep-flight{ grid-template-columns:46px minmax(0,1fr) 14px minmax(0,1fr); gap:6px; }
+    .prep-flight-meta{ grid-column:2 / 5; flex-direction:row; justify-content:flex-start; gap:8px; padding-top:3px; text-align:left; }
+    .prep-flight-meta span{ padding-left:8px; border-left:1px solid var(--border); }
+  }
+
+  /* V5｜Itinerary and transit reader */
+  .tabs{
+    display:flex;
+    gap:0;
+    margin:0 calc(var(--space-lg) * -1) var(--space-lg);
+    padding:0 var(--space-lg);
+    overflow-x:auto;
+    overscroll-behavior-x:contain;
+    scrollbar-width:none;
+    border-bottom:1px solid var(--border);
+  }
+  .tabs::-webkit-scrollbar{ display:none; }
+  .tab{
+    position:relative;
+    flex:0 0 76px;
+    min-height:60px;
+    padding:12px 8px 10px;
+    border:0;
+    border-radius:0;
+    background:transparent;
+    color:var(--text-dim);
+    font-family:Arial,sans-serif;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.1em;
+    line-height:1.35;
+  }
+  .tab .dt{ margin-top:4px; color:inherit; font-size:10px; font-weight:600; letter-spacing:.06em; opacity:.72; }
+  .tab.active{
+    border:0;
+    background:transparent;
+    box-shadow:none;
+    color:var(--accent);
+  }
+  .tab.active::after{
+    content:"";
+    position:absolute;
+    right:17px;
+    bottom:-1px;
+    left:17px;
+    height:2px;
+    border-radius:999px 999px 0 0;
+    background:currentColor;
+  }
+  .timeline{ position:relative; padding:0; }
+  .timeline::before{
+    content:attr(data-city);
+    position:absolute;
+    top:22px;
+    right:-12px;
+    z-index:0;
+    color:var(--text);
+    font-family:Arial,sans-serif;
+    font-size:clamp(42px,10vw,86px);
+    font-weight:700;
+    letter-spacing:-.09em;
+    line-height:.9;
+    opacity:.035;
+    pointer-events:none;
+    user-select:none;
+  }
+  .t-row{
+    position:relative;
+    z-index:1;
+    gap:13px;
+    padding:17px 0;
+    border-bottom:0;
+  }
+  .t-time{
+    width:51px;
+    padding-top:3px;
+    color:var(--text-dim);
+    font-family:Arial,sans-serif;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.05em;
+  }
+  .t-mid{ position:relative; width:16px; padding-top:5px; }
+  .t-mid::after{
+    content:"";
+    position:absolute;
+    top:16px;
+    bottom:-21px;
+    left:50%;
+    width:1px;
+    background:var(--border);
+    transform:translateX(-50%);
+  }
+  .t-row:last-child .t-mid::after{ display:none; }
+  .t-dot{
+    position:relative;
+    z-index:1;
+    width:8px;
+    height:8px;
+    border:2px solid var(--bg);
+    background:var(--text-dim);
+    box-shadow:0 0 0 1px var(--border);
+  }
+  .t-dot.current{
+    background:var(--accent);
+    box-shadow:0 0 0 4px var(--accent-soft),0 0 16px rgba(169,95,61,.18);
+  }
+  .t-head{ align-items:center; gap:7px; }
+  .t-icon{ font-size:15px; opacity:.72; filter:saturate(.75); }
+  .t-title{ font-size:15.5px; font-weight:700; line-height:1.45; }
+  .t-tag{
+    flex:0 0 auto;
+    border-radius:999px;
+    font-family:Arial,sans-serif;
+    font-size:8px;
+    font-weight:700;
+    letter-spacing:.1em;
+    line-height:1;
+  }
+  .t-tag{ padding:4px 6px; background:var(--accent); }
+  .t-chev{ margin-left:auto; font-size:9px; opacity:.6; }
+  .t-detail{ padding-right:0; }
+  .t-row.open .t-detail{ margin-top:15px; }
+  .t-detail-inner{
+    padding:18px;
+    border-radius:var(--radius-md);
+    background:var(--surface-glass);
+    box-shadow:var(--shadow-sm);
+    -webkit-backdrop-filter:blur(22px) saturate(112%);
+    backdrop-filter:blur(22px) saturate(112%);
+  }
+  .d-img,.img-placeholder{ height:150px; margin-bottom:16px; border-radius:16px; }
+  .d-desc{ margin-bottom:14px; color:var(--text); font-size:14px; line-height:1.75; }
+  .d-line{
+    gap:10px;
+    padding:9px 0;
+    border-top:1px solid rgba(112,87,65,.09);
+    color:var(--text-dim);
+    font-size:13px;
+    line-height:1.65;
+  }
+  .d-line .k{ width:18px; font-size:12px; opacity:.72; }
+  .d-line .v{ color:var(--text); }
+  .recs{ margin-top:14px; padding-top:12px; border-top:1px solid rgba(112,87,65,.09); }
+  .recs .rec-title{ margin-bottom:7px; font-family:Arial,sans-serif; font-size:9px; letter-spacing:.14em; }
+  .rec-item{ padding:3px 0 3px 14px; font-size:12.5px; line-height:1.55; }
+  .btn-row{ gap:8px; margin-top:18px; }
+  .btn{
+    min-height:40px;
+    padding:9px 12px;
+    border-radius:12px;
+    background:rgba(255,255,255,.22);
+    font-size:11.5px;
+  }
+  .btn.primary{ background:var(--accent); box-shadow:0 7px 16px rgba(169,95,61,.17); }
+
+  .transit-page .label{ display:flex; align-items:baseline; gap:9px; }
+  .transit-card{ padding:19px; border-radius:var(--radius-lg); }
+  .transit-card-title{ font-size:17px; }
+  .transit-map-frame{
+    margin-top:15px;
+    padding:8px;
+    border-radius:16px;
+    background:rgba(255,255,255,.25);
+  }
+  .transit-map-image{ border-radius:11px; }
+  .transit-map-action{
+    min-height:44px;
+    margin-top:13px;
+    border-radius:12px;
+    background:rgba(255,255,255,.26);
+    font-size:12px;
+  }
+  .transit-lightbox{
+    background:rgba(15,15,15,.9);
+    -webkit-backdrop-filter:blur(18px);
+    backdrop-filter:blur(18px);
+  }
+  .transit-lightbox-head{ margin-bottom:14px; }
+  .transit-zoom-btn,
+  .transit-lightbox-close{
+    border-color:rgba(255,255,255,.22);
+    border-radius:12px;
+    background:rgba(255,255,255,.1);
+    -webkit-backdrop-filter:blur(16px);
+    backdrop-filter:blur(16px);
+  }
+  .transit-zoom-btn{ width:38px; height:38px; }
+  .transit-zoom-btn.reset{ width:56px; }
+  .transit-lightbox-close{ min-height:38px; padding:0 13px; }
+  .transit-map-viewport{ border-color:rgba(255,255,255,.16); border-radius:18px; }
+  @media (hover:hover) and (pointer:fine){
+    .tab:hover{ transform:none; background:rgba(255,255,255,.16); }
+    .btn:not(.primary):hover,.transit-map-action:hover{ background:var(--accent-soft); }
+  }
+  @media (max-width:560px){
+    .tabs{ margin-right:calc(var(--space-md) * -1); margin-left:calc(var(--space-md) * -1); padding:0 var(--space-md); }
+    .tab{ flex-basis:70px; }
+    .timeline::before{ display:none; }
+    .t-row{ gap:10px; padding:15px 0; }
+    .t-time{ width:45px; font-size:11px; }
+    .t-icon{ font-size:14px; }
+    .t-title{ font-size:14px; }
+    .t-detail-inner{ padding:16px; }
+    .transit-card{ padding:16px; }
+  }
+  @media (prefers-color-scheme: dark){
+    .d-line,.recs{ border-color:rgba(237,219,198,.1); }
+    .transit-map-frame,.transit-map-action{ background:rgba(20,16,14,.2); }
+  }
+
+  /* V6｜Micro motion, reveal, and liquid glass finishing layer */
+  .hero-kicker,.hero-copy,.trip-progress{ position:relative; z-index:1; }
+  @keyframes page-in{ from{ opacity:0; transform:translateY(4px); } to{ opacity:1; transform:translateY(0); } }
+  .page.active{ animation:page-in 190ms ease-out both; }
+  .reveal{ opacity:0; transform:translateY(8px); transition:opacity 500ms ease,transform 500ms ease; }
+  .reveal.is-revealed{ opacity:1; transform:translateY(0); }
+  button,
+  .btn,
+  .t-row{ -webkit-tap-highlight-color:transparent; }
+  button:active,
+  .btn:active,
+  .t-row:active{ transform:scale(.97); }
+  .nav-btn{ transition:transform 180ms ease,color 200ms ease,background-color 200ms ease; }
+  .nav-btn.active{ transition:color 200ms ease,background-color 200ms ease; }
+  .day-row{ appearance:none; width:100%; color:inherit; font:inherit; text-align:left; }
+  .tab{ appearance:none; text-align:center; }
+  .t-row:focus-visible,
+  button:focus-visible,
+  .btn:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+  }
+  @media (min-width:768px){
+    .page{ padding-bottom:calc(var(--space-xl) + 24px); }
+    .tabs{ margin-bottom:var(--space-xl); }
+    .timeline{ max-width:820px; }
+    .t-row{ padding:20px 0; }
+    .transit-card{ padding:22px; }
+  }
+  @media (min-width:1024px){
+    .page{ width:min(100%,980px); }
+    .navbar{ max-width:650px; }
+  }
+  @media (max-width:340px){
+    .navbar{ left:10px; right:10px; padding:5px; }
+    .nav-btn{ font-size:8px; }
+    .nav-btn .ic{ font-size:15px; }
+    .hero .title{ max-width:255px; }
+    .t-tag{ display:none; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{ scroll-behavior:auto !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+    .reveal{ opacity:1; transform:none; }
+    .page.active{ animation:none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-ghost" aria-hidden="true"><span>MACAU</span><span>GUANGDONG</span></div>
+  <div class="hero-kicker">JOURNEY 2026</div>
+  <div class="hero-copy">
+    <div class="title serif">澳門・珠海・中山・佛山</div>
+    <div class="hero-meta">
+      <div class="dates"><span>NOV 25 — NOV 30</span><span>2026</span></div>
+      <div class="hero-type">SOLO TRIP</div>
+    </div>
+  </div>
+  <div class="trip-progress" id="trip-progress" aria-live="polite"></div>
+</header>
+
+<!-- ============ HOME ============ -->
+<div class="page active" id="page-home">
+  <div class="label section-label"><span>NOW</span><em>現在</em></div>
+  <div class="now-wrap"><span class="dot" id="now-dot"></span><span class="now-status" id="now-status">—</span></div>
+  <div class="now-card" id="now-card"></div>
+
+  <div class="label">行程</div>
+  <div class="day-nav" id="day-nav"></div>
+
+  <div class="last-updated" id="last-updated-home"></div>
+</div>
+
+<!-- ============ ITINERARY ============ -->
+<div class="page" id="page-itinerary">
+  <div class="tabs" id="tabs"></div>
+  <div class="timeline" id="timeline"></div>
+  <div id="day-extra"></div>
+  <div class="last-updated" id="last-updated-itin"></div>
+</div>
+
+<!-- ============ CURRENCY ============ -->
+<div class="page" id="page-exchange">
+  <div class="label section-label"><span>EXCHANGE</span><em>匯率換算</em></div>
+  <div class="exchange-card">
+    <div class="exchange-notice">目前使用手動設定匯率</div>
+    <div class="exchange-inputs">
+      <input class="exchange-input" id="currency-amount" type="number" min="0" step="any" value="100" inputmode="decimal" aria-label="金額">
+      <select class="exchange-select" id="currency-from" aria-label="原始幣別">
+        <option value="CNY">CNY</option>
+        <option value="TWD">TWD</option>
+        <option value="MOP">MOP</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="label">換算結果</div>
+  <div class="exchange-results" id="currency-results"></div>
+  <div class="exchange-rates" id="currency-rates"></div>
+</div>
+
+<!-- ============ PRE-DEPARTURE ============ -->
+<div class="page prep-page" id="page-prep">
+  <div class="label">PRE-DEPARTURE｜行前準備</div>
+  <div class="prep-intro">把重要文件、行李與安全提醒集中在這裡；勾選狀態只儲存在這台裝置。</div>
+  <div class="prep-tabs" role="tablist" aria-label="行前準備檢查頁籤">
+    <button class="prep-tab active" type="button" data-prep-tab="ready" role="tab" aria-selected="true">準備</button>
+    <button class="prep-tab" type="button" data-prep-tab="safety" role="tab" aria-selected="false">證件與安全</button>
+  </div>
+  <div class="prep-content" id="prep-content"></div>
+</div>
+
+<!-- ============ TRANSIT MAP ============ -->
+<div class="page transit-page" id="page-transit">
+  <div class="label">TRANSIT｜交通圖</div>
+  <div class="transit-intro">主要行程以叫車與城際鐵路為主；以下地圖作為臨時改搭大眾運輸時的備案。</div>
+
+  <section class="transit-card">
+    <div class="transit-card-title">廣州・佛山軌道交通圖</div>
+    <div class="transit-card-sub">2026-07｜地鐵、城際與有軌電車</div>
+    <div class="transit-map-frame">
+      <img class="transit-map-image" src="assets/maps/guangzhou-foshan-rail-2026-07.png" alt="廣州與佛山軌道交通圖，包含來源、圖例與授權資訊">
+    </div>
+    <button class="transit-map-action" type="button" onclick="openTransitMap('assets/maps/guangzhou-foshan-rail-2026-07.png','廣州・佛山軌道交通圖')">全螢幕查看</button>
+  </section>
+
+  <section class="transit-card">
+    <div class="transit-card-title">澳門輕軌圖</div>
+    <div class="transit-card-sub">機場與氹仔備用交通</div>
+    <div class="transit-map-frame">
+      <img class="transit-map-image" src="assets/maps/macau-lrt.png" alt="澳門輕軌圖">
+    </div>
+    <button class="transit-map-action" type="button" onclick="openTransitMap('assets/maps/macau-lrt.png','澳門輕軌圖')">全螢幕查看</button>
+  </section>
+
+  <section class="transit-card">
+    <div class="transit-card-title">本趟交通備忘</div>
+    <ul class="transit-note-list">
+      <li>廣州／佛山：地鐵為備用方案，主要行程仍以叫車為主</li>
+      <li>廣州南 ↔ 珠海：城際鐵路</li>
+      <li>澳門：機場、關閘與景點間以叫車為主；輕軌作備案</li>
+    </ul>
+  </section>
+</div>
+
+<div class="transit-lightbox" id="transit-lightbox" role="dialog" aria-modal="true" aria-labelledby="transit-lightbox-title" aria-hidden="true">
+  <div class="transit-lightbox-head">
+    <div class="transit-lightbox-title" id="transit-lightbox-title"></div>
+    <div class="transit-lightbox-controls" aria-label="地圖縮放">
+      <button class="transit-zoom-btn" type="button" onclick="zoomTransitMap(-0.25)" aria-label="縮小地圖">－</button>
+      <button class="transit-zoom-btn reset" type="button" id="transit-zoom-label" onclick="resetTransitMapZoom()" aria-label="重設縮放為百分之百">100%</button>
+      <button class="transit-zoom-btn" type="button" onclick="zoomTransitMap(0.25)" aria-label="放大地圖">＋</button>
+    </div>
+    <button class="transit-lightbox-close" type="button" onclick="closeTransitMap()">關閉</button>
+  </div>
+  <div class="transit-map-viewport" id="transit-map-viewport" tabindex="0" aria-label="可縮放與拖曳的地圖閱讀器">
+    <img class="transit-lightbox-image" id="transit-lightbox-image" alt="" draggable="false">
+  </div>
+</div>
+
+<div class="navbar">
+  <button class="nav-btn active" data-page="home"><span class="ic">🏠</span>首頁</button>
+  <button class="nav-btn" data-page="itinerary"><span class="ic">🗓️</span>行程</button>
+  <button class="nav-btn" data-page="exchange"><span class="ic">💱</span>匯率</button>
+  <button class="nav-btn" data-page="prep"><span class="ic">🧳</span>行前準備</button>
+  <button class="nav-btn" data-page="transit"><span class="ic">🚇</span>交通圖</button>
+</div>
+
+<div class="test-fab" id="test-fab">🧪</div>
+<div class="test-sheet" id="test-sheet">
+  <div class="test-title">測試時間</div>
+  <div class="test-row">
+    <div class="test-btn active" id="btn-real">使用目前時間</div>
+    <div class="test-btn" id="btn-sim">模擬時間</div>
+  </div>
+  <input type="datetime-local" id="sim-input">
+  <div class="presets" id="presets"></div>
+  <div class="test-close" id="test-close">關閉</div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   ================================
+   TRIP DATA｜旅行資料
+   未來主要只修改這裡
+   ================================
+
+   - 修改或新增行程，只需要編輯下面的 TRIP 物件
+   - 不需要更動任何 render function 或 HTML
+   - 每一天（day）固定格式：{ date, label, dateLabel, route, items }
+   - 每一個行程（item）固定支援以下欄位；沒有資料可省略欄位：
+       s            開始時間 "HH:mm"
+       e            結束時間 "HH:mm"
+       title        行程名稱
+       type         類型（餐廳／景點／交通／購物／住宿…）
+       icon         emoji icon
+       desc         簡短說明
+       address      地址
+       price        費用
+       transport    交通方式／班次
+       phone        電話
+       status       "confirmed" 或 "tentative"
+       imageUrl     圖片網址（null 時顯示 placeholder）
+       websiteUrl   官方網站
+       mapUrl       導航連結
+       bookingUrl   訂票／訂房連結
+       note         備註
+
+   // 新增行程範例（僅供參考，不會顯示在網站上）：
+   // {
+   //   s:"10:00", e:"11:30",
+   //   title:"景點名稱",
+   //   type:"景點",
+   //   icon:"📍",
+   //   desc:null,
+   //   address:null,
+   //   price:null,
+   //   transport:null,
+   //   
+   //   status:"tentative",
+   //   imageUrl:null,
+   //   websiteUrl:null,
+   //   mapUrl:null,
+   //   bookingUrl:null,
+   //   note:null
+   // }
+   ========================================================= */
+const DEFAULT_TRIP = {
+  lastUpdated: "2026-08-26T00:00:00",
+
+  flights: [
+    { type:"outbound", airline:"STARLUX 星宇航空", flightNo:"JX201", date:"2026-11-25",
+      fromCity:"台北", fromAirport:"桃園國際機場", fromCode:"TPE",
+      toCity:"澳門", toAirport:"澳門國際機場", toCode:"MFM",
+      depart:"07:45", arrive:"09:45", duration:"2 小時", direct:true,
+      terminal:null, gate:null, seat:null, baggage:null,
+      bookingReference:null, bookingUrl:null, status:"confirmed", note:null },
+    { type:"return", airline:"STARLUX 星宇航空", flightNo:"JX206", date:"2026-11-30",
+      fromCity:"澳門", fromAirport:"澳門國際機場", fromCode:"MFM",
+      toCity:"台北", toAirport:"桃園國際機場", toCode:"TPE",
+      depart:"20:35", arrive:"22:25", duration:"1 小時 50 分", direct:true,
+      terminal:null, gate:null, seat:null, baggage:null,
+      bookingReference:null, bookingUrl:null, status:"confirmed", note:null }
+  ],
+
+  stays: [
+    { day:1, city:"中山", hotelName:"中山富華道石岐步行街亞朵酒店", checkIn:"2026-11-25", checkOut:"2026-11-26",
+      address:"中山市西區富華道7號", phone:"0760-88633838",
+      imageUrl:null, websiteUrl:null, bookingUrl:null, mapUrl:null,
+      nights:"1 晚", roomType:"高級大床房", bedType:"1 張大床", occupancy:"2 位成人",
+      area:"31–35 平方公尺", floor:"3–9 樓", features:"有窗、禁煙",
+      breakfast:"2026/11/26 每房 2 客早餐", price:"¥320",
+      note:"1 晚｜高級大床房｜含 11/26 兩客早餐", status:"confirmed" },
+    { day:2, city:"佛山", hotelName:"宜尚PLUS飯店（佛山禪城智慧新城地鐵站店）", checkIn:"2026-11-26", checkOut:"2026-11-29",
+      address:"佛山市禪城區華寶南路13號一座2樓201", phone:"0757-82133880",
+      imageUrl:null, websiteUrl:null, bookingUrl:null, mapUrl:null,
+      nights:"3 晚", roomType:"豪華城景大床房", roomNote:"超大休閒觀景陽台／茶具／落地窗",
+      bedType:"1 張特大雙人床", occupancy:"2 位成人", area:"80 平方公尺", view:"城市景觀",
+      floor:"7 樓", breakfast:"無餐食", price:"¥300",
+      note:"3 晚｜豪華城景大床房｜80㎡｜城市景觀｜7樓｜無早餐", status:"confirmed" },
+    { day:5, city:"珠海", hotelName:"珠海·海之珠｜RomanticPearl｜有溫度的酒店（拱北口岸珠海站店）", checkIn:"2026-11-29", checkOut:"2026-11-30",
+      checkInTime:"13:00 後", checkOutTime:"13:00 前", address:"珠海市香洲區粵華路138號拱北市場5-8層", phone:"0756-8887668",
+      imageUrl:null, websiteUrl:null, bookingUrl:null, mapUrl:null,
+      nights:"1 晚", roomType:"零壓舒享大床房", bedType:"1 張約 1.81 米特大床", occupancy:"2 位成人",
+      area:"29–32 平方公尺", features:"有窗、部分禁煙", breakfast:"每間每晚含 2 份早餐", price:"¥196",
+      note:"1 晚｜零壓舒享大床房｜29–32㎡｜含 2 客早餐", status:"confirmed" }
+  ],
+
+  days: [
+    { date:"2026-11-25", label:"DAY 1", dateLabel:"11/25（三）", route:"台北 → 澳門 → 珠海 → 中山",
+      items: [
+        {s:"07:45",e:"09:45",title:"桃園 → 澳門",type:"交通",icon:"✈️",desc:"STARLUX JX201",address:"桃園國際機場 TPE",price:"NT$ 3,470",transport:"航班 JX201",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"來回機票 NT$ 6,945；去程 NT$ 3,470。直飛，航程約 2 小時"},
+        {s:"09:45",e:"10:25",title:"抵達澳門",type:"交通",icon:"🛬",desc:"飛機抵達、下機、澳門入境、領取行李。",address:"澳門國際機場",price:null,transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"10:25",e:"10:40",title:"澳門國際機場 → 澳門輕軌機場站",type:"交通",icon:"🚶",desc:"從機場航廈步行前往澳門輕軌機場站。",address:"澳門國際機場 → 澳門輕軌機場站",price:"免費",transport:"步行",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"10:40",e:"11:00",title:"機場站 → 蓮花站",type:"交通",icon:"🚈",desc:"搭乘澳門輕軌氹仔線，由機場站前往蓮花站。",address:"澳門輕軌機場站 → 蓮花站",price:"依實際乘車",transport:"澳門輕軌氹仔線",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"11:00",e:"11:10",title:"蓮花站 → 橫琴站",type:"交通",icon:"🚈",desc:"於蓮花站轉乘橫琴線，前往橫琴站。",address:"澳門輕軌蓮花站 → 橫琴站",price:"依實際乘車",transport:"澳門輕軌橫琴線",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"11:10",e:"11:40",title:"橫琴口岸過關",type:"交通",icon:"🛂",desc:"由澳門輕軌橫琴站前往橫琴口岸，辦理澳門出境及中國入境。",address:"澳門輕軌橫琴站／橫琴口岸",price:"免費",transport:"步行／口岸通關",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"提醒攜帶台灣護照及台胞證。"},
+        {s:"11:40",e:"12:00",title:"橫琴口岸 → 橫琴城際站",type:"交通",icon:"🚶",desc:"通關後依指示前往橫琴站（珠機城際鐵路）。",address:"橫琴口岸 → 橫琴站（珠機城際鐵路）",price:"免費",transport:"步行",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"12:00",e:"12:25",title:"橫琴站 → 珠海站",type:"交通",icon:"🚄",desc:"搭乘珠機城際鐵路，由橫琴站前往珠海站；車次依實際購票確認。",address:"橫琴站 → 珠海站",price:"依實際購票",transport:"珠機城際鐵路",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"車次之後再確認。"},
+        {s:"12:25",e:"12:45",title:"珠海站轉乘",type:"交通",icon:"🔄",desc:"抵達珠海站後轉乘前往中山北站的列車，預留找月台、安檢與候車時間。",address:"珠海站",price:null,transport:"轉乘／候車",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"12:45",e:"13:15",title:"珠海站 → 中山北站",type:"交通",icon:"🚄",desc:"搭乘城際／動車前往中山北站，車次依實際購票確認。",address:"珠海站 → 中山北站",price:"約 ¥30",transport:"城際二等座",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"車次之後再確認。"},
+        {s:"13:15",e:"13:40",title:"中山北站 → 中山富華道石岐步行街亞朵酒店",type:"交通",icon:"🚕",desc:"抵達中山北站後叫車前往酒店。",address:"中山市西區富華道7號",price:"¥18",transport:"叫車",phone:"0760-88633838",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"13:40",e:"13:50",title:"酒店寄存行李",type:"住宿",icon:"🧳",desc:"中山富華道石岐步行街亞朵酒店",address:"中國廣東省中山市富華道7號",price:null,transport:null,phone:"+86-760-88633838",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"酒店 16:00 後可入住，目前先寄存行李"},
+        {s:"13:50",e:"14:40",title:"午餐自理｜孫文西路周邊",type:"餐廳",icon:"🍜",desc:"當天依現場情況自行決定用餐地點",address:"中山市石岐區孫文西路步行街",price:"¥45",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"14:40",e:"15:20",title:"孫文西路步行街",type:"景點",icon:"📍",desc:"中山老街散步，嶺南建築風情。",address:"中山市石岐區孫文西路文化旅遊步行街",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"全天開放；商鋪約 09:00–22:00"},
+        {s:"15:20",e:"16:00",title:"香山商業文化博物館",type:"景點",icon:"📍",desc:"",address:"中山市石岐區孫文西路152號",price:"免費",transport:null,phone:"0760-88838248",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"09:00–17:30；周一閉館"},
+        {s:"16:00",e:"16:40",title:"中山公園",type:"景點",icon:"📍",desc:"",address:"中山市石岐區公園大道9號",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"16:40",e:"17:30",title:"岐江公園",type:"景點",icon:"🌇",desc:"工業風公園散步，安排傍晚江景與日落拍照",address:"中山市西區中山一路與大橋橫街交叉口東200米",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"24 小時開放"},
+        {s:"17:30",e:"17:55",title:"中懇人行天橋",type:"景點",icon:"📸",desc:"岐江橋旁熱門城市拍照機位",address:"中山市石岐區興中廣場旁岐江橋邊",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"市政人行橋，全天通行"},
+        {s:"17:55",e:"18:40",title:"興中廣場",type:"景點",icon:"🌃",desc:"岐江旁夜景、散步與自由活動",address:"中山市石岐區鳳鳴路3號",price:"街區免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"摩天輪需另外購票"},
+        {s:"18:40",e:"21:00",title:"岐江夜市",type:"景點",icon:"🌙",desc:"逛夜市、自由活動，晚餐現場自理",address:"中山市西區西堤路（光明橋至富業大街路段，香山古埠岐江夜市）",price:"¥55",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"季節性臨時市集，出發前建議確認是否開放。"},
+        {s:"21:00",e:"23:59",title:"回酒店休息",type:"住宿",icon:"🛏️",desc:"中山富華道石岐步行街亞朵酒店",address:"中國廣東省中山市富華道7號",price:"¥320",transport:null,phone:"+86-760-88633838",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"1 晚｜高級大床房｜含 11/26 兩客早餐"}
+      ],
+      transportBudget: {
+        items: [
+          {label:"桃園 → 澳門 JX201", cost:"NT$ 3,470"},
+          {label:"澳門機場 → 輕軌機場站", cost:"步行｜免費"},
+          {label:"澳門輕軌 機場站 → 蓮花站 → 橫琴站", cost:"票價依實際乘車"},
+          {label:"橫琴口岸通關", cost:"免費"},
+          {label:"橫琴站 → 珠海站", cost:"珠機城際｜依實際購票"},
+          {label:"珠海站 → 中山北站", cost:"城際二等座｜約 ¥30"},
+          {label:"中山北站 → 中山亞朵酒店", cost:"叫車 ¥18"}
+        ],
+        total:"輕軌＋珠機城際依實際購票 ＋ ¥48 ＋ NT$ 3,470",
+        note:"已知交通小計 ¥48；澳門輕軌與珠機城際票價依實際購票；已含去程機票 NT$ 3,470。"
+      },
+      dayBudget: {
+        transport:"輕軌＋珠機城際依實際購票 ＋ ¥48 ＋ NT$ 3,470",
+        attractions: [
+          {name:"孫文西路步行街", cost:"免費"},
+          {name:"香山商業文化博物館", cost:"免費"},
+          {name:"中山公園", cost:"免費"},
+          {name:"岐江公園", cost:"免費"},
+          {name:"中懇人行天橋", cost:"免費"},
+          {name:"興中廣場", cost:"街區免費"},
+          {name:"岐江夜市", cost:"免費逛"}
+        ],
+        food:{label:"午餐＋岐江夜市晚餐／小吃", cost:"¥100"},
+        other:{label:"飲料、臨時消費、備用", cost:"待定"},
+        total:"¥148 ＋ 輕軌＋珠機城際依實際購票 ＋ NT$ 3,470",
+        note:"不含住宿、不含購物；澳門輕軌與珠機城際票價依實際購票。所有金額均為1人預算。"
+      }
+    },
+    { date:"2026-11-26", label:"DAY 2", dateLabel:"11/26（四）", route:"中山 → 廣州南 → 佛山",
+      items: [
+        {s:"07:00",e:"07:30",title:"中山富華道石岐步行街亞朵酒店 → 中山北站",type:"交通",icon:"🚕",desc:"退房後叫車前往中山北站",address:"中山市西區富華道7號",price:"¥18",transport:"叫車",phone:"0760-88633838",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"07:30",e:"08:15",title:"中山北站 → 廣州南站",type:"交通",icon:"🚄",desc:"城際二等座前往廣州南站",address:"廣州市番禺區石壁街道南站北路",price:"¥40",transport:"城際二等座",phone:"020-61132666",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"08:15",e:"08:50",title:"廣州南站 → 佛山宜尚PLUS飯店",type:"交通",icon:"🚕",desc:"叫車前往佛山住宿",address:"佛山市禪城區華寶南路13號一座2樓201",price:"¥35",transport:"叫車",phone:"0757-82133880",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"08:50",e:"09:05",title:"飯店寄放行李",type:"住宿",icon:"🧳",desc:"宜尚PLUS飯店（佛山禪城智慧新城地鐵站店）",address:"中國廣東省佛山市禪城區華寶南路13號一座2樓201",price:null,transport:null,phone:"+86-757-82133880",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"14:00 後可正式入住，目前先寄放行李"},
+        {s:"09:05",e:"09:40",title:"飯店 → 紫南文化旅遊區",type:"交通",icon:"🚕",desc:"叫車前往",address:"佛山市禪城區南莊鎮紫南村賢德路11號",price:"¥40",transport:"叫車",phone:"0757-82560265",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"09:40",e:"11:20",title:"紫南文化旅遊區",type:"景點",icon:"🏞️",desc:"嶺南水鄉、紫南村街區、仁善三館、水鄉建築與拍照",address:"佛山市禪城區南庄鎮紫南村賢德路11號",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"08:00–18:00；遊船另收費"},
+        {s:"11:20",e:"12:00",title:"紫南文化旅遊區 → 梁園",type:"交通",icon:"🚕",desc:"叫車前往梁園",address:"佛山市禪城區松風路先鋒古道93號",price:"¥45",transport:"叫車",phone:"0757-82241279",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"12:00",e:"12:30",title:"午餐自理｜梁園周邊",type:"餐廳",icon:"🍜",desc:"當天依現場情況自行決定用餐地點",address:"佛山市禪城區松風路梁園附近商鋪",price:"¥50",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"12:30",e:"13:30",title:"梁園",type:"景點",icon:"🏯",desc:"嶺南四大名園之一",address:"佛山市禪城區松風路先鋒古道93號",price:"約 ¥10",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"09:00–17:00；約 16:40 停止入園；周一閉園（節假日除外）"},
+        {s:"13:30",e:"13:45",title:"梁園 → 中山公園",type:"交通",icon:"🚕",desc:"叫車前往",address:"佛山市禪城區中山路12號",price:"¥12",transport:"叫車",phone:"0757-82811335",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"13:45",e:"14:10",title:"中山公園",type:"景點",icon:"🌳",desc:"佛山老城湖景公園，短暫散步",address:"佛山市禪城區中山路12號",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"06:00–22:00"},
+        {s:"14:10",e:"14:25",title:"中山公園 → 佛山祖廟",type:"交通",icon:"🚕",desc:"叫車前往佛山祖廟",address:"佛山市禪城區祖廟路21號",price:"¥10",transport:"叫車",phone:"0757-82221680",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"14:25",e:"15:50",title:"佛山祖廟",type:"景點",icon:"🏛️",desc:"佛山功夫文化核心，可看黃飛鴻紀念館、葉問堂、醒獅與古建築",address:"佛山市禪城區祖廟路21號",price:"約 ¥20",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"08:30–18:00；若醒獅表演時間不同，可依現場微調"},
+        {s:"15:50",e:"16:15",title:"嶺南天地",type:"景點",icon:"🏘️",desc:"祖廟旁老城街區、騎樓、老宅與文創店",address:"佛山市禪城區祖廟大街2號",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"16:15",e:"16:35",title:"嶺南天地 → 南風古灶",type:"交通",icon:"🚕",desc:"叫車前往，避免錯過關門時間",address:"佛山市禪城區石灣鎮高廟路5號",price:"¥18",transport:"叫車",phone:"0757-82701218",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"16:35",e:"17:25",title:"南風古灶",type:"景點",icon:"🏺",desc:"五百年龍窯、石灣陶瓷與老窯建築",address:"佛山市禪城區高廟路6號",price:"約 ¥25",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"08:30–17:30；此景點關門時間重要，盡量 16:30 左右抵達"},
+        {s:"17:25",e:"18:10",title:"石灣公仔街",type:"景點",icon:"🧸",desc:"逛石灣公仔、陶藝小店、手工藝品與伴手禮",address:"南風古灶周邊",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"18:10",e:"18:25",title:"石灣公仔街 → 佛山創意產業園",type:"交通",icon:"🚕",desc:"叫車前往",address:"佛山市禪城區季華四路33號",price:"¥12",transport:"叫車",phone:"0757-82701218",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"18:25",e:"21:15",title:"佛山創意產業園・功夫夜市",type:"景點",icon:"🌙",desc:"逛夜市、自由活動，晚餐現場自理",address:"佛山市禪城區季華四路33號",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"晚餐不指定餐廳，現場自理"},
+        {s:"21:15",e:"23:59",title:"回酒店休息",type:"住宿",icon:"🛏️",desc:"宜尚PLUS飯店（佛山禪城智慧新城地鐵站店）",address:"中國廣東省佛山市禪城區華寶南路13號一座2樓201",price:"¥300",transport:null,phone:"+86-757-82133880",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"3 晚｜豪華城景大床房｜80㎡｜城市景觀｜7樓｜無早餐"}
+      ],
+      transportBudget: {
+        items: [
+          {label:"中山亞朵酒店 → 中山北站", cost:"叫車 ¥18"},
+          {label:"中山北站 → 廣州南站", cost:"城際二等座 ¥40"},
+          {label:"廣州南站 → 佛山宜尚PLUS", cost:"叫車 ¥35"},
+          {label:"宜尚PLUS → 紫南文化旅遊區", cost:"叫車 ¥40"},
+          {label:"紫南文化旅遊區 → 梁園", cost:"叫車 ¥45"},
+          {label:"梁園 → 中山公園", cost:"叫車 ¥12"},
+          {label:"中山公園 → 佛山祖廟", cost:"叫車 ¥10"},
+          {label:"嶺南天地 → 南風古灶", cost:"叫車 ¥18"},
+          {label:"石灣公仔街 → 佛山創意產業園", cost:"叫車 ¥12"}
+        ],
+        total:"¥230",
+        note:"所有叫車金額為單人搭乘一台普通網約快車的順路預估。"
+      },
+      dayBudget: {
+        transport:"¥230",
+        attractions: [
+          {name:"紫南文化旅遊區", cost:"免費"},
+          {name:"梁園", cost:"約 ¥10"},
+          {name:"中山公園", cost:"免費"},
+          {name:"佛山祖廟", cost:"約 ¥20"},
+          {name:"嶺南天地", cost:"免費"},
+          {name:"南風古灶", cost:"約 ¥25"},
+          {name:"石灣公仔街", cost:"免費"},
+          {name:"佛山創意產業園", cost:"免費"},
+          {name:"固定景點門票預估", cost:"約 ¥55"},
+          {name:"紫南遊船", cost:"另計／現場決定"}
+        ],
+        food:{label:"梁園附近午餐", cost:"¥50"},
+        other:{label:"飲料、伴手禮以外的臨時消費", cost:"待定"},
+        total:"¥280 ＋ 門票另計",
+        note:"全部為1人預算。叫車費為獨自搭乘整台車的費用，不做兩人分攤。"
+      }
+    },
+    { date:"2026-11-27", label:"DAY 3", dateLabel:"11/27（五）", route:"佛山 → 順德 → 佛山",
+      theme:"順德一日遊｜建築藝術、嶺南園林與順德老街", hint:"行程較緊湊",
+      items: [
+        {s:"08:10",e:"09:00",title:"宜尚PLUS酒店 → 羅浮宮國際家居博覽中心",type:"交通",icon:"🚕",desc:"叫車前往順德樂從",address:"佛山市順德區樂從鎮英雄河西岸",price:"¥55",transport:"叫車",phone:"0757-28835168",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"09:00",e:"10:15",title:"羅浮宮國際家居博覽中心",type:"景點",icon:"🏛️",desc:"大型高級家具展覽中心兼國家4A級景區，建築內有大量歐式裝潢與藝術裝置",address:"佛山市順德區樂從鎮英雄河西岸",price:"免費",transport:null,phone:"0757-28839999 / 0757-28835168",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"09:00–18:30｜停留約1小時15分鐘｜不是法國羅浮宮分館｜看點：C區5樓星座廣場、金色大廳、D區1樓椅子塔、A區白色旋轉樓梯｜省錢方案：智慧新城站→佛山地鐵2號線→魁奇路站C出口→255A/255B公交，約55–75分鐘／¥5–8（時間較長，本次不建議使用）"},
+        {s:"10:15",e:"10:50",title:"羅浮宮 → 和美術館",type:"交通",icon:"🚕",desc:"叫車前往和美術館",address:"佛山市順德區北滘鎮怡興路6號",price:"¥30",transport:"叫車",phone:"0757-26670666",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"10:50",e:"12:40",title:"和美術館",type:"景點",icon:"🎨",desc:"安藤忠雄設計的現代美術館，特色為清水混凝土、圓形結構、雙螺旋樓梯與自然光影",address:"佛山市順德區北滘新城怡興路6號／美和路6號",price:"依展覽而定；港澳台成人票約 ¥90 起，學生票約 ¥85",transport:null,phone:"0757-26670666",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"10:00–18:00；17:30停止入場；攜帶台灣學生證，出發前確認當期展覽及票價"},
+        {s:"12:40",e:"13:25",title:"午餐自理｜北滘新城周邊",type:"餐廳",icon:"🍜",desc:"和美術館或北滘新城附近自行決定用餐地點，以簡餐為主",address:"佛山市順德區北滘新城和美術館附近商鋪",price:"¥48",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"控制約45分鐘，避免影響下午行程"},
+        {s:"13:25",e:"14:00",title:"北滘新城／和美術館 → 順峰山公園",type:"交通",icon:"🚕",desc:"叫車前往順峰山公園正門",address:"佛山市順德區大良街道順峰山路",price:"¥35",transport:"叫車",phone:"0757-22638736",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"14:00",e:"15:05",title:"順峰山公園",type:"景點",icon:"🌳",desc:"順德大型城市公園，本次只遊覽正門、中華第一牌坊及青雲湖附近",address:"佛山市順德區大良街道南國東路40號",price:"免費",transport:null,phone:"0757-22638916",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"06:00–22:30｜本次不走完整約8公里環湖路線｜本次只遊覽正門牌坊及附近園區"},
+        {s:"15:05",e:"15:25",title:"順峰山公園 → 清暉園",type:"交通",icon:"🚕",desc:"叫車前往清暉園",address:"佛山市順德區大良街道清暉路23號",price:"¥12",transport:"叫車",phone:"0757-22226196",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"15:25",e:"16:40",title:"清暉園",type:"景點",icon:"🏯",desc:"廣東四大名園之一，主要欣賞嶺南園林、彩色玻璃、庭院、水景、木雕與傳統建築",address:"佛山市順德區大良街道清暉路23號",price:"成人約 ¥15",transport:null,phone:"0757-22226196",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"09:00–17:30；官方最晚入園約17:00，建議16:00前入園｜可提前購買15:00–17:30時段門票"},
+        {s:"16:40",e:"17:50",title:"華蓋路步行街＋華蓋山棧道",type:"景點",icon:"🏘️",desc:"順德老街散步、小吃街區與華蓋山綠地棧道",address:"佛山市順德區大良街道華蓋路步行街",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"清暉園出口步行約2–5分鐘；華蓋路與華蓋山棧道不是同一景點｜本次路線：清暉園出口→華蓋路步行街→華蓋山棧道入口→只走一小段後折返"},
+        {s:"17:50",e:"18:05",title:"華蓋路 → 金榜上街",type:"交通",icon:"🚕",desc:"短程叫車前往",address:"佛山市順德區大良街道華蓋路步行街／佛山市順德區大良金榜上街",price:"¥8",transport:"叫車",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"18:05",e:"19:20",title:"金榜上街｜晚餐＋甜品自理",type:"景點",icon:"🥛",desc:"逛金榜上街，晚餐與甜品依現場情況自行決定",address:"佛山市順德區大良街道金榜上街",price:"¥65",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"主要特色為順德乳製品、甜品及老街小吃｜推薦品項：雙皮奶、薑撞奶、水牛奶、牛乳片、炸牛奶｜可選參考店家（非固定行程）：金榜老街坊（金榜上街33號，13823467008）、霞姐牛奶牛乳（金榜上街21號，13690588312 / 13531396873）、金榜牛哞哞（金榜上街57號，13006744980 / 18998400132）｜金榜上街以乳製品與甜品為主，若需完整晚餐可在華蓋路或金榜周邊現場自行決定"},
+        {s:"19:20",e:"20:15",title:"金榜上街 → 千燈湖公園",type:"交通",icon:"🚕",desc:"叫車前往千燈湖夜景區",address:"佛山市南海區桂城燈湖西路28號",price:"¥60",transport:"叫車",phone:"0757-86236600",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"20:15",e:"21:05",title:"千燈湖公園",type:"景點",icon:"🌉",desc:"佛山南海代表性城市湖景公園，晚上欣賞湖畔燈光、城市夜景與水面倒影",address:"佛山市南海區燈湖西路28號",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"全年全天開放｜本次為夜遊短停留，不走完整公園｜主要看點：千燈湖湖畔夜景、市民廣場、湖面燈光倒影、城市天際線、夜間散步拍照｜提醒：千燈湖範圍很大，本次只安排約50分鐘夜景散步，不走完整環湖路線"},
+        {s:"21:05",e:"21:15",title:"千燈湖公園 → 燈湖西街",type:"交通",icon:"🚕",desc:"短程叫車前往",address:"佛山市南海區桂城燈湖西路與南六路交叉口東南120米",price:"¥8",transport:"叫車",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"21:15",e:"22:15",title:"燈湖西街夜市",type:"景點",icon:"🌙",desc:"千燈湖旁夜生活街區，逛夜市、市集、小吃與夜景，宵夜現場自理",address:"佛山市南海區燈湖西路與南六路交叉口東南120米",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"夜間街區約15:30–24:30較熱鬧；實際攤位與活動依當天為準｜特色：夜市與特色小吃、創意市集、街頭活動、千燈湖夜景、歐式街區建築、夜間拍照｜不新增固定餐廳，宵夜與小吃全部現場自理"},
+        {s:"22:15",e:"22:50",title:"燈湖西街 → 宜尚PLUS酒店",type:"交通",icon:"🚕",desc:"叫車返回佛山酒店",address:"佛山市禪城區華寶南路13號一座2樓201",price:"¥45",transport:"叫車",phone:"0757-82133880",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"22:50",e:"23:59",title:"回酒店休息",type:"住宿",icon:"🛏️",desc:"宜尚PLUS飯店（佛山禪城智慧新城地鐵站店）",address:"中國廣東省佛山市禪城區華寶南路13號一座2樓201",price:"¥300",transport:null,phone:"+86-757-82133880",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"3 晚｜豪華城景大床房｜80㎡｜城市景觀｜7樓｜無早餐"}
+      ],
+      transportBudget: {
+        items: [
+          {label:"酒店 → 羅浮宮", cost:"叫車 ¥55"},
+          {label:"羅浮宮 → 和美術館", cost:"叫車 ¥30"},
+          {label:"和美術館 → 順峰山", cost:"叫車 ¥35"},
+          {label:"順峰山 → 清暉園", cost:"叫車 ¥12"},
+          {label:"華蓋路 → 金榜上街", cost:"叫車 ¥8"},
+          {label:"金榜上街 → 千燈湖", cost:"叫車 ¥60"},
+          {label:"千燈湖 → 燈湖西街", cost:"叫車 ¥8"},
+          {label:"燈湖西街 → 酒店", cost:"叫車 ¥45"}
+        ],
+        total:"¥253",
+        note:"所有叫車金額為單人搭乘一台普通網約快車的順路預估。"
+      },
+      dayBudget: {
+        transport:"¥253",
+        attractions: [
+          {name:"羅浮宮國際家居博覽中心", cost:"免費"},
+          {name:"和美術館", cost:"依展覽而定；預留約 ¥85–100"},
+          {name:"順峰山公園", cost:"免費"},
+          {name:"清暉園", cost:"約 ¥15"},
+          {name:"華蓋路步行街＋華蓋山棧道", cost:"免費"},
+          {name:"金榜上街", cost:"免費"},
+          {name:"千燈湖公園", cost:"免費"},
+          {name:"燈湖西街", cost:"免費"},
+          {name:"固定景點預算", cost:"約 ¥100–115"}
+        ],
+        food:{label:"北滘午餐＋金榜晚餐甜品（不含燈湖西街小吃／宵夜）", cost:"¥113"},
+        other:{label:"飲料、臨時支出", cost:"待定"},
+        total:"¥366 ＋ 門票另計",
+        note:"不含住宿、不含購物。全部為1人預算；叫車費為獨自乘車整台車費用，不做分攤。和美術館票價依當期展覽與實際購票資格調整。"
+      }
+    },
+    { date:"2026-11-28", label:"DAY 4", dateLabel:"11/28（六）", route:"佛山 → 廣州 → 佛山",
+      theme:"廣州一日遊｜西關老城、歷史建築與珠江夜景", hint:"全程以地鐵＋步行為主｜夜間珠江夜遊",
+      items: [
+        {s:"08:00",e:"09:25",title:"宜尚PLUS酒店 → 永慶坊",type:"交通",icon:"🚕",desc:"叫車前往永慶坊",address:"廣州市荔灣區恩寧路99號",price:"¥50",transport:"叫車",phone:"020-87600688",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"09:25",e:"10:55",title:"永慶坊｜西關老廣州",type:"景點",icon:"🏘️",desc:"廣州西關歷史街區，以恩寧路、西關騎樓、西關老城生活與嶺南建築為主要特色。",address:"廣州市荔灣區恩寧路永慶坊",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"停留約1.5小時，可逛恩寧路、永慶坊及周邊西關街區。"},
+        {s:"10:55",e:"11:25",title:"永慶坊 → 中山紀念堂",type:"交通",icon:"🚕",desc:"叫車前往中山紀念堂",address:"廣州市越秀區東風中路293號",price:"¥22",transport:"叫車",phone:"020-83552080",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"11:25",e:"12:20",title:"中山紀念堂｜近代廣州",type:"景點",icon:"🏛️",desc:"廣州代表性的近代歷史建築之一，為紀念孫中山先生而興建。",address:"廣州市越秀區東風中路299號",price:"園區免費；主體建築依現場",transport:null,phone:"020-83552030",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"主體建築一般09:00–17:30；如遇演出、會議或活動，開放時間可能調整。"},
+        {s:"12:20",e:"13:00",title:"午餐自理｜中山紀念堂／一德路周邊",type:"餐廳",icon:"🍜",desc:"依當天現場情況選擇廣州小吃或簡餐。",address:"廣州市越秀區一德路沿線商鋪",price:"¥52",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"13:00",e:"13:25",title:"中山紀念堂 → 石室聖心大教堂",type:"交通",icon:"🚕",desc:"叫車前往石室聖心大教堂",address:"廣州市越秀區一德路舊部前56號",price:"¥10",transport:"叫車",phone:"020-83392860",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"13:25",e:"14:20",title:"石室聖心大教堂｜哥德式建築",type:"景點",icon:"⛪",desc:"廣州代表性的哥德復興式教堂，以全石結構、雙尖塔與彩色玻璃為特色。",address:"廣州市越秀區一德路舊部前56號",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"2026/11/28為星期六，本次安排13:25–14:20參觀。宗教活動可能臨時影響開放，出發前再次確認。"},
+        {s:"14:20",e:"14:40",title:"石室聖心大教堂 → 北京路",type:"交通",icon:"🚕",desc:"叫車前往北京路",address:"廣州市越秀區北京路步行街",price:"¥10",transport:"叫車",phone:"020-83513481",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"14:40",e:"17:15",title:"北京路＋大佛寺｜老城商圈",type:"景點",icon:"🏮",desc:"廣州代表性老城商圈，結合北京路步行街、歷史街區、大佛寺、商場與小吃。",address:"廣州市越秀區北京路步行街／惠福東路惠新中街21號",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"停留約2.5小時。大佛寺安排接近傍晚拍照。不要新增固定餐廳。"},
+        {s:"17:15",e:"17:50",title:"北京路 → 珠江新城",type:"交通",icon:"🚕",desc:"叫車前往花城廣場",address:"廣州市天河區花城大道花城廣場",price:"¥25",transport:"叫車",phone:"020-38320601",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"17:50",e:"19:00",title:"珠江新城＋花城廣場｜現代廣州",type:"景點",icon:"🌆",desc:"廣州現代城市核心區，欣賞花城廣場、廣州大劇院、廣東省博物館外觀、東西塔、海心沙與廣州塔天際線。",address:"廣州市天河區花城廣場",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"本次以戶外散步與夜景為主，不安排廣東省博物館入館。"},
+        {s:"19:00",e:"19:20",title:"花城廣場 → 廣州塔",type:"交通",icon:"🚕",desc:"叫車前往廣州塔",address:"廣州市海珠區閱江西路222號",price:"¥15",transport:"叫車",phone:"020-89338222",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"19:20",e:"20:00",title:"廣州塔｜城市地標",type:"景點",icon:"🗼",desc:"廣州代表性城市地標，本次以塔下外觀與珠江夜景拍照為主。",address:"廣州市海珠區閱江西路222號",price:"塔下外觀免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"本次不安排登塔，不要加入廣州塔登塔門票。"},
+        {s:"20:00",e:"21:30",title:"珠江夜遊｜廣州塔碼頭",type:"景點",icon:"🚢",desc:"從廣州塔周邊登船，以珠江夜景作為廣州一日遊最後一站。",address:"廣州塔碼頭",price:"預留約 ¥80–150／人",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"尚未訂票。實際2026/11/28班次之後再確認。"},
+        {s:"21:30",e:"23:00",title:"廣州塔 → 宜尚PLUS酒店",type:"交通",icon:"🚕",desc:"叫車返回佛山酒店",address:"佛山市禪城區華寶南路13號一座2樓201",price:"¥70",transport:"叫車",phone:"0757-82133880",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"23:00",e:"23:59",title:"回酒店休息",type:"住宿",icon:"🛏️",desc:"宜尚PLUS飯店（佛山禪城智慧新城地鐵站店）",address:"中國廣東省佛山市禪城區華寶南路13號一座2樓201",price:null,transport:null,phone:"+86-757-82133880",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"3 晚｜豪華城景大床房｜80㎡｜城市景觀｜7樓｜無早餐"}
+      ],
+      transportBudget: {
+        items: [
+          {label:"宜尚PLUS → 永慶坊", cost:"叫車 ¥50"},
+          {label:"永慶坊 → 中山紀念堂", cost:"叫車 ¥22"},
+          {label:"中山紀念堂 → 石室聖心大教堂", cost:"叫車 ¥10"},
+          {label:"石室聖心大教堂 → 北京路", cost:"叫車 ¥10"},
+          {label:"北京路 → 珠江新城", cost:"叫車 ¥25"},
+          {label:"花城廣場 → 廣州塔", cost:"叫車 ¥15"},
+          {label:"廣州塔 → 宜尚PLUS", cost:"叫車 ¥70"}
+        ],
+        total:"¥202",
+        note:"所有叫車金額為單人搭乘一台普通網約快車的順路預估。"
+      },
+      dayBudget: {
+        transport:"¥202",
+        attractions: [
+          {name:"永慶坊", cost:"免費"},
+          {name:"中山紀念堂", cost:"園區免費，主體建築依現場"},
+          {name:"石室聖心大教堂", cost:"免費"},
+          {name:"北京路", cost:"免費"},
+          {name:"大佛寺", cost:"免費"},
+          {name:"花城廣場", cost:"免費"},
+          {name:"廣州塔塔下", cost:"免費"},
+          {name:"珠江夜遊", cost:"預留 ¥80–150"}
+        ],
+        food:{label:"中山紀念堂／一德路周邊午餐", cost:"¥52"},
+        other:{label:"備用", cost:"待定"},
+        total:"¥254 ＋ 門票另計",
+        note:"不含購物、不含廣州塔登塔。珠江夜遊票價另計。"
+      }
+    },
+    { date:"2026-11-29", label:"DAY 5", dateLabel:"11/29（日）", route:"佛山 → 廣州南 → 珠海",
+      theme:"珠海海濱一日｜愛情郵局、日月貝與晚餐", hint:"移動日｜下午輕鬆看海｜晚餐後回飯店",
+      transportBudget:{
+        items:[
+          {label:"宜尚PLUS → 廣州南站",cost:"叫車 ¥35"},
+          {label:"廣州南站 → 珠海站",cost:"城際二等座 ¥70"},
+          {label:"珠海站 → 海之珠酒店",cost:"叫車 ¥12"},
+          {label:"海之珠酒店 → 愛情郵局",cost:"叫車 ¥25"},
+          {label:"愛情郵局 → 日月貝",cost:"叫車 ¥20"},
+          {label:"日月貝 → 喜庭海鮮自助（環宇城店）",cost:"叫車 ¥30"},
+          {label:"喜庭 → 海之珠酒店",cost:"叫車 ¥32"}
+        ],
+        total:"¥224",
+        note:"已補齊所有交通段；叫車金額為單人搭乘一台普通網約快車的順路預估。"
+      },
+      dayBudget:{
+        transport:"¥224",
+        attractions:[
+          {name:"愛情郵局",cost:"免費"},
+          {name:"情侶路海濱",cost:"免費"},
+          {name:"日月貝／珠海大劇院外觀",cost:"免費"}
+        ],
+        food:{label:"喜庭海鮮自助（環宇城店）晚餐",cost:"¥168（晚市參考價，以現場／團購為準）"},
+        other:{label:"飲料、臨時消費",cost:"預留約 ¥30–50"},
+        total:"¥392 ＋ 其他餐飲待定",
+        note:"已含交通 ¥224 與喜庭晚餐 ¥168；不含住宿、不含購物。全部為1人預算。"
+      },
+      items: [
+        {s:"10:30",e:"11:30",title:"整理行李＋佛山宜尚PLUS退房",type:"住宿",icon:"🧳",desc:"整理行李並完成佛山宜尚PLUS退房。",address:"中國廣東省佛山市禪城區華寶南路13號一座2樓201",price:null,transport:null,phone:"+86-757-82133880",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"12:00前完成退房。"},
+        {s:"11:30",e:"12:30",title:"宜尚PLUS → 廣州南站",type:"交通",icon:"🚕",desc:"退房後叫車前往廣州南站。",address:"廣州市番禺區石壁街道南站北路",price:"¥35",transport:"叫車",phone:"020-61132666",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"12:30",e:"13:30",title:"廣州南站 → 珠海站",type:"交通",icon:"🚄",desc:"搭乘城際二等座前往珠海站。",address:"珠海市香洲區拱北關口旁珠海城軌站",price:"¥70",transport:"城際二等座",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"13:30",e:"13:50",title:"珠海站 → 海之珠酒店",type:"交通",icon:"🚕",desc:"抵達珠海站後叫車前往住宿。",address:"珠海市香洲區粵華路138號拱北市場5-8層",price:"¥12",transport:"叫車",phone:"0756-8887668",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"13:50",e:"14:20",title:"海之珠酒店放行李",type:"住宿",icon:"🧳",desc:"辦理入住或寄放行李，稍微整理後再出發。",address:"珠海市香洲區粵華路138號拱北市場5-8層",price:null,transport:null,phone:"0756-8887668",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"如果房間尚未整理完成，先寄放行李即可。"},
+        {s:"14:20",e:"14:50",title:"海之珠酒店 → 愛情郵局",type:"交通",icon:"🚕",desc:"叫車前往珠海情侶路愛情郵局。",address:"珠海市香洲區情侶中路燈塔旁愛情郵局",price:"¥25",transport:"叫車",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"14:50",e:"15:50",title:"愛情郵局｜情侶路海景",type:"景點",icon:"💌",desc:"珠海情侶路代表性海濱景點，安排愛情郵局、海邊、燈塔與情侶路散步拍照。",address:"珠海市香洲區情侶中路燈塔旁愛情郵局",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"停留約1小時，以散步與拍照為主，不安排額外付費項目。",recs:["愛情郵局","情侶路","海邊步道","珠海燈塔","海景拍照"]},
+        {s:"15:50",e:"16:20",title:"愛情郵局 → 日月貝",type:"交通",icon:"🚕",desc:"叫車前往珠海大劇院日月貝。",address:"珠海市香洲區漁灣路129號野狸島",price:"¥20",transport:"叫車",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"16:20",e:"18:00",title:"日月貝｜珠海大劇院",type:"景點",icon:"🐚",desc:"珠海代表性海濱地標，安排大劇院外觀、海邊散步與傍晚拍照。",address:"珠海市香洲區漁灣路129號野狸島",price:"免費",transport:null,phone:"0756-2198888",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"停留約1小時40分鐘，安排從白天看到傍晚。此次不安排劇院入場或表演。",recs:["日月貝正面","珠海大劇院外觀","海韻城周邊","海邊步道","傍晚與夜景拍照"]},
+        {s:"18:00",e:"18:30",title:"日月貝 → 喜庭海鮮自助（環宇城店）",type:"交通",icon:"🚕",desc:"叫車前往喜庭海鮮自助環宇城店。",address:"珠海市香洲區前山前河北路96號珠海環宇城3F",price:"¥30",transport:"叫車",phone:"0756-8519789",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"18:30",e:"20:30",title:"喜庭海鮮自助（環宇城店）｜吃到飽晚餐",type:"餐廳",icon:"🍽️",desc:"今天正式晚餐，預留約2小時慢慢吃。",address:"珠海市香洲區前山前河北路96號珠海環宇城3F",price:"¥168（晚市參考價，以現場／團購為準）",transport:null,phone:"0756-8519789",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"20:30",e:"21:00",title:"喜庭 → 海之珠酒店",type:"交通",icon:"🚕",desc:"叫車返回海之珠酒店。",address:"珠海市香洲區粵華路138號拱北市場5-8層",price:"¥32",transport:"叫車",phone:"0756-8887668",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"21:00",e:"23:59",title:"回酒店休息",type:"住宿",icon:"🛏️",desc:"珠海·海之珠｜RomanticPearl｜有溫度的酒店（拱北口岸珠海站店）",address:"珠海市香洲區粵華路138號拱北市場5-8層",price:null,transport:null,phone:"0756-8887668",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"1 晚｜零壓舒享大床房｜29–32㎡｜含 2 客早餐"}
+      ]
+    },
+    { date:"2026-11-30", label:"DAY 6", dateLabel:"11/30（一）", route:"珠海 → 澳門 → 台北",
+      theme:"澳門美食與伴手禮快閃", hint:"跨境回程日｜大三巴、金光大道、官也街與永利皇宮｜行程緊湊",
+      airportArrivalTime:"18:05",
+      arrivalNotice:{
+        title:"台灣入境｜肉類製品注意",
+        intro:"不要購買或攜帶以下產品回台：",
+        items:["豬肉乾","牛肉乾","肉鬆蛋捲","含肉鳳凰捲","含肥肉或肉塊的杏仁餅","雞仔餅","含肉肉切酥","其他含豬肉、牛肉或禽肉製品"],
+        details:["部分雞仔餅、杏仁餅、鳳凰捲或肉切酥可能含豬肉、肥膘或肉鬆。","購買前確認包裝成分。無法確認時不要購買；若抵台時仍無法判斷，主動向檢疫人員詢問。"]
+      },
+      transportBudget:{
+        items:[
+          {label:"澳門 → 桃園 JX206",cost:"NT$ 3,475"},
+          {label:"珠海酒店 → 拱北口岸",cost:"叫車 ¥12"},
+          {label:"關閘 → 澳門機場",cost:"叫車約 MOP 120"},
+          {label:"澳門機場 → 百樂門",cost:"叫車約 MOP 120"},
+          {label:"百樂門 → 大三巴",cost:"叫車約 MOP 60"},
+          {label:"大三巴 → 福隆新街",cost:"叫車約 MOP 30"},
+          {label:"福隆新街 → 倫敦人",cost:"叫車約 MOP 100"},
+          {label:"倫敦人 → 巴黎人",cost:"叫車約 MOP 30"},
+          {label:"巴黎人 → 威尼斯人",cost:"叫車約 MOP 30"},
+          {label:"威尼斯人 → 官也街",cost:"叫車約 MOP 30"},
+          {label:"官也街 → 永利皇宮",cost:"叫車約 MOP 45"},
+          {label:"永利皇宮 → 澳門機場",cost:"叫車約 MOP 35"}
+        ],
+        total:"¥12 ＋ MOP 600 ＋ NT$ 3,475",
+        note:"MOP 600 為全程叫車估算；已含回程機票 NT$ 3,475，未含機場行李寄存。"
+      },
+      dayBudget:{
+        transport:"¥12 ＋ MOP 600 ＋ NT$ 3,475",
+        attractions:[
+          {name:"大三巴牌坊",cost:"免費"},
+          {name:"澳門倫敦人",cost:"免費"},
+          {name:"澳門巴黎人",cost:"免費"},
+          {name:"澳門威尼斯人",cost:"免費"},
+          {name:"官也街",cost:"免費"},
+          {name:"永利皇宮觀光纜車",cost:"免費"},
+          {name:"澳門機場行李寄存",cost:"約 MOP 80／件"}
+        ],
+        food:{label:"早午餐＋午餐＋蛋撻＋官也街美食",cost:"約 MOP 180–300"},
+        other:{label:"伴手禮＋其他（自由購物）",cost:"待定（可選參考合計 ¥220）"},
+        total:"¥12 ＋ MOP 860–980 ＋ NT$ 3,475 ＋ 伴手禮待定",
+        note:"已含澳門→台灣機票 NT$ 3,475；MOP 總額含全程叫車、機場行李寄存與餐飲預留，不含珠海住宿與自由購物。伴手禮可選參考合計 ¥220。全部為1人預算。"
+      },
+      items: [
+        {s:"07:10",e:"07:50",title:"起床、整理行李、退房",type:"住宿",icon:"🧳",desc:"珠海·海之珠｜RomanticPearl｜有溫度的酒店（拱北口岸珠海站店）",address:"珠海市香洲區粵華路138號拱北市場5-8層（海之珠酒店）",price:null,transport:null,phone:"0756-8887668",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"07:50",e:"08:05",title:"珠海海之珠酒店 → 拱北口岸",type:"交通",icon:"🚕",desc:"叫車前往拱北口岸",address:"拱北口岸",price:"¥12",transport:"叫車",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"08:05",e:"08:45",title:"中國出境 → 澳門入境",type:"交通",icon:"🛂",desc:"辦理中國出境與澳門入境手續",address:"拱北口岸／關閘",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"提醒攜帶台胞證、台灣護照"},
+        {s:"08:45",e:"09:30",title:"澳門關閘 → 澳門國際機場",type:"交通",icon:"🚕",desc:"叫車前往澳門國際機場",address:"澳門國際機場",price:"約 MOP 120",transport:"叫車",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"09:30",e:"09:45",title:"澳門機場寄放行李",type:"交通",icon:"🧳",desc:"於澳門國際機場寄放行李",address:"澳門氹仔偉龍馬路澳門國際機場",price:"約 MOP 80／件",transport:null,phone:"+853 2886 1111",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"09:45",e:"10:10",title:"澳門機場 → 百樂門粉麵店",type:"交通",icon:"🚕",desc:"叫車前往百樂門粉麵店",address:"澳門祐漢新村第一街16號",price:"約 MOP 120",transport:"叫車",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"10:10",e:"10:50",title:"百樂門粉麵店｜早午餐",type:"餐廳",icon:"🍜",desc:"SOLO TRIP：建議 1 份主食＋少量小吃或飲料。",address:"澳門祐漢新村第一街16號",price:"約 MOP 45–80",transport:null,phone:"+853 2837 1138",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null,recs:["咖喱薯仔雞翼","菜撈麵","香腸雞蛋麵"]},
+        {s:"10:50",e:"11:10",title:"百樂門 → 大三巴",type:"交通",icon:"🚕",desc:"叫車前往大三巴",address:"澳門耶穌會紀念廣場",price:"約 MOP 60",transport:"叫車",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"11:10",e:"11:35",title:"大三巴牌坊｜快速拍照",type:"景點",icon:"⛪",desc:"快速拍照；本次不進博物館。",address:"澳門耶穌會紀念廣場",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"11:35",e:"12:00",title:"大三巴街｜試吃伴手禮",type:"購物",icon:"🥮",desc:"先試吃，主要購物留到官也街。",address:"澳門花王堂區大三巴街",price:"待定（伴手禮另計）",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null,recs:["杏仁餅","花生糖","芝麻糖","蛋捲","薑糖","牛軋糖","鉅記","咀香園","英記"]},
+        {s:"12:00",e:"12:20",title:"大三巴街 → 福隆新街",type:"交通",icon:"🚕",desc:"叫車前往福隆新街",address:"澳門福隆新街",price:"約 MOP 30",transport:"叫車",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"12:20",e:"13:10",title:"福隆新街｜午餐二選一",type:"餐廳",icon:"🍲",desc:"午餐二選一：預設添發碗仔翅；備選祥記麵家，擇一即可。",address:"福隆新街",price:"約 MOP 50–100",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null,recs:["添發碗仔翅","祥記麵家（備選）"]},
+        {s:"13:10",e:"13:40",title:"福隆新街 → 澳門倫敦人",type:"交通",icon:"🚕",desc:"叫車前往金光大道",address:"澳門倫敦人",price:"約 MOP 100",transport:"叫車",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"13:40",e:"14:10",title:"澳門倫敦人｜快速拍照",type:"景點",icon:"🇬🇧",desc:"快速拍照。",address:"澳門倫敦人",price:"免費",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null,recs:["大笨鐘","國會大廈外觀","倫敦街景","室內金色大廳"]},
+        {s:"14:10",e:"14:35",title:"澳門巴黎人｜快速拍照",type:"景點",icon:"🗼",desc:"由倫敦人叫車前往；本次不登塔。",address:"澳門巴黎人",price:"叫車約 MOP 30",transport:"叫車",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null,recs:["巴黎鐵塔正面","巴黎風格大廳","商場街景"]},
+        {s:"14:35",e:"15:15",title:"澳門威尼斯人＋安德魯蛋撻",type:"景點",icon:"🛶",desc:"由巴黎人叫車前往；商場免費，蛋撻另計。SOLO TRIP：建議先買 1 顆蛋撻現場吃；本次不搭貢多拉。",address:"澳門氹仔望德聖母灣大馬路",price:"叫車約 MOP 30＋蛋撻約 MOP 12–25",transport:"叫車",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null,recs:["人造天空","大運河","貢多拉區","安德魯蛋撻"]},
+        {s:"15:15",e:"15:35",title:"威尼斯人 → 官也街",type:"交通",icon:"🚕",desc:"叫車前往官也街",address:"澳門嘉模堂區氹仔官也街20號",price:"約 MOP 30",transport:"叫車",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"15:35",e:"16:50",title:"官也街｜美食＋伴手禮",type:"購物",icon:"🛍️",desc:"SOLO TRIP：不需要每家都吃，現場挑 2–3 樣即可。",address:"澳門嘉模堂區氹仔官也街20號",price:"待定（伴手禮另計）",transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null,recs:["榮記牛雜","世記咖啡","莫義記","晃記餅家","鉅記","咀香園"]},
+        {s:"16:50",e:"17:05",title:"官也街 → 永利皇宮",type:"交通",icon:"🚕",desc:"叫車前往永利皇宮。",address:"澳門路氹體育館大馬路",price:"約 MOP 45",transport:"叫車",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"17:05",e:"17:50",title:"永利皇宮＋觀光纜車",type:"景點",icon:"🎡",desc:"纜車免費。排隊超過 30 分鐘就放棄纜車。",address:"澳門路氹體育館大馬路",price:"纜車免費",transport:null,phone:"+853 8889 8889",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"17:50",e:"18:05",title:"永利皇宮 → 澳門國際機場",type:"交通",icon:"🚕",desc:"叫車前往澳門國際機場",address:"澳門國際機場",price:"約 MOP 35",transport:"叫車",status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"18:05",e:"18:30",title:"領行李＋辦理航班報到",type:"交通",icon:"🛫",desc:"領取寄放行李後辦理回程航班報到。",address:"澳門國際機場",price:null,transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:null},
+        {s:"18:30",e:"20:35",title:"澳門機場候機",type:"交通",icon:"🛫",desc:"等候回程班機 STARLUX JX206",address:"澳門國際機場 MFM",price:null,transport:null,status:"tentative",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"預留報到、安檢、出境與候機時間"},
+        {s:"20:35",e:"22:25",title:"澳門 → 桃園",type:"交通",icon:"✈️",desc:"STARLUX JX206",address:"澳門國際機場 MFM",price:"NT$ 3,475",transport:"航班 JX206",status:"confirmed",imageUrl:null,websiteUrl:null,mapUrl:null,bookingUrl:null,note:"來回機票 NT$ 6,945；回程 NT$ 3,475。直飛，航程約 1 小時 50 分"}
+      ]
+    }
+  ]
+};
+
+/* TRIP 目前指向的資料來源：預設為內建資料（DEFAULT_TRIP）
+   若 Supabase 讀取成功，會在 initTrip() 中被換成雲端資料 */
+let TRIP = DEFAULT_TRIP;
+
+/* time utils */
+/* 只接受合法的 "YYYY-MM-DD" + "HH:mm"，其他情況回傳 null（不會產生 Invalid Date） */
+function toDate(dateStr,timeStr){
+  if(!dateStr || !timeStr) return null;
+  const dm = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr);
+  const tm = /^(\d{2}):(\d{2})$/.exec(timeStr);
+  if(!dm || !tm) return null;
+  const d = new Date(Number(dm[1]), Number(dm[2])-1, Number(dm[3]), Number(tm[1]), Number(tm[2]), 0, 0);
+  return isNaN(d.getTime()) ? null : d;
+}
+let FLAT=[];
+function buildFlat(){
+  FLAT=[];
+  TRIP.days.forEach((day,dayIdx)=>{
+    if(!day.date || !Array.isArray(day.items) || day.items.length===0) return; // 待安排／空白的一天，NOW 不處理
+    day.items.forEach((it,itemIdx)=>{
+      let start=toDate(day.date,it.s), end=toDate(day.date,it.e);
+      if(!start || !end) return; // 缺少有效 start/end，略過，不加入 NOW 判斷
+      if(end<=start) end=new Date(end.getTime()+24*60*60*1000);
+      FLAT.push({...it,dayIdx,itemIdx,dayLabel:day.label,start,end});
+    });
+  });
+  FLAT.sort((a,b)=>a.start-b.start);
+}
+buildFlat();
+
+/* =========================================================
+   ================================
+   SUPABASE 讀取架構｜V4-A2
+   只使用 anon key 讀取（select），不做寫入、不做登入。
+   成功 → 用雲端資料覆蓋 TRIP；失敗／未設定 → 維持 DEFAULT_TRIP。
+   ================================
+   ========================================================= */
+const SUPABASE_URL = "YOUR_SUPABASE_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+
+function supabaseConfigured(){
+  return !!SUPABASE_URL && !!SUPABASE_ANON_KEY &&
+    SUPABASE_URL.indexOf("YOUR_SUPABASE_URL")===-1 &&
+    SUPABASE_ANON_KEY.indexOf("YOUR_SUPABASE_ANON_KEY")===-1;
+}
+
+async function sbGet(path){
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    headers:{
+      "apikey": SUPABASE_ANON_KEY,
+      "Authorization": "Bearer " + SUPABASE_ANON_KEY
+    }
+  });
+  if(!res.ok) throw new Error(`Supabase 讀取失敗：${path}（${res.status}）`);
+  return res.json();
+}
+
+/* "HH:mm:ss" 或 "HH:mm" → "HH:mm"；空值回傳 null */
+function sbTime(t){ return t ? String(t).slice(0,5) : null; }
+
+/* 將 Supabase 回傳的 rows 轉換成目前網站使用的 TRIP 結構
+   （TRIP.days / TRIP.stays / TRIP.flights），
+   欄位命名對應現有 render function 所預期的 camelCase 欄位。 */
+function mapSupabaseToTrip(trip, dayRows, itemRows, stayRows, flightRows){
+  const dayIndexById = {};
+  dayRows.forEach(d=> dayIndexById[d.id] = d.day_index);
+
+  const days = dayRows
+    .slice()
+    .sort((a,b)=>a.day_index-b.day_index)
+    .map(d=>{
+      const fallbackDay = DEFAULT_TRIP.days.find(x=>x.date===d.date);
+      const items = itemRows
+        .filter(it=>it.day_id===d.id)
+        .slice()
+        .sort((a,b)=>(a.sort_order??0)-(b.sort_order??0))
+        .map(it=>({
+          s: sbTime(it.start_time),
+          e: sbTime(it.end_time),
+          title: it.title,
+          type: it.type,
+          icon: it.icon,
+          desc: it.description,
+          address: it.address,
+          price: it.price,
+          transport: it.transport,
+          phone: it.phone,
+          status: it.status,
+          imageUrl: it.image_url,
+          websiteUrl: it.website_url,
+          mapUrl: it.map_url,
+          bookingUrl: it.booking_url,
+          note: it.note,
+          image: !!it.image_url
+        }));
+      return {
+        date: d.date,
+        label: d.label,
+        dateLabel: d.date_label,
+        route: d.route,
+        theme: fallbackDay?.theme ?? null,
+        hint: fallbackDay?.hint ?? null,
+        transportBudget: fallbackDay?.transportBudget ?? null,
+        dayBudget: fallbackDay?.dayBudget ?? null,
+        arrivalNotice: fallbackDay?.arrivalNotice ?? null,
+        airportArrivalTime: fallbackDay?.airportArrivalTime ?? null,
+        items
+      };
+    });
+
+  const stays = stayRows.map(s=>({
+    day: s.day_id ? (dayIndexById[s.day_id] ?? null) : null,
+    city: s.city,
+    hotelName: s.hotel_name,
+    checkIn: s.check_in,
+    checkOut: s.check_out,
+    address: s.address,
+    phone: s.phone,
+    imageUrl: s.image_url,
+    websiteUrl: s.website_url,
+    bookingUrl: s.booking_url,
+    mapUrl: s.map_url,
+    note: s.note,
+    status: s.status
+  }));
+
+  const flights = flightRows.map(f=>({
+    type: f.type,
+    airline: f.airline,
+    flightNo: f.flight_no,
+    date: f.date,
+    fromCity: f.from_city,
+    fromAirport: f.from_airport,
+    fromCode: f.from_code,
+    toCity: f.to_city,
+    toAirport: f.to_airport,
+    toCode: f.to_code,
+    depart: sbTime(f.depart_time),
+    arrive: sbTime(f.arrive_time),
+    duration: f.duration,
+    direct: f.direct,
+    terminal: f.terminal,
+    gate: f.gate,
+    seat: f.seat,
+    baggage: f.baggage,
+    bookingReference: f.booking_reference,
+    bookingUrl: f.booking_url,
+    status: f.status,
+    note: f.note
+  }));
+
+  // lastUpdated 直接採用 Supabase trips 資料表的 updated_at 欄位（timestamptz）。
+  // 未來任何資料異動（景點/時間/地址/備註/住宿/交通/照片新增或刪除）
+  // 只要在後端寫入時同步更新 trips.updated_at，這裡就會自動反映最新時間，
+  // 不需要另外修改這段前端邏輯。
+  return { lastUpdated: trip.updated_at, flights, stays, days };
+}
+
+/* 嘗試從 Supabase 讀取整趟旅行資料；任何一步失敗都會 throw，
+   由呼叫端 catch 並 fallback 回 DEFAULT_TRIP */
+async function loadFromSupabase(){
+  if(!supabaseConfigured()) return null; // 尚未設定，直接跳過、不發送請求
+
+  const trips = await sbGet(`trips?select=*&is_public=eq.true&order=created_at.desc&limit=1`);
+  const trip = trips && trips[0];
+  if(!trip) throw new Error("找不到公開的旅行資料");
+
+  const dayRows = await sbGet(`days?select=*&trip_id=eq.${trip.id}&order=day_index.asc`);
+  if(!dayRows || dayRows.length===0) throw new Error("找不到 days 資料");
+
+  const dayIds = dayRows.map(d=>d.id);
+  const itemRows = dayIds.length
+    ? await sbGet(`itinerary_items?select=*&day_id=in.(${dayIds.join(",")})&order=sort_order.asc`)
+    : [];
+
+  const stayRows = await sbGet(`stays?select=*&trip_id=eq.${trip.id}&order=check_in.asc`);
+  const flightRows = await sbGet(`flights?select=*&trip_id=eq.${trip.id}`);
+
+  return mapSupabaseToTrip(trip, dayRows, itemRows, stayRows, flightRows);
+}
+
+const state={ page:"home", day:1, openId:null, simTime:null, prepTab:"ready" };
+function getNow(){ return state.simTime ? new Date(state.simTime) : new Date(); }
+function computeStatus(now){
+  let current=null,next=null;
+  for(const it of FLAT){ if(now>=it.start && now<it.end) current=it; }
+  for(const it of FLAT){ if(it.start>now){ next=it; break; } }
+  return {current,next};
+}
+function esc(s){ return (s||"").replace(/'/g,"\\'"); }
+function copyText(t){ navigator.clipboard?.writeText(t).then(()=>showToast("已複製地址 📋")).catch(()=>showToast("複製失敗")); }
+function callPhone(n){ window.location.href="tel:"+n.replace(/[^0-9+]/g,""); }
+function openMap(addr){ window.open("https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(addr),"_blank"); }
+function showToast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),1600); }
+
+/* ---- 匯率：手動設定，均以 1 單位幣別可兌換的 CNY 表示 ---- */
+const MANUAL_CURRENCY_RATES = { CNY:1, TWD:1/4.5, MOP:1/1.1 };
+const CURRENCY_NAMES = { CNY:"人民幣 CNY", TWD:"新台幣 TWD", MOP:"澳門幣 MOP" };
+function convertCurrency(amount,fromCurrency,toCurrency){
+  const value=Number(amount);
+  if(!Number.isFinite(value) || value<0 || !MANUAL_CURRENCY_RATES[fromCurrency] || !MANUAL_CURRENCY_RATES[toCurrency]) return null;
+  return value*MANUAL_CURRENCY_RATES[fromCurrency]/MANUAL_CURRENCY_RATES[toCurrency];
+}
+function formatCurrency(currency,value){
+  if(value==null) return "—";
+  return `${currency} ${value.toLocaleString("zh-TW",{maximumFractionDigits:2})}`;
+}
+function renderExchange(){
+  const amountInput=document.getElementById("currency-amount");
+  const fromSelect=document.getElementById("currency-from");
+  const results=document.getElementById("currency-results");
+  const rates=document.getElementById("currency-rates");
+  if(!amountInput || !fromSelect || !results || !rates) return;
+  const rawAmount=amountInput.value.trim();
+  const amount=Number(rawAmount);
+  const valid=rawAmount!=="" && Number.isFinite(amount) && amount>=0;
+  const from=fromSelect.value;
+  const targets=Object.keys(MANUAL_CURRENCY_RATES).filter(currency=>currency!==from);
+  results.innerHTML=valid
+    ? targets.map(currency=>`<div class="exchange-result"><div class="currency-name">${CURRENCY_NAMES[currency]}</div><div class="currency-value">${formatCurrency(currency,convertCurrency(amount,from,currency))}</div></div>`).join("")
+    : '<div class="exchange-result"><div class="currency-name">請輸入有效金額</div></div>';
+  rates.textContent="目前使用手動設定匯率｜1 CNY = 4.50 TWD｜1 CNY = 1.10 MOP";
+}
+
+/* 剩餘時間文字：不顯示小數或秒數 */
+function formatRemaining(ms){
+  const totalMinutes = Math.max(1, Math.floor(ms/60000));
+  const days = Math.floor(totalMinutes/1440);
+  const hours = Math.floor((totalMinutes%1440)/60);
+  const minutes = totalMinutes%60;
+  if(days>=1) return `${days} 天 ${hours} 小時`;
+  if(hours>=1) return `${hours} 小時 ${minutes} 分鐘`;
+  return `${minutes} 分鐘`;
+}
+/* 下一個行程的時間顯示：跨日時附上日期 */
+function formatNextWhen(item, now){
+  const sameDay = item.start.getFullYear()===now.getFullYear() && item.start.getMonth()===now.getMonth() && item.start.getDate()===now.getDate();
+  return sameDay ? item.s : `${item.start.getMonth()+1}/${item.start.getDate()}（${item.s}）`;
+}
+/* 找出 now 所在日曆日期對應的 TRIP.days 項目（依 date 欄位比對年月日） */
+function findDayForDate(now){
+  return TRIP.days.find(d=>{
+    if(!d.date) return false;
+    const [y,m,dd]=d.date.split("-").map(Number);
+    return now.getFullYear()===y && (now.getMonth()+1)===m && now.getDate()===dd;
+  });
+}
+/* 找出 now 屬於旅行第幾天（1-based），不屬於旅行期間則回傳 null */
+function getTripDayIndex(now){
+  for(let i=0;i<TRIP.days.length;i++){
+    const d=TRIP.days[i];
+    if(!d.date) continue;
+    const [y,m,dd]=d.date.split("-").map(Number);
+    if(now.getFullYear()===y && (now.getMonth()+1)===m && now.getDate()===dd) return i+1;
+  }
+  return null;
+}
+
+/* ---- render trip progress (header) ---- */
+function getTripStart(){
+  const firstDay = [...(TRIP.days||[])]
+    .filter(day=>day?.date && Array.isArray(day.items) && day.items.length)
+    .sort((a,b)=>String(a.date).localeCompare(String(b.date)))[0];
+  const firstItemStart = firstDay
+    ? firstDay.items.map(item=>toDate(firstDay.date,item.s)).filter(Boolean).sort((a,b)=>a-b)[0]
+    : null;
+  const outboundFlightStart = (TRIP.flights||[])
+    .filter(flight=>flight?.type==="outbound")
+    .map(flight=>toDate(flight.date,flight.depart))
+    .filter(Boolean)
+    .sort((a,b)=>a-b)[0];
+  return [firstItemStart,outboundFlightStart]
+    .filter(Boolean)
+    .sort((a,b)=>a-b)[0] || FLAT[0]?.start || null;
+}
+function renderTripProgress(){
+  const el=document.getElementById("trip-progress");
+  if(!el) return;
+  const now=getNow();
+  const tripStart=getTripStart();
+  const before = tripStart && now < tripStart;
+  const after = FLAT.length && now >= FLAT[FLAT.length-1].end;
+  const totalDays=TRIP.days.length || 6;
+  const cityLabels={"澳門":"MACAU","珠海":"ZHUHAI","中山":"ZHONGSHAN","佛山":"FOSHAN","廣州":"GUANGZHOU"};
+  const render=(label,value,progress)=>{
+    el.innerHTML=`<span class="trip-progress-label">${label}</span><strong class="trip-progress-value">${value}</strong><span class="trip-progress-line" aria-hidden="true"><i style="width:${progress}%"></i></span>`;
+  };
+  if(before){
+    const days=Math.max(1,Math.ceil((tripStart-now)/86400000));
+    render("DEPARTS IN",`${days} DAYS`,0);
+  } else if(after){
+    render("TRIP COMPLETED",`${totalDays} DAYS · 5 NIGHTS`,100);
+  } else {
+    const dayIdx = getTripDayIndex(now);
+    const day=TRIP.days[dayIdx-1];
+    const city=Object.keys(cityLabels).reduce((latest,name)=>{
+      const index=(day?.route||"").lastIndexOf(name);
+      return index>latest.index ? {name,index} : latest;
+    },{name:"",index:-1}).name;
+    render(`DAY ${dayIdx || totalDays} / ${totalDays}`,cityLabels[city]||"ON THE ROAD",Math.round(((dayIdx||totalDays)/totalDays)*100));
+  }
+}
+
+/* ---- render NOW ---- */
+function renderNow(){
+  const now=getNow();
+  const {current,next}=computeStatus(now);
+  const dotEl=document.getElementById("now-dot");
+  const statusEl=document.getElementById("now-status");
+  const card=document.getElementById("now-card");
+
+  if(current){
+    dotEl.className="dot live";
+    statusEl.innerHTML="<span>CURRENTLY</span><b>現在</b>";
+    const remain = formatRemaining(current.end - now);
+    card.innerHTML=`
+      <div class="now-icon">${current.icon}</div>
+      <div class="now-content">
+        <div class="now-title serif">${current.title}</div>
+        <div class="now-time mono">${current.s} – ${current.e}</div>
+        <div class="now-addr">📍 ${current.address||"—"}</div>
+        ${next?`<div class="next-line"><span class="ic">${next.icon}</span><span>下一站：<b>${next.title}</b>　${next.s}</span></div>`:""}
+        <div class="now-remain">距離本行程結束還有 <b>${remain}</b></div>
+      </div>`;
+  } else {
+    dotEl.className="dot idle";
+    const before = FLAT[0] && now < FLAT[0].start;
+    const after = FLAT.length && now >= FLAT[FLAT.length-1].end;
+    const todayDay = findDayForDate(now);
+    const noScheduleToday = !before && !after && todayDay && (!todayDay.items || todayDay.items.length===0);
+
+    if(after){
+      statusEl.innerHTML="<span>TRIP COMPLETED</span><b>旅程結束</b>";
+      card.innerHTML = `<div style="padding:6px 2px; color:var(--text-dim); font-size:13.5px;">這趟旅程已經結束，一路順風 ✈️</div>`;
+    } else if(noScheduleToday){
+      statusEl.innerHTML="<span>CURRENTLY</span><b>現在</b>";
+      const remain = next ? formatRemaining(next.start - now) : null;
+      const whenStr = next ? formatNextWhen(next, now) : null;
+      card.innerHTML=`
+        <div class="now-icon">☕</div>
+        <div style="flex:1; min-width:0">
+          <div class="now-title serif">今日尚未安排詳細行程</div>
+          ${next?`
+            <div class="now-addr" style="margin-top:8px">下一個行程：</div>
+            <div class="now-title serif" style="font-size:16px; margin-top:2px;">${next.icon} ${next.title}</div>
+            <div class="now-addr" style="margin-top:6px">開始：<span class="mono">${whenStr}</span></div>
+            <div class="now-remain">距離下一個行程還有 <b>${remain}</b></div>
+          `:""}
+        </div>`;
+    } else if(next){
+      statusEl.innerHTML=before ? "<span>UPCOMING TRIP</span><b>即將出發</b>" : "<span>CURRENTLY</span><b>現在</b>";
+      const remain = formatRemaining(next.start - now);
+      const whenStr = formatNextWhen(next, now);
+      card.innerHTML=`
+        <div class="now-icon">☕</div>
+        <div style="flex:1; min-width:0">
+          <div class="now-title serif">自由／緩衝時間</div>
+          <div class="now-addr" style="margin-top:8px">下一個行程：</div>
+          <div class="now-title serif" style="font-size:16px; margin-top:2px;">${next.icon} ${next.title}</div>
+          <div class="now-addr" style="margin-top:6px">開始：<span class="mono">${whenStr}</span></div>
+          <div class="now-remain">距離下一個行程還有 <b>${remain}</b></div>
+        </div>`;
+    } else {
+      statusEl.innerHTML="<span>UPCOMING TRIP</span><b>即將出發</b>";
+      card.innerHTML = `<div style="padding:6px 2px; color:var(--text-dim); font-size:13.5px;">目前沒有安排的行程。</div>`;
+    }
+  }
+}
+
+/* ---- render home day nav ---- */
+function renderDayNav(){
+  const el=document.getElementById("day-nav");
+  el.innerHTML = TRIP.days.map((d,i)=>{
+    const date=d.date ? new Date(d.date+"T00:00:00") : null;
+    const dateLabel=date ? `${date.toLocaleString("en-US",{month:"short"}).toUpperCase()} ${String(date.getDate()).padStart(2,"0")}` : d.dateLabel;
+    return `
+    <button class="day-row" type="button" onclick="goDay(${i+1})" aria-label="查看 DAY ${i+1}：${d.route}">
+      <span class="d mono"><span>DAY ${String(i+1).padStart(2,"0")}</span><small>${dateLabel}</small></span>
+      <span class="r"><span class="s">${d.route}</span></span>
+      <span class="arrow">›</span>
+    </button>
+  `}).join("");
+}
+function goDay(n){ state.day=n; switchPage("itinerary"); }
+
+/* ---- render home confirmed section ---- */
+function fmtDateShort(dateStr){
+  if(!dateStr) return "—";
+  const [y,m,d]=dateStr.split("-");
+  return `${parseInt(m)}/${parseInt(d)}`;
+}
+/* ---- 依 stay 的 checkIn/checkOut 換算住宿標題顯示用的 DAY 範圍 ---- */
+function stayDayRangeLabel(h){
+  const days = TRIP.days;
+  const startIdx = days.findIndex(d=>d.date===h.checkIn);
+  let endIdx = -1;
+  if(h.checkOut){
+    const co = new Date(h.checkOut+"T00:00:00");
+    if(!isNaN(co.getTime())){
+      co.setDate(co.getDate()-1); // 退房日的前一晚才是最後一個住宿夜晚
+      const pad=n=>String(n).padStart(2,"0");
+      const endDateStr = `${co.getFullYear()}-${pad(co.getMonth()+1)}-${pad(co.getDate())}`;
+      endIdx = days.findIndex(d=>d.date===endDateStr);
+    }
+  }
+  const startDay = startIdx>=0 ? startIdx+1 : h.day;
+  const endDay = endIdx>=0 ? endIdx+1 : startDay;
+  return startDay===endDay ? `DAY ${startDay} 住宿` : `DAY ${startDay}–${endDay} 住宿`;
+}
+
+/* ---- 將 Timeline 的住宿項目對應至同一筆住宿資料，避免重複維護飯店資訊 ---- */
+function stayForTimelineItem(day,it){
+  if(it.type!=="住宿" || /退房/.test(it.title||"")) return null;
+  const itemText=`${it.title||""} ${it.desc||""}`;
+  const namedStay=TRIP.stays.find(h=>h.hotelName && itemText.includes(h.hotelName));
+  if(namedStay) return namedStay;
+  return TRIP.stays.find(h=>h.checkIn && h.checkOut && day.date>=h.checkIn && day.date<h.checkOut) || null;
+}
+function stayDetailLines(h,itemNote=null){
+  const price=h.price==null ? "價格待補" : h.price;
+  const dates=[
+    h.checkIn ? `入住 ${fmtDateShort(h.checkIn)}${h.checkInTime ? ` ${h.checkInTime}` : ""}` : null,
+    h.checkOut ? `退房 ${fmtDateShort(h.checkOut)}${h.checkOutTime ? ` ${h.checkOutTime}` : ""}` : null
+  ].filter(Boolean).join(" · ");
+  const lines=[];
+  if(dates) lines.push(["🗓️",dates]);
+  if(h.nights) lines.push(["🌙",h.nights]);
+  lines.push(["💰",price]);
+  if(h.roomType) lines.push(["🛏️",h.roomNote ? `${h.roomType}｜${h.roomNote}` : h.roomType]);
+  if(h.bedType) lines.push(["🛌",h.bedType]);
+  if(h.occupancy) lines.push(["👥",h.occupancy]);
+  if(h.area) lines.push(["📐",h.area]);
+  if(h.view) lines.push(["🏙️",h.view]);
+  if(h.floor) lines.push(["🏢",h.floor]);
+  if(h.features) lines.push(["🪟",h.features]);
+  if(h.breakfast) lines.push(["🍳",h.breakfast]);
+  if(h.address) lines.push(["📍",h.address]);
+  if(h.phone) lines.push(["☎️",h.phone]);
+  if(h.note) lines.push(["📝",h.note]);
+  if(itemNote && itemNote!==h.note) lines.push(["📝",itemNote]);
+  return lines.map(([icon,value])=>`<div class="d-line"><span class="k">${icon}</span><span class="v">${value}</span></div>`).join("");
+}
+
+/* ---- last updated ---- */
+function formatLastUpdated(iso){
+  if(!iso) return "";
+  const d=new Date(iso);
+  const pad=n=>String(n).padStart(2,"0");
+  return `最後更新：${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+function renderLastUpdated(){
+  const txt = formatLastUpdated(TRIP.lastUpdated);
+  const a=document.getElementById("last-updated-home");
+  const b=document.getElementById("last-updated-itin");
+  if(a) a.textContent = txt;
+  if(b) b.textContent = txt;
+}
+
+/* ---- render itinerary ---- */
+function renderTabs(){
+  const el=document.getElementById("tabs");
+  el.innerHTML = TRIP.days.map((d,i)=>{
+    const shortDate=d.date ? d.date.slice(5).replace("-","/") : d.dateLabel;
+    return `
+    <button class="tab ${state.day===i+1?'active':''}" type="button" onclick="setDay(${i+1})" aria-label="查看 DAY ${i+1}，${shortDate}"><span>DAY ${String(i+1).padStart(2,"0")}</span><span class="dt">${shortDate}</span></button>
+  `;
+  }).join("");
+}
+function setDay(n){ state.day=n; state.openId=null; renderTabs(); renderTimeline(); }
+
+function renderTimeline(){
+  const day=TRIP.days[state.day-1];
+  const now=getNow();
+  const {current}=computeStatus(now);
+  const el=document.getElementById("timeline");
+  const cityLabels={"澳門":"MACAU","珠海":"ZHUHAI","中山":"ZHONGSHAN","佛山":"FOSHAN","廣州":"GUANGZHOU"};
+  const city=Object.keys(cityLabels).reduce((latest,name)=>{
+    const index=(day.route||"").lastIndexOf(name);
+    return index>latest.index ? {name,index} : latest;
+  },{name:"",index:-1}).name;
+  el.dataset.city=cityLabels[city]||"";
+
+  if(!day.items || day.items.length===0){
+    el.innerHTML = `<div class="empty-day">這一天還沒有安排</div>`;
+    renderDayExtra(day);
+    return;
+  }
+
+  el.innerHTML = day.items.map((it,idx)=>{
+    const id=`${state.day}-${idx}`;
+    const isCurrent = current && current.dayIdx===state.day-1 && current.itemIdx===idx;
+    const isOpen = state.openId===id;
+    const stay=stayForTimelineItem(day,it);
+    const detailData=stay||it;
+    const itemNoteHtml=["孫文西路步行街","香山商業文化博物館","岐江公園","中懇人行天橋","興中廣場"].includes(it.title) && it.note
+      ? `<div class="d-line"><span class="k">📝</span><span class="v">${it.note}</span></div>`
+      : "";
+    const recsHtml = it.recs ? `<div class="recs"><div class="rec-title">推薦</div>${it.recs.map(r=>`<div class="rec-item">${r}</div>`).join("")}</div>` : "";
+    const imgHtml = it.image
+      ? (it.imageUrl
+          ? `<img class="d-img" src="${esc(it.imageUrl)}" alt="${esc(it.title)}">`
+          : `<div class="img-placeholder"><span class="ic">🖼️</span><span>圖片區域</span></div>`)
+      : "";
+    const btns = [];
+    if(detailData.mapUrl) btns.push(`<div class="btn" onclick="event.stopPropagation(); window.open('${esc(detailData.mapUrl)}','_blank')">導航</div>`);
+    else if(detailData.address) btns.push(`<div class="btn" onclick="event.stopPropagation(); openMap('${esc(detailData.address)}')">地圖</div>`);
+    if(detailData.websiteUrl) btns.push(`<div class="btn" onclick="event.stopPropagation(); window.open('${esc(detailData.websiteUrl)}','_blank')">官方網站</div>`);
+    if(detailData.bookingUrl) btns.push(`<div class="btn" onclick="event.stopPropagation(); window.open('${esc(detailData.bookingUrl)}','_blank')">訂房資訊</div>`);
+    if(detailData.phone) btns.push(`<div class="btn primary" onclick="event.stopPropagation(); callPhone('${detailData.phone}')">撥打電話</div>`);
+    else if(detailData.address) btns.push(`<div class="btn" onclick="event.stopPropagation(); copyText('${esc(detailData.address)}')">複製地址</div>`);
+    return `
+      <div class="t-row ${isOpen?'open':''}" role="button" tabindex="0" aria-expanded="${isOpen}" onclick="toggleItem('${id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleItem('${id}')}">
+        <div class="t-time mono">${it.s}</div>
+        <div class="t-mid"><div class="t-dot ${isCurrent?'current':''}"></div></div>
+        <div class="t-body">
+          <div class="t-head">
+            <span class="t-icon">${it.icon}</span>
+            <span class="t-title">${it.title}</span>
+            ${isCurrent?'<span class="t-tag">NOW</span>':''}
+            <span class="t-chev">▶</span>
+          </div>
+          <div class="t-detail">
+            <div class="t-detail-inner" onclick="event.stopPropagation()">
+              ${imgHtml}
+              <div class="d-desc">${stay?stay.hotelName:it.desc}</div>
+              ${stay?stayDetailLines(stay,it.title==="酒店寄存行李" ? it.note : null):`${it.address?`<div class="d-line"><span class="k">📍</span><span class="v">${it.address}</span></div>`:""}
+              ${it.price?`<div class="d-line"><span class="k">💰</span><span class="v">${it.price}</span></div>`:""}
+              ${it.transport?`<div class="d-line"><span class="k">🚦</span><span class="v">${it.transport}</span></div>`:""}
+              ${it.phone?`<div class="d-line"><span class="k">☎</span><span class="v">${it.phone}</span></div>`:""}${itemNoteHtml}`}
+              ${recsHtml}
+              ${btns.length?`<div class="btn-row">${btns.join("")}</div>`:""}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+  renderDayExtra(day);
+}
+function timeToMinutes(time){
+  const match=/^(\d{2}):(\d{2})$/.exec(time||"");
+  if(!match) return null;
+  const hours=Number(match[1]), minutes=Number(match[2]);
+  return hours<24 && minutes<60 ? hours*60+minutes : null;
+}
+function minutesToTime(totalMinutes){
+  const normalized=((totalMinutes%1440)+1440)%1440;
+  const hours=Math.floor(normalized/60), minutes=normalized%60;
+  return `${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}`;
+}
+function renderFlightArrivalCheck(day){
+  const planned=day.airportArrivalTime;
+  const flight=TRIP.flights.find(f=>f.date===day.date && f.type==="return" && f.status==="confirmed");
+  const plannedMinutes=timeToMinutes(planned);
+  const departureMinutes=timeToMinutes(flight?.depart);
+  if(plannedMinutes==null || departureMinutes==null) return "";
+  const latestMinutes=departureMinutes-120;
+  const latest=minutesToTime(latestMinutes);
+  const late=plannedMinutes>latestMinutes;
+  const status=late
+    ? "⚠️ 預計抵達機場時間晚於建議時間，請縮短前方行程。"
+    : "✓ 預計機場抵達時間仍在建議範圍內";
+  return `
+    <div class="transport-budget">
+      <div class="tb-title">✈️ 機場抵達時間</div>
+      <div class="tb-line"><span>預計抵達澳門機場</span><span class="v">${planned}</span></div>
+      <div class="tb-line"><span>建議最晚抵達</span><span class="v">${latest}</span></div>
+      <div class="flight-arrival-status ${late?"late":"safe"}">${status}</div>
+    </div>`;
+}
+/* 選填的「今日交通預算」區塊：只有該天資料裡有 transportBudget 才會顯示 */
+function renderDayExtra(day){
+  const el=document.getElementById("day-extra");
+  if(!el) return;
+  const tb = day && day.transportBudget;
+  const db = day && day.dayBudget;
+  const arrivalNotice = day && day.arrivalNotice;
+  let html = "";
+  if(tb){
+    html += `
+    <div class="transport-budget">
+      <div class="tb-title">💰 今日交通預算</div>
+      ${(tb.items||[]).map(i=>`<div class="tb-line"><span>${i.label}</span><span class="v">${i.cost}</span></div>`).join("")}
+      ${tb.total?`<div class="tb-total">交通預估：<b>${tb.total}</b></div>`:""}
+      ${tb.note?`<div class="tb-note">＊${tb.note}</div>`:""}
+    </div>`;
+  }
+  if(db){
+    html += `
+    <div class="transport-budget">
+      <div class="tb-title">💰 今日預算</div>
+      <div class="tb-line"><span>交通</span><span class="v">${db.transport}</span></div>
+      ${db.attractions&&db.attractions.length?`<div class="tb-group">景點</div>${db.attractions.map(a=>`<div class="tb-line"><span>${a.name}</span><span class="v">${a.cost}</span></div>`).join("")}`:""}
+      ${db.food?`<div class="tb-group">餐飲</div><div class="tb-line"><span>${db.food.label}</span><span class="v">${db.food.cost}</span></div>`:""}
+      ${db.other?`<div class="tb-group">其他</div><div class="tb-line"><span>${db.other.label}</span><span class="v">${db.other.cost}</span></div>`:""}
+      ${db.total?`<div class="tb-total">今日總預算：<b>${db.total}</b></div>`:""}
+      ${db.note?`<div class="tb-note">＊${db.note}</div>`:""}
+    </div>`;
+  }
+  if(day && day.airportArrivalTime) html += renderFlightArrivalCheck(day);
+  if(arrivalNotice){
+    html += `
+    <div class="travel-warning">
+      <div class="tw-title">⚠️ ${arrivalNotice.title}</div>
+      <div class="tw-intro">${arrivalNotice.intro}</div>
+      <ul class="tw-list">${(arrivalNotice.items||[]).map(item=>`<li>${item}</li>`).join("")}</ul>
+      ${(arrivalNotice.details||[]).map(detail=>`<div class="tw-detail">${detail}</div>`).join("")}
+    </div>`;
+  }
+  el.innerHTML = html;
+}
+function toggleItem(id){ state.openId = state.openId===id ? null : id; renderTimeline(); }
+
+/* ---- pre-departure checklist ---- */
+const PREP_STORAGE_KEY="macau_trip_prep_checks_v1";
+const PACKING_STORAGE_KEY="macau_trip_packing_checks_v1";
+const PREP_READY_KEYS=["luggage-measured"];
+const PREP_SAFETY_KEYS=["military-applicable","military-application","military-notice","permit-received","permit-expiry","permit-backup"];
+const PACKING_CATEGORIES=[
+  {id:"documents-money",title:"🪪 證件・金錢",items:[
+    ["packing-passport","護照"],["packing-entry-data","簽證／入境所需資料"],["packing-entry-permit","台胞證／其他入境證件"],["packing-national-id","身分證"],["packing-twd-cash","台幣現金"],["packing-local-currency","當地貨幣／外幣"],["packing-bank-cards","信用卡／提款卡"],["packing-wallet","錢包"],["packing-flight-information","電子機票／航班資料"],["packing-hotel-reservation","飯店訂房資料"],["packing-travel-insurance","旅遊保險資料"],["packing-itinerary","行程表"],["packing-document-backup","重要證件電子備份"]
+  ]},
+  {id:"electronics",title:"📱 3C・電子設備",items:[
+    ["packing-phone","手機"],["packing-power-bank","行動電源"],["packing-charger","充電器"],["packing-phone-cable","手機充電線"],["packing-earphones","耳機"],["packing-esim","eSIM"],["packing-ipad","iPad"],["packing-camera","相機"],["packing-camera-charger","相機電池充電器"],["packing-card-reader","讀卡機"]
+  ]},
+  {id:"clothing",title:"👕 衣物・穿戴",items:[
+    ["packing-clothes","衣服兩套"],["packing-light-jacket","薄外套"],["packing-sunglasses","太陽眼鏡"]
+  ]},
+  {id:"toiletries",title:"🪥 盥洗・保養",items:[
+    ["packing-face-wash","洗面乳"],["packing-razor","刮鬍刀"],["packing-moisturizer","保濕用品"],["packing-sunscreen","防曬"],["packing-concealer","遮瑕"],["packing-perfume","香水"]
+  ]},
+  {id:"health",title:"💊 藥品・健康",items:[
+    ["packing-personal-medicine","個人常用藥"],["packing-eye-drops","眼藥水"],["packing-masks","口罩"]
+  ]},
+  {id:"bags",title:"🎒 包包・收納",items:[
+    ["packing-camera-backpack","相機後背包"],["packing-crossbody-bag","側背包／隨身小包"],["packing-suitcase","行李箱"],["packing-carry-on-bag","手提行李袋"],["packing-compression-bags","壓縮袋"]
+  ]},
+  {id:"travel-small-items",title:"🧳 旅行小物",items:[
+    ["packing-earplugs","耳塞"],["packing-umbrella","雨傘"],["packing-keys","鑰匙"]
+  ]},
+  {id:"food",title:"🍜 食物",items:[
+    ["packing-snacks","零食"],["packing-instant-noodles","泡麵"]
+  ]}
+];
+const PACKING_ALL_KEYS=PACKING_CATEGORIES.flatMap(category=>category.items.map(([key])=>key));
+const PREP_ALL_KEYS=[...PREP_READY_KEYS,...PACKING_ALL_KEYS,...PREP_SAFETY_KEYS];
+function getPrepChecks(){
+  try{ return JSON.parse(localStorage.getItem(PREP_STORAGE_KEY)||"{}"); }
+  catch(_){ return {}; }
+}
+let prepChecks=getPrepChecks();
+function savePrepChecks(){
+  try{ localStorage.setItem(PREP_STORAGE_KEY,JSON.stringify(prepChecks)); }
+  catch(_){ /* localStorage unavailable: keep the current page state only */ }
+}
+function getPackingChecks(){
+  try{ return JSON.parse(localStorage.getItem(PACKING_STORAGE_KEY)||"{}"); }
+  catch(_){ return {}; }
+}
+let packingChecks=getPackingChecks();
+function savePackingChecks(){
+  try{ localStorage.setItem(PACKING_STORAGE_KEY,JSON.stringify(packingChecks)); }
+  catch(_){ /* localStorage unavailable: keep the current page state only */ }
+}
+function getPrepFlight(type){
+  return TRIP.flights.find(f=>f.type===type) || DEFAULT_TRIP.flights.find(f=>f.type===type) || {};
+}
+function prepCheck(key,label){
+  const checked=!!prepChecks[key];
+  return `<label class="prep-check"><input type="checkbox" data-prep-check="${key}" ${checked?"checked":""}><span>${label}</span></label>`;
+}
+function packingCheck(key,label){
+  const checked=!!packingChecks[key];
+  return `<label class="prep-check prep-packing-check"><input type="checkbox" data-packing-check="${key}" ${checked?"checked":""}><span>${label}</span></label>`;
+}
+function renderPackingCategory(category){
+  const keys=category.items.map(([key])=>key);
+  const done=keys.filter(key=>packingChecks[key]).length;
+  return `<section class="prep-card">
+    <div class="prep-category-head"><div class="prep-category-title">${category.title}</div><div class="prep-category-count" data-packing-category="${category.id}" data-packing-keys="${keys.join(",")}">${done} / ${keys.length}</div></div>
+    <div class="prep-checks">${category.items.map(([key,label])=>packingCheck(key,label)).join("")}</div>
+  </section>`;
+}
+function packingProgressMarkup(){
+  const total=PACKING_ALL_KEYS.length;
+  const done=PACKING_ALL_KEYS.filter(key=>packingChecks[key]).length;
+  const percent=total ? (done/total)*100 : 0;
+  return `<div class="prep-packing-progress-head"><span class="prep-packing-progress-name">行前物品</span><span class="prep-packing-progress-count">已完成 <b>${done} / ${total}</b></span></div><div class="prep-packing-track" role="progressbar" aria-label="行前物品完成進度" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${done}"><span class="prep-packing-fill" style="width:${percent}%"></span></div>${done===total?'<span class="prep-packing-complete">行前物品已準備完成</span>':""}`;
+}
+function updatePackingCounts(){
+  document.querySelectorAll("[data-packing-category]").forEach(counter=>{
+    const keys=(counter.dataset.packingKeys||"").split(",").filter(Boolean);
+    counter.textContent=`${keys.filter(key=>packingChecks[key]).length} / ${keys.length}`;
+  });
+  const progress=document.getElementById("packing-progress");
+  if(progress) progress.innerHTML=packingProgressMarkup();
+}
+function prepFlightRow(f){
+  const date=f.date ? f.date.slice(5).replace("-","/") : "—";
+  const airline=(f.airline||"STARLUX").split(/\s/)[0];
+  return `<div class="prep-flight">
+    <div class="prep-flight-date"><span>${date}</span><small>${f.type==="outbound"?"去程":"回程"}</small></div>
+    <div class="prep-flight-place"><b>${f.fromCode||"—"}</b><span>${f.depart||"—"}</span></div>
+    <div class="prep-flight-arrow" aria-hidden="true">→</div>
+    <div class="prep-flight-place"><b>${f.toCode||"—"}</b><span>${f.arrive||"—"}</span></div>
+    <div class="prep-flight-meta"><b>${f.flightNo||"—"}</b><span>${airline}</span></div>
+  </div>`;
+}
+function renderPrep(){
+  const content=document.getElementById("prep-content");
+  if(!content) return;
+  document.querySelectorAll(".prep-tab").forEach(btn=>{
+    const active=btn.dataset.prepTab===state.prepTab;
+    btn.classList.toggle("active",active);
+    btn.setAttribute("aria-selected",String(active));
+  });
+  if(state.prepTab==="safety"){
+    content.innerHTML=`
+      <section class="prep-card">
+        <div class="prep-card-head"><div><div class="prep-card-title">役男短期出境（若適用）</div><div class="prep-card-sub">出境前 1 個月內線上申請；資格與期限以官方系統查核為準。</div></div></div>
+        <div class="prep-checks">
+          ${prepCheck("military-applicable","已確認是否適用")}
+          ${prepCheck("military-application","已完成線上申請")}
+          ${prepCheck("military-notice","已儲存或列印核准通知單")}
+        </div>
+      </section>
+      <section class="prep-card">
+        <div class="prep-card-head"><div><div class="prep-card-title">台胞證</div></div></div>
+        <div class="prep-checks">
+          ${prepCheck("permit-received","已申請／已收到")}
+          ${prepCheck("permit-expiry","效期已確認")}
+          ${prepCheck("permit-backup","正本隨身、電子副本已備份")}
+        </div>
+        <p class="prep-note">首次申請或換發的文件與收件時間，以受理機構最新公告為準。</p>
+      </section>
+      <button class="prep-start" type="button" onclick="startPrepCheck()">開始行前準備檢查</button>`;
+  } else {
+    const outbound=getPrepFlight("outbound"), ret=getPrepFlight("return");
+    content.innerHTML=`
+      <section class="prep-card">
+        <div class="prep-card-head"><div><div class="prep-card-title">航班確認</div><div class="prep-card-sub">僅顯示行程必要資訊，不顯示電子機票或付款資料。</div></div></div>
+        ${prepFlightRow(outbound)}${prepFlightRow(ret)}
+      </section>
+      <section class="prep-card">
+        <div class="prep-card-head"><div><div class="prep-card-title">行李額度</div><div class="prep-card-sub">行前請再以航空公司最新規定為準。</div></div></div>
+        <div class="prep-baggage">
+          <svg class="prep-bag-svg" viewBox="0 0 60 70" fill="none" aria-hidden="true"><rect x="10" y="17" width="40" height="45" rx="6" stroke="currentColor" stroke-width="2"/><path d="M22 17V11a8 8 0 0 1 16 0v6M19 29h22M21 62v4M39 62v4M16 24v32M44 24v32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <div class="prep-baggage-list"><div class="prep-baggage-line"><b>託運行李</b>：1 件免費｜23 kg｜三邊總和 158 cm</div><div class="prep-baggage-line"><b>手提行李</b>：1 件免費｜7 kg｜三邊總和 115 cm</div><div class="prep-baggage-line"><b>個人物品</b>：1 件免費｜三邊總和 80 cm</div></div>
+        </div>
+        <div class="prep-checks" style="margin-top:10px">${prepCheck("luggage-measured","已量行李尺寸與重量")}</div>
+      </section>
+      <div class="prep-packing-progress" id="packing-progress" aria-live="polite">${packingProgressMarkup()}</div>
+      <div class="prep-packing-grid">${PACKING_CATEGORIES.map(renderPackingCategory).join("")}</div>`;
+  }
+}
+function setPrepTab(tab){ state.prepTab=tab; renderPrep(); }
+function startPrepCheck(){
+  state.prepTab="ready";
+  renderPrep();
+  requestAnimationFrame(()=>{
+    const first=[...document.querySelectorAll("#prep-content input[data-prep-check],#prep-content input[data-packing-check]")].find(input=>!input.checked);
+    if(first){ first.scrollIntoView({behavior:"smooth",block:"center"}); first.focus({preventScroll:true}); return; }
+    const complete=PREP_ALL_KEYS.every(key=>PACKING_ALL_KEYS.includes(key) ? packingChecks[key] : prepChecks[key]);
+    showToast(complete ? "行前準備已完成" : "準備清單已完成，請再確認證件與安全");
+  });
+}
+
+/* ---- page switching ---- */
+function switchPage(page){
+  state.page=page;
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("page-"+page).classList.add("active");
+  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active", b.dataset.page===page));
+  if(page==="itinerary"){ renderTabs(); renderTimeline(); }
+  if(page==="exchange"){ renderExchange(); }
+  if(page==="prep"){ renderPrep(); }
+}
+
+const transitReader={scale:1,x:0,y:0,pointers:new Map(),pinch:null,pan:null,bodyOverflow:""};
+function getTransitMapImage(){ return document.getElementById("transit-lightbox-image"); }
+function renderTransitMap(){
+  const image=getTransitMapImage();
+  image.style.transform=`translate(${transitReader.x}px, ${transitReader.y}px) scale(${transitReader.scale})`;
+  document.getElementById("transit-zoom-label").textContent=`${Math.round(transitReader.scale*100)}%`;
+}
+function setTransitMapScale(scale){
+  transitReader.scale=Math.min(4,Math.max(.5,scale));
+  if(transitReader.scale<=1){ transitReader.x=0; transitReader.y=0; }
+  renderTransitMap();
+}
+function zoomTransitMap(amount){ setTransitMapScale(transitReader.scale+amount); }
+function resetTransitMapZoom(){
+  transitReader.scale=1;
+  transitReader.x=0;
+  transitReader.y=0;
+  renderTransitMap();
+}
+function openTransitMap(src,title){
+  const lightbox=document.getElementById("transit-lightbox");
+  const image=getTransitMapImage();
+  document.getElementById("transit-lightbox-title").textContent=title;
+  image.src=src;
+  image.alt=title;
+  resetTransitMapZoom();
+  transitReader.bodyOverflow=document.body.style.overflow;
+  lightbox.classList.add("open");
+  lightbox.setAttribute("aria-hidden","false");
+  document.body.style.overflow="hidden";
+  document.getElementById("transit-map-viewport").focus();
+}
+function closeTransitMap(){
+  const lightbox=document.getElementById("transit-lightbox");
+  lightbox.classList.remove("open");
+  lightbox.setAttribute("aria-hidden","true");
+  transitReader.pointers.clear();
+  transitReader.pinch=null;
+  transitReader.pan=null;
+  document.body.style.overflow=transitReader.bodyOverflow;
+}
+function transitPointerDistance(points){
+  const [a,b]=[...points.values()];
+  return Math.hypot(a.x-b.x,a.y-b.y);
+}
+const transitViewport=document.getElementById("transit-map-viewport");
+transitViewport.addEventListener("pointerdown",event=>{
+  transitViewport.setPointerCapture(event.pointerId);
+  transitReader.pointers.set(event.pointerId,{x:event.clientX,y:event.clientY});
+  if(transitReader.pointers.size===1){
+    transitReader.pan={id:event.pointerId,startX:event.clientX,startY:event.clientY,x:transitReader.x,y:transitReader.y};
+    transitViewport.classList.add("dragging");
+  }else if(transitReader.pointers.size===2){
+    transitReader.pinch={distance:transitPointerDistance(transitReader.pointers),scale:transitReader.scale};
+    transitReader.pan=null;
+  }
+});
+transitViewport.addEventListener("pointermove",event=>{
+  if(!transitReader.pointers.has(event.pointerId)) return;
+  transitReader.pointers.set(event.pointerId,{x:event.clientX,y:event.clientY});
+  if(transitReader.pointers.size===2 && transitReader.pinch){
+    setTransitMapScale(transitReader.pinch.scale*(transitPointerDistance(transitReader.pointers)/transitReader.pinch.distance));
+  }else if(transitReader.scale>1 && transitReader.pan && transitReader.pan.id===event.pointerId){
+    transitReader.x=transitReader.pan.x+event.clientX-transitReader.pan.startX;
+    transitReader.y=transitReader.pan.y+event.clientY-transitReader.pan.startY;
+    renderTransitMap();
+  }
+});
+function endTransitPointer(event){
+  transitReader.pointers.delete(event.pointerId);
+  transitReader.pinch=null;
+  transitReader.pan=null;
+  transitViewport.classList.remove("dragging");
+}
+transitViewport.addEventListener("pointerup",endTransitPointer);
+transitViewport.addEventListener("pointercancel",endTransitPointer);
+transitViewport.addEventListener("wheel",event=>{
+  event.preventDefault();
+  zoomTransitMap(event.deltaY<0?.15:-.15);
+},{passive:false});
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape" && document.getElementById("transit-lightbox").classList.contains("open")) closeTransitMap();
+});
+document.querySelectorAll(".nav-btn").forEach(btn=>btn.addEventListener("click",()=>switchPage(btn.dataset.page)));
+document.getElementById("currency-amount").addEventListener("input",renderExchange);
+document.getElementById("currency-from").addEventListener("change",renderExchange);
+document.querySelectorAll(".prep-tab").forEach(btn=>btn.addEventListener("click",()=>setPrepTab(btn.dataset.prepTab)));
+document.getElementById("prep-content").addEventListener("change",event=>{
+  const input=event.target;
+  if(input.matches("input[data-prep-check]")){
+    prepChecks[input.dataset.prepCheck]=input.checked;
+    savePrepChecks();
+  }else if(input.matches("input[data-packing-check]")){
+    packingChecks[input.dataset.packingCheck]=input.checked;
+    savePackingChecks();
+    updatePackingCounts();
+  }
+});
+renderExchange();
+
+/* ---- test time tool ---- */
+const testFab=document.getElementById("test-fab");
+const testSheet=document.getElementById("test-sheet");
+const simInput=document.getElementById("sim-input");
+const btnReal=document.getElementById("btn-real");
+const btnSim=document.getElementById("btn-sim");
+testFab.addEventListener("click",()=>testSheet.classList.add("open"));
+document.getElementById("test-close").addEventListener("click",()=>testSheet.classList.remove("open"));
+btnReal.addEventListener("click",()=>{ state.simTime=null; btnReal.classList.add("active"); btnSim.classList.remove("active"); refreshAll(); showToast("已切換為裝置目前時間"); });
+btnSim.addEventListener("click",()=>{ btnSim.classList.add("active"); btnReal.classList.remove("active"); if(!simInput.value) simInput.value="2026-11-25T19:00"; state.simTime=simInput.value; refreshAll(); });
+simInput.addEventListener("change",()=>{ if(simInput.value){ state.simTime=simInput.value; btnSim.classList.add("active"); btnReal.classList.remove("active"); refreshAll(); } });
+const PRESETS=[
+  {label:"11/25 19:00",val:"2026-11-25T19:00"},
+  {label:"11/26 10:00",val:"2026-11-26T10:00"},
+  {label:"11/26 10:30",val:"2026-11-26T10:30"},
+  {label:"11/27 09:00",val:"2026-11-27T09:00"},
+  {label:"11/28 12:00",val:"2026-11-28T12:00"},
+  {label:"11/29 12:00",val:"2026-11-29T12:00"},
+  {label:"11/30 21:00",val:"2026-11-30T21:00"},
+];
+document.getElementById("presets").innerHTML = PRESETS.map(p=>`<div class="chip" onclick="setPreset('${p.val}')">${p.label}</div>`).join("");
+function setPreset(val){ simInput.value=val; state.simTime=val; btnSim.classList.add("active"); btnReal.classList.remove("active"); refreshAll(); }
+
+/* ---- refresh loop ---- */
+function refreshAll(){
+  renderNow();
+  renderTripProgress();
+  if(state.page==="itinerary") renderTimeline();
+}
+/* ---- 啟動流程：Supabase 成功 → 用雲端資料；失敗／未設定 → fallback 回內建 TRIP ---- */
+async function initTrip(){
+  try{
+    const remote = await loadFromSupabase();
+    if(remote && Array.isArray(remote.days) && remote.days.length){
+      TRIP = remote;
     }
     // remote 為 null（未設定 Supabase）時，TRIP 維持預設的 DEFAULT_TRIP，不做任何事
   } catch(err){
@@ -115,4 +2880,3 @@ initTrip();
 </script>
 </body>
 </html>
-
